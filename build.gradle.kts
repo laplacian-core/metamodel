@@ -11,8 +11,8 @@ plugins {
 }
 
 repositories {
-    maven { url = uri("../maven2/") }
-    maven { url = uri("https://bitbucket.org/nabla2/maven2/raw/master/") }
+    maven { url = uri("../mvn-repo/") }
+    maven { url = uri("https://github.com/nabla-squared/raw/mvn-repo/") }
     jcenter()
 }
 
