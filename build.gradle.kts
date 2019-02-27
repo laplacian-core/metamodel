@@ -1,36 +1,20 @@
 import laplacian.gradle.task.LaplacianGenerateExtension
-import laplacian.metamodel.MetamodelModelLoader
 
 group = "laplacian"
 version = "1.0.0"
 
-buildscript {
-    repositories {
-        maven { url = uri("../maven2/") }
-        maven { url = uri("https://bitbucket.org/nabla2/maven2/raw/master/") }
-        jcenter()
-    }
-    dependencies {
-        classpath("laplacian:laplacian.generator:1.0.0")
-        classpath("laplacian:laplacian.model.metamodel:1.0.0")
-    }
+plugins {
+    `maven-publish`
+    `java-gradle-plugin`
+    kotlin("jvm") version "1.3.10"
+    id("laplacian.model.metamodel") version "1.0.0"
 }
-
-defaultTasks = listOf("build")
 
 repositories {
     maven { url = uri("../maven2/") }
     maven { url = uri("https://bitbucket.org/nabla2/maven2/raw/master/") }
     jcenter()
 }
-
-plugins {
-    kotlin("jvm") version "1.3.10"
-	`maven-publish`
-    id("laplacian.generator") version "1.0.0"
-}
-
-//val laplacianTemplate = configurations.create("laplacianTemplate")
 
 dependencies {
     template("laplacian:laplacian.template.entity.kotlin:1.0.0")
@@ -43,12 +27,16 @@ dependencies {
 
 configure<LaplacianGenerateExtension> {
     model {
-        loader(MetamodelModelLoader())
         dir("src/main/resources")
     }
-    templateModule {
-        from("laplacian.template.entity.kotlin")
-        into("./")
+}
+
+gradlePlugin {
+    plugins {
+        create("laplacianPlugin") {
+            id = "laplacian.model.metamodel"
+            implementationClass = "laplacian.metamodel.gradle.MetamodelPlugin"
+        }
     }
 }
 
