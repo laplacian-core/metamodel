@@ -1,8 +1,8 @@
 rootProject.name = "laplacian.model.metamodel"
 pluginManagement {
     repositories {
-        maven { url = uri("../mvn-repo/") }
-        maven { url = uri("https://raw.github.com/nabla-squared/mvn-repo/master/") }
+        maven(url = "../mvn-repo/")
+        maven(url = "https://github.com/nabla-squared/raw/mvn-repo/")
         gradlePluginPortal()
         jcenter()
     }

@@ -1,0 +1,13 @@
+group: laplacian
+type: model
+name: metamodel
+version: "1.0.0"
+templates:
+- group: laplacian
+  name: entity
+  subname: kotlin
+  version: "1.0.0"
+- group: laplacian
+  name: json-schema
+  version: "1.0.0"
+
