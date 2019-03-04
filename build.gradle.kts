@@ -9,12 +9,12 @@ plugins {
 }
 repositories {
     maven(url = "../mvn-repo/")
-    maven(url = "https://github.com/nabla-squared/raw/mvn-repo/maven/")
+    maven(url = "https://raw.github.com/nabla-squared/mvn-repo/maven/")
     jcenter()
 }
 dependencies {
     template("laplacian:laplacian.template.entity.kotlin:1.0.0")
-    template("laplacian:laplacian.template.json-schema:1.0.0")
+    template("laplacian:laplacian.template.entity.json-schema:1.0.0")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation("laplacian:laplacian.generator:1.0.0")

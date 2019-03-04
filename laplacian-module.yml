@@ -8,6 +8,8 @@ templates:
   subname: kotlin
   version: "1.0.0"
 - group: laplacian
-  name: json-schema
+  name: entity
+  subname: json-schema
   version: "1.0.0"
+
 
