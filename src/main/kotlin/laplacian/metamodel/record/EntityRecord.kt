@@ -1,4 +1,5 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.EntityList
 import laplacian.metamodel.model.Property
@@ -9,8 +10,9 @@ import laplacian.util.*
  * エンティティ
  */
 data class EntityRecord (
-    private val _record: Record,
-    private val _model: Model
+    private val __record: Record,
+    private val _context: Context,
+    private val _record: Record = __record.normalizeCamelcase()
 ): Entity, Record by _record {
     /**
      * 名称
@@ -26,11 +28,11 @@ data class EntityRecord (
                 inheritedFrom.first().referenceEntity.namespace
             }
             else {
-                _model.retrieve("project.namespace") ?: throw IllegalStateException(
+                _context.get("project.namespace") ?: throw IllegalStateException(
                     "The ${name} entity does not have namespace." +
                     "You should give it or set the default(project) namespace instead."
                 )
-            }
+            } as String
         }
     /**
      * 識別子 省略時は名称を使用
@@ -57,26 +59,23 @@ data class EntityRecord (
      * このエンティティのプロパティ
      */
     override val properties: List<Property>
-        = PropertyRecord.from(getList("properties"), _model, this)
+        = PropertyRecord.from(getList("properties"), _context, this)
     /**
      * このエンティティと他のエンティティの関連
      */
     override val relationships: List<Relationship>
-        = RelationshipRecord.from(getList("relationships", emptyList()), _model, this)
+        = RelationshipRecord.from(getList("relationships", emptyList()), _context, this)
     /**
      * このエンティティに対するルートクエリ
      */
     override val queries: List<Query>
-        = QueryRecord.from(getList("queries", emptyList()), _model, this)
+        = QueryRecord.from(getList("queries", emptyList()), _context, this)
     companion object {
         /**
          * creates record list from list of map
          */
-        fun from(model: Model): EntityList {
-            val entities = model.getList<Record>("entities", emptyList()).map {
-                EntityRecord(it.normalizeCamelcase(), model)
-            }
-            return EntityList(entities, model)
+        fun from(_context: Context): EntityList {
+            return _context.get("entities") as EntityList
         }
     }
 }

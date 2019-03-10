@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test
 
 class EntityTest {
 
-    val model = assertion.model
-    fun metamodelOfEntity() = model.entities.find{ it.name == "entity" }!!
-    fun metamodelOfProperty() = model.entities.find{ it.name == "property" }!!
-    fun metamodelOfRelationship() = model.entities.find{ it.name == "relationship" }!!
+    fun metamodelOfEntity() = assertion.entities.find{ it.name == "entity" }!!
+    fun metamodelOfProperty() = assertion.entities.find{ it.name == "property" }!!
+    fun metamodelOfRelationship() = assertion.entities.find{ it.name == "relationship" }!!
 
     @Test
     fun its_properties_can_be_accessed_with_key_accessor() {

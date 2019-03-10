@@ -1,6 +1,5 @@
 package laplacian.metamodel.model
 
-import laplacian.metamodel.MetamodelModel
 import laplacian.metamodel.MetamodelTemplateAssertion
 import org.junit.jupiter.api.Test
 
@@ -9,14 +8,6 @@ class RelationshipTest {
 
     val recordClassTemplate =
         "template/metamodel/src/main/kotlin/{each entities.in_namespace as entity}{path entity.namespace}/record/{entity.class_name}Record.kt.hbs"
-
-    val addItemToContext = { model: MetamodelModel ->
-        mapOf("entity" to model.entities.find{ it.name == "item" })
-    }
-
-    val addCompositeToContext = { model: MetamodelModel ->
-        mapOf("entity" to model.entities.find{ it.name == "composite" })
-    }
 
     val namespace = "laplacian.metamodel"
 
@@ -67,13 +58,17 @@ class RelationshipTest {
         val assertion = assertionForModelWithInheritedRelationship
         assertion.assertContains("""
         |override val items: List<Item>
-        |    = ItemRecord.from(getList("items"), _model, this)
-        """.trimMargin(), addCompositeToContext)
+        |    = ItemRecord.from(getList("items"), _context, this)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "composite" })
+        }
 
         assertion.assertContains("""
         |override val children: List<Item>
-        |    = ItemRecord.from(getList("children", emptyList()), _model, this)
-        """.trimMargin(), addItemToContext)
+        |    = ItemRecord.from(getList("children", emptyList()), _context, this)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
     }
 
 
@@ -83,23 +78,31 @@ class RelationshipTest {
         val assertion = assertionForModelWithInheritedRelationship
         assertion.assertContains("""
         |data class ItemRecord (
-        |    private val _record: Record,
-        |    private val _model: Model,
+        |    private val __record: Record,
+        |    private val _context: Context,
         |    override val composite: Composite? = null,
-        |    override val parent: Item? = null
-        |): Item, Record by _record
-        """.trimMargin(), addItemToContext)
+        |    override val parent: Item? = null,
+        |    private val _record: Record = __record.normalizeCamelcase()
+        |): Item, Record by _record {
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
 
         assertion.assertContains("""
-        |fun from(records: RecordList, model: Model, parent: Item? = null) = records.map {
-        |    ItemRecord(it.normalizeCamelcase(), model, parent = parent)
+        |fun from(records: RecordList, _context: Context, parent: Item? = null) = records.map {
+        |    ItemRecord(it, _context, parent = parent)
         |}
-        """.trimMargin(), addItemToContext)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
+
         assertion.assertContains("""
-        |fun from(records: RecordList, model: Model, composite: Composite? = null) = records.map {
-        |    ItemRecord(it.normalizeCamelcase(), model, composite = composite)
+        |fun from(records: RecordList, _context: Context, composite: Composite? = null) = records.map {
+        |    ItemRecord(it, _context, composite = composite)
         |}
-        """.trimMargin(), addItemToContext)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
     }
 
     val assertionForModelWithoutInheritedRelationship = MetamodelTemplateAssertion().withModelText(
@@ -143,28 +146,30 @@ class RelationshipTest {
     fun an_aggregator_does_not_pass_its_reference_to_children_if_they_do_not_have_inherited_relationship() {
         val assertion = assertionForModelWithoutInheritedRelationship
         assertion.assertContains("""
-        |override val items: List<Item>
-        |    = ItemRecord.from(getList("items"), _model)
-        """.trimMargin(), addCompositeToContext)
-
-        assertion.assertContains("""
         |override val children: List<Item>
-        |    = ItemRecord.from(getList("children", emptyList()), _model, this)
-        """.trimMargin(), addItemToContext)
+        |    = ItemRecord.from(getList("children", emptyList()), _context, this)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
 
         assertion.assertContains("""
         |data class ItemRecord (
-        |    private val _record: Record,
-        |    private val _model: Model,
-        |    override val parent: Item? = null
+        |    private val __record: Record,
+        |    private val _context: Context,
+        |    override val parent: Item? = null,
+        |    private val _record: Record = __record.normalizeCamelcase()
         |): Item, Record by _record
-        """.trimMargin(), addItemToContext)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
 
         assertion.assertContains("""
-        |fun from(records: RecordList, model: Model, parent: Item? = null) = records.map {
-        |    ItemRecord(it.normalizeCamelcase(), model, parent = parent)
+        |fun from(records: RecordList, _context: Context, parent: Item? = null) = records.map {
+        |    ItemRecord(it, _context, parent = parent)
         |}
-        """.trimMargin(), addItemToContext)
+        """.trimMargin()) {
+            mapOf("entity" to entities.find{ it.name == "item" })
+        }
     }
 }
 

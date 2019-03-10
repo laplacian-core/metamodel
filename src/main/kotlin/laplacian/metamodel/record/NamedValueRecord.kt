@@ -1,13 +1,15 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.NamedValue
 import laplacian.util.*
 /**
  * named_value
  */
 data class NamedValueRecord (
-    private val _record: Record,
-    private val _model: Model
-): NamedValue, Record by _record {
+    private val __record: Record,
+    private val _context: Context,
+    private val _record: Record = __record.normalizeCamelcase()
+): NamedValue, Record by _record.normalizeCamelcase() {
     /**
      * The name of this named_value.
      */
@@ -22,8 +24,8 @@ data class NamedValueRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, model: Model) = records.map {
-            NamedValueRecord(it.normalizeCamelcase(), model)
+        fun from(records: RecordList, _context: Context) = records.map {
+            NamedValueRecord(it, _context)
         }
     }
 }

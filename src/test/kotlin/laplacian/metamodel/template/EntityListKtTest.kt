@@ -11,8 +11,8 @@ class EntityListKtTest {
     @Test
     fun it_generates_the_list_wrapper_class_of_entity() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/EntityList.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "entity"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "entity"}!!)
         }
     }
 }

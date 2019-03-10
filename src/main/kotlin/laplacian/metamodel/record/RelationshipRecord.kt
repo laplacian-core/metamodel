@@ -1,4 +1,5 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.Relationship
 import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.PropertyMapping
@@ -7,12 +8,13 @@ import laplacian.util.*
  * relationship
  */
 data class RelationshipRecord (
-    private val _record: Record,
-    private val _model: Model,
+    private val __record: Record,
+    private val _context: Context,
     /**
      * the entity which aggregates this relationship
      */
-    override val entity: Entity
+    override val entity: Entity,
+    private val _record: Record = __record.normalizeCamelcase()
 ): Relationship, Record by _record {
     /**
      * The name of this relationship.
@@ -65,17 +67,17 @@ data class RelationshipRecord (
      * mappings
      */
     override val mappings: List<PropertyMapping>
-        = PropertyMappingRecord.from(getList("mappings", emptyList()), _model, this)
+        = PropertyMappingRecord.from(getList("mappings", emptyList()), _context, this)
     /**
      * reference_entity
      */
     override val referenceEntity: Entity
-        get() = EntityRecord.from(_model).find {
+        get() = EntityRecord.from(_context).find {
             it.name == referenceEntityName
         } ?: throw IllegalStateException(
             "There is no entity which meets the following condition(s): "
             + "Relationship.reference_entity_name == entity.name (=$referenceEntityName) "
-            + "Possible values are: " + EntityRecord.from(_model).map {
+            + "Possible values are: " + EntityRecord.from(_context).map {
               "(${ it.name })"
             }.joinToString()
         )
@@ -83,8 +85,8 @@ data class RelationshipRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, model: Model, entity: Entity) = records.map {
-            RelationshipRecord(it.normalizeCamelcase(), model, entity = entity)
+        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
+            RelationshipRecord(it, _context, entity = entity)
         }
     }
 }

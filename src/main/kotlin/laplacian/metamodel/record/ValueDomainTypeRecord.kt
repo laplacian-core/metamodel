@@ -1,4 +1,5 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.ValueDomainType
 import laplacian.metamodel.model.ValueDomainTypeList
 import laplacian.metamodel.model.ValueDomain
@@ -7,9 +8,10 @@ import laplacian.util.*
  * value_domain_type
  */
 data class ValueDomainTypeRecord (
-    private val _record: Record,
-    private val _model: Model
-): ValueDomainType, Record by _record {
+    private val __record: Record,
+    private val _context: Context,
+    private val _record: Record = __record.normalizeCamelcase()
+): ValueDomainType, Record by _record.normalizeCamelcase() {
     /**
      * The name of this value_domain_type.
      */
@@ -31,16 +33,13 @@ data class ValueDomainTypeRecord (
      * domain
      */
     override val domain: ValueDomain
-        = ValueDomainRecord(getOrThrow<Record>("domain").normalizeCamelcase(), _model)
+        = ValueDomainRecord(getOrThrow<Record>("domain").normalizeCamelcase(), _context)
     companion object {
         /**
          * creates record list from list of map
          */
-        fun from(model: Model): ValueDomainTypeList {
-            val entities = model.getList<Record>("value_domain_types", emptyList()).map {
-                ValueDomainTypeRecord(it.normalizeCamelcase(), model)
-            }
-            return ValueDomainTypeList(entities, model)
+        fun from(_context: Context): ValueDomainTypeList {
+            return _context.get("value_domain_types") as ValueDomainTypeList
         }
     }
 }

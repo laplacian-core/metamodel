@@ -1,4 +1,5 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.Query
 import laplacian.metamodel.model.Entity
 import laplacian.util.*
@@ -6,12 +7,13 @@ import laplacian.util.*
  * The queries from which all navigation originates.
  */
 data class QueryRecord (
-    private val _record: Record,
-    private val _model: Model,
+    private val __record: Record,
+    private val _context: Context,
     /**
      * the entity which aggregates this query
      */
-    override val entity: Entity
+    override val entity: Entity,
+    private val _record: Record = __record.normalizeCamelcase()
 ): Query, Record by _record {
     /**
      * クエリ名称
@@ -61,15 +63,15 @@ data class QueryRecord (
      * クエリ結果エンティティ
      */
     override val resultEntity: Entity?
-        get() = EntityRecord.from(_model).find {
+        get() = EntityRecord.from(_context).find {
             it.name == resultEntityName
         }
     companion object {
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, model: Model, entity: Entity) = records.map {
-            QueryRecord(it.normalizeCamelcase(), model, entity = entity)
+        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
+            QueryRecord(it, _context, entity = entity)
         }
     }
 }

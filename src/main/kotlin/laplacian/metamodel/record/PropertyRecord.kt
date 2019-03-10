@@ -1,4 +1,5 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.Property
 import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.ValueDomain
@@ -8,12 +9,13 @@ import laplacian.util.*
  * property
  */
 data class PropertyRecord (
-    private val _record: Record,
-    private val _model: Model,
+    private val __record: Record,
+    private val _context: Context,
     /**
      * the entity which aggregates this property
      */
-    override val entity: Entity
+    override val entity: Entity,
+    private val _record: Record = __record.normalizeCamelcase()
 ): Property, Record by _record {
     /**
      * The name of this property.
@@ -107,20 +109,20 @@ data class PropertyRecord (
      * domain
      */
     override val domain: ValueDomain?
-        = getOrNull<Record>("domain")?.let{ ValueDomainRecord(it.normalizeCamelcase(), _model) }
+        = getOrNull<Record>("domain")?.let{ ValueDomainRecord(it, _context) }
     /**
      * domain_type
      */
     override val domainType: ValueDomainType?
-        get() = ValueDomainTypeRecord.from(_model).find {
+        get() = ValueDomainTypeRecord.from(_context).find {
             it.name == domainTypeName
         }
     companion object {
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, model: Model, entity: Entity) = records.map {
-            PropertyRecord(it.normalizeCamelcase(), model, entity = entity)
+        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
+            PropertyRecord(it, _context, entity = entity)
         }
     }
 }

@@ -1,13 +1,15 @@
 package laplacian.metamodel.record
+import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.ValueItem
 import laplacian.util.*
 /**
  * value_item
  */
 data class ValueItemRecord (
-    private val _record: Record,
-    private val _model: Model
-): ValueItem, Record by _record {
+    private val __record: Record,
+    private val _context: Context,
+    private val _record: Record = __record.normalizeCamelcase()
+): ValueItem, Record by _record.normalizeCamelcase() {
     /**
      * The value of this value_item.
      */
@@ -31,8 +33,8 @@ data class ValueItemRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, model: Model) = records.map {
-            ValueItemRecord(it.normalizeCamelcase(), model)
+        fun from(records: RecordList, _context: Context) = records.map {
+            ValueItemRecord(it, _context)
         }
     }
 }

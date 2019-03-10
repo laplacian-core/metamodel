@@ -10,40 +10,40 @@ class EntityInterfaceKtTest {
     @Test
     fun it_generates_the_entity_interface_of_entity() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/Entity.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "entity"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "entity"}!!)
         }
     }
 
     @Test
     fun it_generates_the_entity_interface_of_property() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/Property.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "property"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "property"}!!)
         }
     }
 
     @Test
     fun it_generates_the_entity_interface_of_relationship() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/Relationship.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "relationship"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "relationship"}!!)
         }
     }
 
     @Test
     fun it_generates_the_entity_interface_of_property_mapping() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/PropertyMapping.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "property_mapping"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "property_mapping"}!!)
         }
     }
 
     @Test
     fun it_generates_the_entity_interface_of_query() {
         val toBeFile = "src/main/kotlin/laplacian/metamodel/model/Query.kt"
-        template.assertSameContent(toBeFile) { model ->
-            model + ("entity" to model.entities.find{it.name == "query"}!!)
+        template.assertSameContent(toBeFile) {
+            mapOf("entity" to entities.find{it.name == "query"}!!)
         }
     }
 }
