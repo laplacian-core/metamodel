@@ -2,7 +2,6 @@ package laplacian.metamodel.gradle
 import laplacian.gradle.task.LaplacianGenerateExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-
 class MetamodelPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("laplacian.generator")
