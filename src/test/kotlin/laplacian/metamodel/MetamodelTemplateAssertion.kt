@@ -1,7 +1,7 @@
 package laplacian.metamodel
 import com.github.jknack.handlebars.Context
 import laplacian.gradle.task.generate.ExecutionContext
-import laplacian.metamodel.gradle.MetamodelPlugin
+import laplacian.metamodel.gradle.MetamodelModelEntryResolver
 import laplacian.metamodel.model.EntityList
 import laplacian.metamodel.model.ValueDomainTypeList
 import laplacian.util.*
@@ -26,7 +26,7 @@ class MetamodelTemplateAssertion {
     fun withModel(files: List<File>): MetamodelTemplateAssertion {
         context = ExecutionContext().apply {
             modelFiles.addAll(files)
-            modelEntryResolvers.add(MetamodelPlugin.modelEntryResolver)
+            modelEntryResolvers.add(MetamodelModelEntryResolver())
         }
         context.build()
         entities = context.currentModel.get("entities") as EntityList
