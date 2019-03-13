@@ -10,7 +10,7 @@ data class ValueDomainRecord (
     private val __record: Record,
     private val _context: Context,
     private val _record: Record = __record.normalizeCamelcase()
-): ValueDomain, Record by _record.normalizeCamelcase() {
+): ValueDomain, Record by _record {
     /**
      * 許容される値のパターン(正規表現)
      */

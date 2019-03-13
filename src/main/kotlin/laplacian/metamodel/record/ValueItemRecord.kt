@@ -9,7 +9,7 @@ data class ValueItemRecord (
     private val __record: Record,
     private val _context: Context,
     private val _record: Record = __record.normalizeCamelcase()
-): ValueItem, Record by _record.normalizeCamelcase() {
+): ValueItem, Record by _record {
     /**
      * The value of this value_item.
      */

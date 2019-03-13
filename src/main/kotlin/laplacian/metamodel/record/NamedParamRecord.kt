@@ -9,7 +9,7 @@ data class NamedParamRecord (
     private val __record: Record,
     private val _context: Context,
     private val _record: Record = __record.normalizeCamelcase()
-): NamedParam, Record by _record.normalizeCamelcase() {
+): NamedParam, Record by _record {
     /**
      * The name of this named_param.
      */

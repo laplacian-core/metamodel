@@ -11,7 +11,7 @@ data class ValueDomainTypeRecord (
     private val __record: Record,
     private val _context: Context,
     private val _record: Record = __record.normalizeCamelcase()
-): ValueDomainType, Record by _record.normalizeCamelcase() {
+): ValueDomainType, Record by _record {
     /**
      * The name of this value_domain_type.
      */
@@ -33,7 +33,7 @@ data class ValueDomainTypeRecord (
      * domain
      */
     override val domain: ValueDomain
-        = ValueDomainRecord(getOrThrow<Record>("domain").normalizeCamelcase(), _context)
+        = ValueDomainRecord(getOrThrow<Record>("domain"), _context)
     companion object {
         /**
          * creates record list from list of map
