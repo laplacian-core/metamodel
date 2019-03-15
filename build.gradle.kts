@@ -23,7 +23,7 @@ dependencies {
 }
 configure<LaplacianGenerateExtension> {
     model {
-        dir("src/main/resources")
+        files("src/main/resources")
     }
 }
 gradlePlugin {
