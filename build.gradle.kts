@@ -13,11 +13,8 @@ repositories {
     jcenter()
 }
 dependencies {
-    template("laplacian:laplacian.template.entity.kotlin:1.0.0")
-    template("laplacian:laplacian.template.entity.json-schema:1.0.0")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation("laplacian:laplacian.generator:1.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 }
@@ -30,7 +27,7 @@ gradlePlugin {
     plugins {
         create("MetamodelPlugin") {
             id = "laplacian.model.metamodel"
-            implementationClass = "laplacian.metamodel.gradle.MetamodelPlugin"
+            implementationClass = "laplacian.model.metamodel.gradle.MetamodelPlugin"
         }
     }
 }
