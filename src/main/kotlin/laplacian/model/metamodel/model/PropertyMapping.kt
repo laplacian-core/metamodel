@@ -1,5 +1,5 @@
 package laplacian.model.metamodel.model
-
+import laplacian.util.*
 /**
  * property_mapping
  */

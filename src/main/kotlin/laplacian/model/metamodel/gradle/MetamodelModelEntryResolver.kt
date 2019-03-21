@@ -16,11 +16,11 @@ class MetamodelModelEntryResolver: ModelEntryResolver {
     override fun resolve(key: String, model: Map<String, RecordList>, context: ExecutionContext): Any? {
         return when (key) {
             "entities" -> EntityList(
-                model.getList<Record>("entities").map { EntityRecord(it, context.currentModel) },
+                model.getList<Record>("entities").map{ EntityRecord(it, context.currentModel) },
                 context.currentModel
             )
             "value_domain_types" -> ValueDomainTypeList(
-                model.getList<Record>("value_domain_types").map { ValueDomainTypeRecord(it, context.currentModel) },
+                model.getList<Record>("value_domain_types").map{ ValueDomainTypeRecord(it, context.currentModel) },
                 context.currentModel
             )
             else -> throw IllegalArgumentException("Unknown key: $key")

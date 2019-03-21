@@ -2,6 +2,7 @@ package laplacian.model.metamodel.record
 import com.github.jknack.handlebars.Context
 import laplacian.model.metamodel.model.PropertyMapping
 import laplacian.model.metamodel.model.Relationship
+import laplacian.model.metamodel.model.Property
 import laplacian.util.*
 /**
  * property_mapping

@@ -1,7 +1,7 @@
 entities:
   - name: named_value
     value_object: true
-    namespace: laplacian.metamodel
+    namespace: laplacian.model.metamodel
     properties:
       - name: name
         type: string

@@ -1,5 +1,5 @@
 package laplacian.model.metamodel.model
-
+import laplacian.util.*
 /**
  * The queries from which all navigation originates.
  */

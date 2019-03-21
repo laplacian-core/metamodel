@@ -1,5 +1,5 @@
 package laplacian.model.metamodel.model
-
+import laplacian.util.*
 /**
  * value_domain_type
  */

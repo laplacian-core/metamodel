@@ -1,6 +1,6 @@
 entities:
   - name: property_mapping
-    namespace: laplacian.metamodel
+    namespace: laplacian.model.metamodel
     properties:
       - name: from
         type: string
