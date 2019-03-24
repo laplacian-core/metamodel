@@ -3,9 +3,8 @@ group = "laplacian"
 version = "1.0.0"
 plugins {
     `maven-publish`
-    `java-gradle-plugin`
     kotlin("jvm") version "1.3.10"
-    id("laplacian.model.metamodel") version "1.0.0"
+    id("laplacian.plugin.metamodel") version "1.0.0"
 }
 repositories {
     maven(url = "../mvn-repo/")
@@ -13,22 +12,11 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    template("laplacian:laplacian.template.entity.json-schema:1.0.0")
 }
 configure<LaplacianGenerateExtension> {
     model {
         files("src/main/resources")
-    }
-}
-gradlePlugin {
-    plugins {
-        create("MetamodelPlugin") {
-            id = "laplacian.model.metamodel"
-            implementationClass = "laplacian.model.metamodel.gradle.MetamodelPlugin"
-        }
     }
 }
 publishing {

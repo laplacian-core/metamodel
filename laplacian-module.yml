@@ -3,4 +3,12 @@ project:
   type: model
   name: metamodel
   version: "1.0.0"
-
+  plugins:
+  - group: laplacian
+    name: metamodel
+    version: "1.0.0"
+  templates:
+  - group: laplacian
+    name: entity
+    subname: json-schema
+    version: "1.0.0"

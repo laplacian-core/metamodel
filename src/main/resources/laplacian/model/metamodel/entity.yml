@@ -1,7 +1,7 @@
 entities:
   - name: entity
     description: エンティティ
-    namespace: laplacian.model.metamodel
+    namespace: laplacian.metamodel
     properties:
       - name: name
         description: 名称

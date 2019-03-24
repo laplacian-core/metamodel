@@ -1,6 +1,6 @@
 entities:
   - name: value_domain_type
-    namespace: laplacian.model.metamodel
+    namespace: laplacian.metamodel
     properties:
       - name: name
         type: string
@@ -22,7 +22,7 @@ entities:
         aggregate: true
 
   - name: value_domain
-    namespace: laplacian.model.metamodel
+    namespace: laplacian.metamodel
     value_object: true
     properties:
       - name: pattern
@@ -38,7 +38,7 @@ entities:
         aggregate: true
 
   - name: value_item
-    namespace: laplacian.model.metamodel
+    namespace: laplacian.metamodel
     value_object: true
     properties:
       - name: value

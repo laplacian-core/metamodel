@@ -1,6 +1,6 @@
 entities:
   - name: query
-    namespace: laplacian.model.metamodel
+    namespace: laplacian.metamodel
     description: >
       The queries from which all navigation originates.
 
