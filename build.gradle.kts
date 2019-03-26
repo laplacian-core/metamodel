@@ -16,7 +16,7 @@ dependencies {
 }
 configure<LaplacianGenerateExtension> {
     model {
-        files("src/main/resources")
+        from("src/main/resources")
     }
 }
 publishing {
