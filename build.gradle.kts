@@ -13,6 +13,7 @@ repositories {
 }
 dependencies {
     template("laplacian:laplacian.template.entity.json-schema:1.0.0")
+    template("laplacian:laplacian.template.entity.diagram:1.0.0")
 }
 configure<LaplacianGenerateExtension> {
     model {
