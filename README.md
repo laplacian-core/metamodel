@@ -4,6 +4,7 @@ This model expresses the structure of models. In other words, this model explain
 how to define "a model".
 
 
+
 ## The structure of the *metamodel* model
 
 The following diagram summarizes the structure of the model:
@@ -11,7 +12,10 @@ The following diagram summarizes the structure of the model:
 ![](./doc/image/model-diagram.svg)
 
 
-This model does not have any dependency to external models.
+As shown in above diagram, this model depends on the following external models.
+
+- *metamodel* (laplacian.model.metamodel)
+
 
 
 ## Getting started
@@ -35,4 +39,9 @@ project:
 To reflect the change, you need to type the following command in your console :
 ```bash
 ./gradlew lM
+```
+
+Then put some template files under the *./template* directory and type the following command to generate files:
+```bash
+./gradlew lG
 ```

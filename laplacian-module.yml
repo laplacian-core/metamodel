@@ -6,11 +6,15 @@ project:
   description: |
     This model expresses the structure of models. In other words, this model explains
     how to define "a model".
-  plugins:
+  models:
   - group: laplacian
     name: metamodel
     version: "1.0.0"
   templates:
+  - group: laplacian
+    name: entity
+    subname: kotlin
+    version: "1.0.0"
   - group: laplacian
     name: entity
     subname: json-schema
