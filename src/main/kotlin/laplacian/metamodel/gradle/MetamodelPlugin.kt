@@ -18,8 +18,9 @@ class MetamodelPlugin: Plugin<Project> {
             artifactId.contains(":${project.rootProject.name}:")
         }
         val dependentLibs = listOf(
-            "laplacian:laplacian.generator:1.0.0",
-            "laplacian:laplacian.model.metamodel:1.0.0"
+            "laplacian:laplacian.model.metamodel:1.0.0",
+            "laplacian:laplacian.model.metamodel:1.0.0",
+            "laplacian:laplacian.generator:1.0.0"
         ).filter{ !isLoadedByItSelf(it) }
         val addToDependencies = { configName: String, dependencies :List<String> ->
             project.configurations.getByName(configName).dependencies.addAll(

@@ -1,7 +1,7 @@
 # laplacian:model:metamodel
 
-This model expresses the structure of models. In other words, this model explains
-how to define "a model".
+A model that expresses the structure of relational model with aggregation support.
+This model is used to define models from which templates generate resources.
 
 
 
