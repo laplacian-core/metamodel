@@ -1,4 +1,5 @@
 rootProject.name = "laplacian.model.metamodel"
+
 pluginManagement {
     repositories {
         maven(url = "../mvn-repo/")
@@ -7,3 +8,7 @@ pluginManagement {
         jcenter()
     }
 }
+
+// @subprojects@
+// Subproject definitions are inserted here.
+// @subprojects@

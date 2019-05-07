@@ -1,10 +1,26 @@
+.DS_Store
 build/
 out/
 .gradle/
-.idea
 *.log
-*.iml
+*.class
 *.jar
+!gradle-wrapper.jar
+.git/
+.gitignore
+.bzr/
+.bzrignore
+.hg/
+.hgignore
+.svn/
 *.swp
-.DS_Store
-target/
+*.bak
+*.tmp
+*~
+.project
+.idea/
+*.iml
+*.tmproj
+.vscode/
+# @additional_entries@
+# @additional_entries@
