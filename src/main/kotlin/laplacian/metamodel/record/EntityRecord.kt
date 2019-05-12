@@ -1,19 +1,10 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.Entity
-
 import laplacian.metamodel.model.EntityList
-
-
 import laplacian.metamodel.model.Property
-
-
 import laplacian.metamodel.model.Relationship
-
-
 import laplacian.metamodel.model.Query
-
-
 import laplacian.util.*
 
 /**
@@ -22,16 +13,13 @@ import laplacian.util.*
 data class EntityRecord (
     private val __record: Record,
     private val _context: Context,
-
     private val _record: Record = __record.normalizeCamelcase()
 ): Entity, Record by _record {
-
     /**
      * 名称
      */
     override val name: String
         get() = getOrThrow("name")
-
     /**
      * 名前空間
      */
@@ -47,7 +35,6 @@ data class EntityRecord (
                 )
             } as String
         }
-
     /**
      * 識別子 省略時は名称を使用
 
@@ -56,7 +43,6 @@ data class EntityRecord (
         get() = getOrThrow("identifier") {
             name.lowerUnderscorize()
         }
-
     /**
      * 詳細
      */
@@ -64,7 +50,6 @@ data class EntityRecord (
         get() = getOrThrow("description") {
             name
         }
-
     /**
      * 値オブジェクトかどうか
      */
@@ -72,41 +57,21 @@ data class EntityRecord (
         get() = getOrThrow("valueObject") {
             false
         }
-
-
-
-
-
-
-
-
     /**
      * このエンティティのプロパティ
      */
     override val properties: List<Property>
         = PropertyRecord.from(getList("properties"), _context, this)
-
     /**
      * このエンティティと他のエンティティの関連
      */
     override val relationships: List<Relationship>
         = RelationshipRecord.from(getList("relationships", emptyList()), _context, this)
-
     /**
      * このエンティティに対するルートクエリ
      */
     override val queries: List<Query>
         = QueryRecord.from(getList("queries", emptyList()), _context, this)
-
-
-
-
-
-
-
-
-
-
     companion object {
         /**
          * creates record list from list of map

@@ -1,8 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.NamedValue
-
-
 import laplacian.util.*
 
 /**
@@ -11,23 +9,18 @@ import laplacian.util.*
 data class NamedValueRecord (
     private val __record: Record,
     private val _context: Context,
-
     private val _record: Record = __record.normalizeCamelcase()
 ): NamedValue, Record by _record {
-
     /**
      * The name of this named_value.
      */
     override val name: String
         get() = getOrThrow("name")
-
     /**
      * The expression of this named_value.
      */
     override val expression: String
         get() = getOrThrow("expression")
-
-
     companion object {
         /**
          * creates record list from list of map

@@ -5,7 +5,7 @@ entities:
     properties:
       - name: name
         description: 名称
-        constraint: pk
+        primary_key: true
         type: string
 
       - name: namespace

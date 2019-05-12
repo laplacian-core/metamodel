@@ -10,7 +10,7 @@ entities:
        type: string
        domain_type_name: identifier
        default_value:
-         name
+         name.lowerUnderscorize()
 
      - name: primary_key
        type: boolean

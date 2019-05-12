@@ -1,8 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
 import laplacian.metamodel.model.NamedParam
-
-
 import laplacian.util.*
 
 /**
@@ -11,22 +9,18 @@ import laplacian.util.*
 data class NamedParamRecord (
     private val __record: Record,
     private val _context: Context,
-
     private val _record: Record = __record.normalizeCamelcase()
 ): NamedParam, Record by _record {
-
     /**
      * The name of this named_param.
      */
     override val name: String
         get() = getOrThrow("name")
-
     /**
      * The type of this named_param.
      */
     override val type: String
         get() = getOrThrow("type")
-
     /**
      * The description of this named_param.
      */
@@ -34,8 +28,6 @@ data class NamedParamRecord (
         get() = getOrThrow("description") {
             name
         }
-
-
     companion object {
         /**
          * creates record list from list of map
