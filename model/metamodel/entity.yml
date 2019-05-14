@@ -54,12 +54,17 @@ entities:
         snippet: >
           identifier.upperCamelize()
 
+      - name: subtype_of
+        description: The name of the entity which this entity is subtype of
+        type: string
+        optional: true
+
       - name: inherited
         description: >
           他のエンティティの導出エンティティであるかどうか
         type: boolean
         snippet: >
-          relationships.any{ it.inherited }
+          supertype?.inherited ?: relationships.any{ it.inherited }
 
       - name: top_level
         description: >
@@ -98,16 +103,46 @@ entities:
 
     relationships:
       - name: properties
-        description: このエンティティのプロパティ
+        description: The properties of this entity (excluding supertypes')
         reference_entity_name: property
         aggregate: true
-        cardinality: 1..*
+        cardinality: "*"
+
+      - name: all_properties
+        description: The properties of this entity
+        reference_entity_name: property
+        cardinality: "1..*"
+        snippet: |
+          (supertype?.allProperties ?: emptyList()) + properties
 
       - name: relationships
-        description: このエンティティと他のエンティティの関連
+        description: The relationships with other entities (excluding supertypes')
         reference_entity_name: relationship
         aggregate: true
         cardinality: '*'
+
+      - name: all_relationships
+        description: The relationships including supertype's ones.
+        reference_entity_name: relationship
+        cardinality: "*"
+        snippet: |
+          (supertype?.allRelationships ?: emptyList()) + relationships
+
+      - name: supertype
+        description: The entity which this entity is subtype of
+        reference_entity_name: entity
+        cardinality: '0..1'
+        mappings:
+        - from: subtype_of
+          to: name
+
+      - name: subtypes
+        description: The subtype entities of this entity
+        reference_entity_name: entity
+        cardinality: '*'
+        mappings:
+        - from: name
+          to: subtype_of
 
       - name: queries
         description: このエンティティに対するルートクエリ
@@ -129,7 +164,7 @@ entities:
         reference_entity_name: relationship
         cardinality: '*'
         snippet: >
-          relationships.filter{ it.inherited }
+          allRelationships.filter{ it.inherited }
 
       - name: relating_entities
         description: |

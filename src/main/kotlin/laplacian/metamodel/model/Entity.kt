@@ -34,11 +34,15 @@ interface Entity {
     val className: String
         get() = identifier.upperCamelize()
     /**
+     * The name of the entity which this entity is subtype of
+     */
+    val subtypeOf: String?
+    /**
      * 他のエンティティの導出エンティティであるかどうか
 
      */
     val inherited: Boolean
-        get() = relationships.any{ it.inherited }
+        get() = supertype?.inherited ?: relationships.any{ it.inherited }
     /**
      * このエンティティがトップレベルエンティティかどうか
 
@@ -70,13 +74,31 @@ interface Entity {
             }
         } + primaryKeys.map { it.propertyName.lowerUnderscorize() }
     /**
-     * このエンティティのプロパティ
+     * The properties of this entity (excluding supertypes')
      */
     val properties: List<Property>
     /**
-     * このエンティティと他のエンティティの関連
+     * The properties of this entity
+     */
+    val allProperties: List<Property>
+        get() = (supertype?.allProperties ?: emptyList()) + properties
+    /**
+     * The relationships with other entities (excluding supertypes')
      */
     val relationships: List<Relationship>
+    /**
+     * The relationships including supertype's ones.
+     */
+    val allRelationships: List<Relationship>
+        get() = (supertype?.allRelationships ?: emptyList()) + relationships
+    /**
+     * The entity which this entity is subtype of
+     */
+    val supertype: Entity?
+    /**
+     * The subtype entities of this entity
+     */
+    val subtypes: List<Entity>
     /**
      * このエンティティに対するルートクエリ
      */
@@ -91,7 +113,7 @@ interface Entity {
 
      */
     val inheritedFrom: List<Relationship>
-        get() = relationships.filter{ it.inherited }
+        get() = allRelationships.filter{ it.inherited }
     /**
      * このエンティティが参照するエンティティの一覧(自身は除く)
 

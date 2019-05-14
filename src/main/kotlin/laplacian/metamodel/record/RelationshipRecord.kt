@@ -1,5 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
+import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.Relationship
 import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.PropertyMapping
@@ -18,10 +19,18 @@ data class RelationshipRecord (
     private val _record: Record = __record.normalizeCamelcase()
 ): Relationship, Record by _record {
     /**
+     * The laplacian module project definition.
+     */
+    private val project: Project
+        get() = _context.get("project") as Project
+
+
+    /**
      * The name of this relationship.
      */
     override val name: String
         get() = getOrThrow("name")
+
     /**
      * The identifier of this relationship.
      */
@@ -29,16 +38,19 @@ data class RelationshipRecord (
         get() = getOrThrow("identifier") {
             name.lowerUnderscorize()
         }
+
     /**
      * The cardinality of this relationship.
      */
     override val cardinality: String
         get() = getOrThrow("cardinality")
+
     /**
      * The reference_entity_name of this relationship.
      */
     override val referenceEntityName: String
         get() = getOrThrow("referenceEntityName")
+
     /**
      * Defines this relationship is aggregate or not.
      */
@@ -46,6 +58,7 @@ data class RelationshipRecord (
         get() = getOrThrow("aggregate") {
             false
         }
+
     /**
      * Defines this relationship is inherited or not.
      */
@@ -53,6 +66,7 @@ data class RelationshipRecord (
         get() = getOrThrow("inherited") {
             false
         }
+
     /**
      * The description of this relationship.
      */
@@ -60,15 +74,18 @@ data class RelationshipRecord (
         get() = getOrThrow("description") {
             name
         }
+
     /**
      * The snippet of this relationship.
      */
     override val snippet: String? by _record
+
     /**
      * mappings
      */
     override val mappings: List<PropertyMapping>
         = PropertyMappingRecord.from(getList("mappings", emptyList()), _context, this)
+
     /**
      * reference_entity
      */
@@ -82,6 +99,7 @@ data class RelationshipRecord (
               "(${ it.name })"
             }.joinToString()
         )
+
     companion object {
         /**
          * creates record list from list of map

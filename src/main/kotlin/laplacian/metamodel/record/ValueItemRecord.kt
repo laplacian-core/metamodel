@@ -1,5 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
+import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.ValueItem
 import laplacian.util.*
 
@@ -12,10 +13,18 @@ data class ValueItemRecord (
     private val _record: Record = __record.normalizeCamelcase()
 ): ValueItem, Record by _record {
     /**
+     * The laplacian module project definition.
+     */
+    private val project: Project
+        get() = _context.get("project") as Project
+
+
+    /**
      * The value of this value_item.
      */
     override val value: String
         get() = getOrThrow("value")
+
     /**
      * The label of this value_item.
      */
@@ -23,6 +32,7 @@ data class ValueItemRecord (
         get() = getOrThrow("label") {
             value
         }
+
     /**
      * The description of this value_item.
      */
@@ -30,6 +40,7 @@ data class ValueItemRecord (
         get() = getOrThrow("description") {
             "label (=$value)"
         }
+
     companion object {
         /**
          * creates record list from list of map

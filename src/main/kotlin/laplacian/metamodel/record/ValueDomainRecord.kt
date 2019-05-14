@@ -1,5 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
+import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.ValueDomain
 import laplacian.metamodel.model.ValueItem
 import laplacian.util.*
@@ -13,14 +14,23 @@ data class ValueDomainRecord (
     private val _record: Record = __record.normalizeCamelcase()
 ): ValueDomain, Record by _record {
     /**
+     * The laplacian module project definition.
+     */
+    private val project: Project
+        get() = _context.get("project") as Project
+
+
+    /**
      * 許容される値のパターン(正規表現)
      */
     override val pattern: String? by _record
+
     /**
      * 許容される値のリスト
      */
     override val choices: List<ValueItem>
         = ValueItemRecord.from(getList("choices", emptyList()), _context)
+
     companion object {
         /**
          * creates record list from list of map

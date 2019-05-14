@@ -101,7 +101,6 @@
         "description": "エンティティ",
         "type": "object",
         "required": [
-          "properties",
           "name"
         ],
         "properties": {
@@ -133,15 +132,19 @@
             "description": "値オブジェクトかどうか",
             "type": "boolean"
           },
+          "subtype_of": {
+            "description": "The name of the entity which this entity is subtype of",
+            "type": "string"
+          },
           "properties": {
-            "description": "このエンティティのプロパティ",
+            "description": "The properties of this entity (excluding supertypes')",
             "type": "array",
             "items": {
               "$ref": "#/definitions/entities/property"
             }
           },
           "relationships": {
-            "description": "このエンティティと他のエンティティの関連",
+            "description": "The relationships with other entities (excluding supertypes')",
             "type": "array",
             "items": {
               "$ref": "#/definitions/entities/relationship"

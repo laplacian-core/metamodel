@@ -1,5 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
+import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.Query
 import laplacian.metamodel.model.Entity
 import laplacian.util.*
@@ -18,10 +19,18 @@ data class QueryRecord (
     private val _record: Record = __record.normalizeCamelcase()
 ): Query, Record by _record {
     /**
+     * The laplacian module project definition.
+     */
+    private val project: Project
+        get() = _context.get("project") as Project
+
+
+    /**
      * クエリ名称
      */
     override val name: String
         get() = getOrThrow("name")
+
     /**
      * 識別子
      */
@@ -29,6 +38,7 @@ data class QueryRecord (
         get() = getOrThrow("identifier") {
             name.lowerUnderscorize()
         }
+
     /**
      * 結果型
      */
@@ -38,10 +48,12 @@ data class QueryRecord (
                 if (cardinality.contains("*")) "List<$className>" else className
             }
         }
+
     /**
      * クエリ結果エンティティ名
      */
     override val resultEntityName: String? by _record
+
     /**
      * 詳細
      */
@@ -49,6 +61,7 @@ data class QueryRecord (
         get() = getOrThrow("description") {
             name
         }
+
     /**
      * 多重度
      */
@@ -56,11 +69,13 @@ data class QueryRecord (
         get() = getOrThrow("cardinality") {
             "*"
         }
+
     /**
      * クエリスクリプト
      */
     override val snippet: String
         get() = getOrThrow("snippet")
+
     /**
      * クエリ結果エンティティ
      */
@@ -68,6 +83,7 @@ data class QueryRecord (
         get() = EntityRecord.from(_context).find {
             it.name == resultEntityName
         }
+
     companion object {
         /**
          * creates record list from list of map

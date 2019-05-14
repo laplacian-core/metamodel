@@ -1,5 +1,6 @@
 package laplacian.metamodel.record
 import com.github.jknack.handlebars.Context
+import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.ValueDomainType
 import laplacian.metamodel.model.ValueDomainTypeList
 import laplacian.metamodel.model.ValueDomain
@@ -14,15 +15,24 @@ data class ValueDomainTypeRecord (
     private val _record: Record = __record.normalizeCamelcase()
 ): ValueDomainType, Record by _record {
     /**
+     * The laplacian module project definition.
+     */
+    private val project: Project
+        get() = _context.get("project") as Project
+
+
+    /**
      * The name of this value_domain_type.
      */
     override val name: String
         get() = getOrThrow("name")
+
     /**
      * The type of this value_domain_type.
      */
     override val type: String
         get() = getOrThrow("type")
+
     /**
      * The description of this value_domain_type.
      */
@@ -30,11 +40,13 @@ data class ValueDomainTypeRecord (
         get() = getOrThrow("description") {
             name
         }
+
     /**
      * domain
      */
     override val domain: ValueDomain
         = ValueDomainRecord(getOrThrow<Record>("domain"), _context)
+
     companion object {
         /**
          * creates record list from list of map
