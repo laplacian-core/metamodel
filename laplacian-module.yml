@@ -25,5 +25,5 @@ project:
 
   - group: laplacian
     name: entity
-    subname: diagram
+    subname: document
     version: "1.0.0"
