@@ -20,7 +20,7 @@ class MetamodelModelEntryResolver: ModelEntryResolver {
         return when (key) {
             "entities" -> EntityList(
                 model.getList<Record>("entities")
-                     .mergeWithKeys("name")
+                     .mergeWithKeys("name", "namespace")
                      .map{ EntityRecord(it, context.currentModel) },
                 context.currentModel
             )

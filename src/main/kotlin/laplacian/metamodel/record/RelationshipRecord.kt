@@ -5,7 +5,6 @@ import laplacian.metamodel.model.Relationship
 import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.PropertyMapping
 import laplacian.util.*
-
 /**
  * relationship
  */
@@ -107,5 +106,25 @@ data class RelationshipRecord (
         fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
             RelationshipRecord(it, _context, entity = entity)
         }
+    }
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is RelationshipRecord) return false
+        if (entity != other.entity) return false
+        if (name != other.name) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = entity.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "RelationshipRecord(" +
+            "entity=$entity, " +
+            "name=$name" +
+        ")"
     }
 }

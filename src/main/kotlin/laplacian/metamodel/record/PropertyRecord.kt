@@ -6,7 +6,6 @@ import laplacian.metamodel.model.Entity
 import laplacian.metamodel.model.ValueDomain
 import laplacian.metamodel.model.ValueDomainType
 import laplacian.util.*
-
 /**
  * property
  */
@@ -45,6 +44,14 @@ data class PropertyRecord (
      */
     override val primaryKey: Boolean
         get() = getOrThrow("primaryKey") {
+            false
+        }
+
+    /**
+     * Defines this property is subtype_key or not.
+     */
+    override val subtypeKey: Boolean
+        get() = getOrThrow("subtypeKey") {
             false
         }
 
@@ -149,5 +156,25 @@ data class PropertyRecord (
         fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
             PropertyRecord(it, _context, entity = entity)
         }
+    }
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PropertyRecord) return false
+        if (entity != other.entity) return false
+        if (name != other.name) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = entity.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "PropertyRecord(" +
+            "entity=$entity, " +
+            "name=$name" +
+        ")"
     }
 }

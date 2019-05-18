@@ -20,6 +20,10 @@ interface Property {
      */
     val primaryKey: Boolean
     /**
+     * Defines this property is subtype_key or not.
+     */
+    val subtypeKey: Boolean
+    /**
      * The type of this property.
      */
     val type: String

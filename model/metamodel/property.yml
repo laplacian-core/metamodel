@@ -4,6 +4,7 @@ entities:
     properties:
      - name: name
        type: string
+       primary_key: true
 
      - name: identifier
        optional: true
@@ -13,6 +14,12 @@ entities:
          name.lowerUnderscorize()
 
      - name: primary_key
+       type: boolean
+       optional: true
+       default_value: |
+         false
+
+     - name: subtype_key
        type: boolean
        optional: true
        default_value: |

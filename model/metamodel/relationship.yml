@@ -4,6 +4,7 @@ entities:
     properties:
       - name: name
         type: string
+        primary_key: true
 
       - name: identifier
         optional: true

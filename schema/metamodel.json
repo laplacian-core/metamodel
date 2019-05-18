@@ -136,6 +136,11 @@
             "description": "The name of the entity which this entity is subtype of",
             "type": "string"
           },
+          "subtype_key_value": {
+            "description": "The value of subtype key that represents this type of entity,
+which is used when implementing polymorphism. The name of entity is used by default.",
+            "type": "string"
+          },
           "properties": {
             "description": "The properties of this entity (excluding supertypes')",
             "type": "array",
@@ -181,6 +186,10 @@
           },
           "primary_key": {
             "description": "Defines this property is primary_key or not.",
+            "type": "boolean"
+          },
+          "subtype_key": {
+            "description": "Defines this property is subtype_key or not.",
             "type": "boolean"
           },
           "type": {

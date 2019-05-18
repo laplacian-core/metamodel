@@ -12,7 +12,7 @@
 #### Properties
 * **name:** *PK* `String`
   名称
-* **namespace:** `String?`
+* **namespace:** *PK* `String?`
   名前空間
 * **identifier:** `String?`
   識別子 省略時は名称を使用
@@ -24,6 +24,9 @@
   クラス名
 * **subtype_of:** `String?`
   The name of the entity which this entity is subtype of
+* **subtype_key_value:** `String?`
+  The value of subtype key that represents this type of entity,
+  which is used when implementing polymorphism. The name of entity is used by default.
 * **inherited:** `Boolean`
   他のエンティティの導出エンティティであるかどうか
 * **top_level:** `Boolean`
@@ -48,6 +51,8 @@
   The entity which this entity is subtype of
 * **subtypes:** `List<Entity>`
   The subtype entities of this entity
+* **subtype_key:** `Property?`
+  The property which is used to identify the type of a entity.
 * **queries:** `List<Query>`
   このエンティティに対するルートクエリ
 * **primary_keys:** `List<Property>`
@@ -77,12 +82,14 @@
   property
 
 #### Properties
-* **name:** `String`
+* **name:** *PK* `String`
   The name of this property.
 * **identifier:** `String?`
   The identifier of this property.
 * **primary_key:** `Boolean?`
   Defines this property is primary_key or not.
+* **subtype_key:** `Boolean?`
+  Defines this property is subtype_key or not.
 * **type:** `String`
   The type of this property.
 * **domain_type_name:** `String?`
@@ -126,7 +133,7 @@
   relationship
 
 #### Properties
-* **name:** `String`
+* **name:** *PK* `String`
   The name of this relationship.
 * **identifier:** `String?`
   The identifier of this relationship.

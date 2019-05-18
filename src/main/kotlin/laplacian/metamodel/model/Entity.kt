@@ -35,8 +35,15 @@ interface Entity {
         get() = identifier.upperCamelize()
     /**
      * The name of the entity which this entity is subtype of
+
      */
     val subtypeOf: String?
+    /**
+     * The value of subtype key that represents this type of entity,
+which is used when implementing polymorphism. The name of entity is used by default.
+
+     */
+    val subtypeKeyValue: String
     /**
      * 他のエンティティの導出エンティティであるかどうか
 
@@ -100,6 +107,11 @@ interface Entity {
      */
     val subtypes: List<Entity>
     /**
+     * The property which is used to identify the type of a entity.
+     */
+    val subtypeKey: Property?
+        get() = properties.find{ it.subtypeKey }
+    /**
      * このエンティティに対するルートクエリ
      */
     val queries: List<Query>
@@ -107,13 +119,13 @@ interface Entity {
      * 一意識別キーとなるプロパティのリスト
      */
     val primaryKeys: List<Property>
-        get() = properties.filter{ it.primaryKey }
+        get() = (supertype?.primaryKeys ?: emptyList()) + properties.filter{ it.primaryKey }
     /**
      * このエンティティの導出元エンティティ このエンティティが導出エンティティでなければ空集合
 
      */
     val inheritedFrom: List<Relationship>
-        get() = allRelationships.filter{ it.inherited }
+        get() = supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
     /**
      * このエンティティが参照するエンティティの一覧(自身は除く)
 

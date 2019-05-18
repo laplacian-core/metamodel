@@ -3,7 +3,6 @@ import com.github.jknack.handlebars.Context
 import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.NamedValue
 import laplacian.util.*
-
 /**
  * named_value
  */

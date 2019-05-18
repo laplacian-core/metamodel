@@ -3,7 +3,6 @@ import com.github.jknack.handlebars.Context
 import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.ValueItem
 import laplacian.util.*
-
 /**
  * value_item
  */

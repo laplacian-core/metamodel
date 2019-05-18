@@ -7,7 +7,6 @@ import laplacian.metamodel.model.Property
 import laplacian.metamodel.model.Relationship
 import laplacian.metamodel.model.Query
 import laplacian.util.*
-
 /**
  * エンティティ
  */
@@ -72,8 +71,19 @@ data class EntityRecord (
 
     /**
      * The name of the entity which this entity is subtype of
+
      */
     override val subtypeOf: String? by _record
+
+    /**
+     * The value of subtype key that represents this type of entity,
+which is used when implementing polymorphism. The name of entity is used by default.
+
+     */
+    override val subtypeKeyValue: String
+        get() = getOrThrow("subtypeKeyValue") {
+            name
+        }
 
     /**
      * The properties of this entity (excluding supertypes')
@@ -117,7 +127,6 @@ data class EntityRecord (
             return _context.get("entities") as EntityList
         }
     }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is EntityRecord) return false
@@ -135,6 +144,7 @@ data class EntityRecord (
     override fun toString(): String {
         return "EntityRecord(" +
             "name=$name, " +
-            "namespace=$namespace)"
+            "namespace=$namespace" +
+        ")"
     }
 }

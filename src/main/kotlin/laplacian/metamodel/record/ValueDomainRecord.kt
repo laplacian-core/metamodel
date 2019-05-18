@@ -4,7 +4,6 @@ import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.ValueDomain
 import laplacian.metamodel.model.ValueItem
 import laplacian.util.*
-
 /**
  * value_domain
  */

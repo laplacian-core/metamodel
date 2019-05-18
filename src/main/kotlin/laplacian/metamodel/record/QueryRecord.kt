@@ -4,7 +4,6 @@ import laplacian.gradle.task.generate.model.Project
 import laplacian.metamodel.model.Query
 import laplacian.metamodel.model.Entity
 import laplacian.util.*
-
 /**
  * The queries from which all navigation originates.
 

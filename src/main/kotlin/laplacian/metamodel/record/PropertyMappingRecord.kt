@@ -5,7 +5,6 @@ import laplacian.metamodel.model.PropertyMapping
 import laplacian.metamodel.model.Relationship
 import laplacian.metamodel.model.Property
 import laplacian.util.*
-
 /**
  * property_mapping
  */

@@ -5,7 +5,6 @@ import laplacian.metamodel.model.ValueDomainType
 import laplacian.metamodel.model.ValueDomainTypeList
 import laplacian.metamodel.model.ValueDomain
 import laplacian.util.*
-
 /**
  * value_domain_type
  */
