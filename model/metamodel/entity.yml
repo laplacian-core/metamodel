@@ -155,6 +155,13 @@ entities:
         - from: name
           to: subtype_of
 
+      - name: descendants
+        description: All the subtypes of this entity
+        reference_entity_name: entity
+        cardinality: '*'
+        snippet: |
+          subtypes.flatMap{ listOf(it) + it.subtypes }
+
       - name: subtype_key
         description: The property which is used to identify the type of a entity.
         reference_entity_name: property
