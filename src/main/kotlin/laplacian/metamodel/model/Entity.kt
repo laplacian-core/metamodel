@@ -107,6 +107,11 @@ which is used when implementing polymorphism. The name of entity is used by defa
      */
     val subtypes: List<Entity>
     /**
+     * All the subtypes of this entity
+     */
+    val descendants: List<Entity>
+        get() = subtypes.flatMap{ listOf(it) + it.subtypes }
+    /**
      * The property which is used to identify the type of a entity.
      */
     val subtypeKey: Property?

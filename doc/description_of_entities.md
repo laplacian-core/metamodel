@@ -51,6 +51,8 @@
   The entity which this entity is subtype of
 * **subtypes:** `List<Entity>`
   The subtype entities of this entity
+* **descendants:** `List<Entity>`
+  All the subtypes of this entity
 * **subtype_key:** `Property?`
   The property which is used to identify the type of a entity.
 * **queries:** `List<Query>`
