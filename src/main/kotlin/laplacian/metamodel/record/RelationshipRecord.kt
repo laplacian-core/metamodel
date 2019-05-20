@@ -83,7 +83,7 @@ data class RelationshipRecord (
      * mappings
      */
     override val mappings: List<PropertyMapping>
-        = PropertyMappingRecord.from(getList("mappings", emptyList()), _context, this)
+        = PropertyMappingRecord.from(_record.getList("mappings", emptyList()), _context, this)
 
     /**
      * reference_entity

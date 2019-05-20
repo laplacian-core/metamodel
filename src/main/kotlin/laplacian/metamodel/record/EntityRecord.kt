@@ -89,13 +89,13 @@ which is used when implementing polymorphism. The name of entity is used by defa
      * The properties of this entity (excluding supertypes')
      */
     override val properties: List<Property>
-        = PropertyRecord.from(getList("properties", emptyList()), _context, this)
+        = PropertyRecord.from(_record.getList("properties", emptyList()), _context, this)
 
     /**
      * The relationships with other entities (excluding supertypes')
      */
     override val relationships: List<Relationship>
-        = RelationshipRecord.from(getList("relationships", emptyList()), _context, this)
+        = RelationshipRecord.from(_record.getList("relationships", emptyList()), _context, this)
 
     /**
      * The entity which this entity is subtype of
@@ -117,7 +117,7 @@ which is used when implementing polymorphism. The name of entity is used by defa
      * このエンティティに対するルートクエリ
      */
     override val queries: List<Query>
-        = QueryRecord.from(getList("queries", emptyList()), _context, this)
+        = QueryRecord.from(_record.getList("queries", emptyList()), _context, this)
 
     companion object {
         /**

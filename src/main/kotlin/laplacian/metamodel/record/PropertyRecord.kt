@@ -67,7 +67,7 @@ data class PropertyRecord (
     override val domainTypeName: String? by _record
 
     /**
-     * the maximum allowed size of this property
+     * the maximum allowed size of the content of this property
      */
     override val size: Int
         get() = getOrThrow("size") {
@@ -96,7 +96,7 @@ data class PropertyRecord (
         }
 
     /**
-     * デフォルト値
+     * The default value of this property, which is used when the actual value is null
 
      */
     override val defaultValue: String? by _record

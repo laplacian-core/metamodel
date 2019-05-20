@@ -205,7 +205,7 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "type": "string"
           },
           "size": {
-            "description": "the maximum allowed size of this property",
+            "description": "the maximum allowed size of the content of this property",
             "type": "number"
           },
           "optional": {
@@ -217,7 +217,7 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "type": "string"
           },
           "default_value": {
-            "description": "デフォルト値",
+            "description": "The default value of this property, which is used when the actual value is null",
             "type": "string"
           },
           "example_value": {

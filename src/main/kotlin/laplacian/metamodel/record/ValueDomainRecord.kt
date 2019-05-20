@@ -28,7 +28,7 @@ data class ValueDomainRecord (
      * 許容される値のリスト
      */
     override val choices: List<ValueItem>
-        = ValueItemRecord.from(getList("choices", emptyList()), _context)
+        = ValueItemRecord.from(_record.getList("choices", emptyList()), _context)
 
     companion object {
         /**

@@ -32,7 +32,7 @@ interface Property {
      */
     val domainTypeName: String?
     /**
-     * the maximum allowed size of this property
+     * the maximum allowed size of the content of this property
      */
     val size: Int
     /**
@@ -44,7 +44,7 @@ interface Property {
      */
     val description: String
     /**
-     * デフォルト値
+     * The default value of this property, which is used when the actual value is null
 
      */
     val defaultValue: String?
@@ -77,11 +77,17 @@ interface Property {
             if (multiple) "List<$it>" else it
         }
     /**
-     * Null値が許容されるかどうか
+     * Whether this property permit a null value
 
      */
     val nullable: Boolean
         get() = optional && (defaultValue == null)
+    /**
+     * Whether this preoperty overwrite a property which is defined in supertype.
+
+     */
+    val overwrites: Boolean
+        get() = entity.ancestors.any{ s -> s.properties.any{ p -> p.name == name }}
     /**
      * entity
      */

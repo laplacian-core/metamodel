@@ -103,6 +103,18 @@ which is used when implementing polymorphism. The name of entity is used by defa
      */
     val supertype: Entity?
     /**
+     * The entities which are supertype of this entity (recursive).
+
+     */
+    val ancestors: List<Entity>
+        get() = mutableListOf<Entity>().also {
+            var ancestor = supertype
+            while (ancestor != null) {
+                it.add(ancestor)
+                ancestor = ancestor.supertype
+            }
+        }
+    /**
      * The subtype entities of this entity
      */
     val subtypes: List<Entity>

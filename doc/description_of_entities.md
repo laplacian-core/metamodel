@@ -49,6 +49,8 @@
   The relationships including supertype's ones.
 * **supertype:** `Entity?`
   The entity which this entity is subtype of
+* **ancestors:** `List<Entity>`
+  The entities which are supertype of this entity (recursive).
 * **subtypes:** `List<Entity>`
   The subtype entities of this entity
 * **descendants:** `List<Entity>`
@@ -97,13 +99,13 @@
 * **domain_type_name:** `String?`
   制約型名
 * **size:** `Int?`
-  the maximum allowed size of this property
+  the maximum allowed size of the content of this property
 * **optional:** `Boolean?`
   Defines this property is optional or not.
 * **description:** `String?`
   The description of this property.
 * **default_value:** `String?`
-  デフォルト値
+  The default value of this property, which is used when the actual value is null
 * **example_value:** `String?`
   The example_value of this property.
 * **table_column_name:** `String?`
@@ -117,7 +119,9 @@
 * **class_name:** `String`
   The class_name of this property.
 * **nullable:** `Boolean`
-  Null値が許容されるかどうか
+  Whether this property permit a null value
+* **overwrites:** `Boolean`
+  Whether this preoperty overwrite a property which is defined in supertype.
 
 #### Relationships
 * **entity:** `Entity`
