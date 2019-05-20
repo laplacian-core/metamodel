@@ -1,130 +1,137 @@
 entities:
-  - name: property
-    namespace: laplacian.metamodel
-    properties:
-     - name: name
-       type: string
-       primary_key: true
+- name: property
+  namespace: laplacian.metamodel
+  properties:
+  - name: name
+    type: string
+    primary_key: true
 
-     - name: identifier
-       optional: true
-       type: string
-       domain_type_name: identifier
-       default_value:
-         name.lowerUnderscorize()
+  - name: identifier
+    optional: true
+    type: string
+    domain_type_name: identifier
+    default_value:
+      name.lowerUnderscorize()
 
-     - name: primary_key
-       type: boolean
-       optional: true
-       default_value: |
-         false
+  - name: primary_key
+    type: boolean
+    optional: true
+    default_value: |
+      false
 
-     - name: subtype_key
-       type: boolean
-       optional: true
-       default_value: |
-         false
+  - name: subtype_key
+    type: boolean
+    optional: true
+    default_value: |
+      false
 
-     - name: type
-       type: string
-       domain_type_name: base_type
+  - name: type
+    type: string
+    domain_type_name: base_type
 
-     - name: domain_type_name
-       description: 制約型名
-       type: string
-       optional: true
+  - name: domain_type_name
+    description: 制約型名
+    type: string
+    optional: true
 
-     - name: size
-       description: the maximum allowed size of this property
-       type: number
-       optional: true
-       default_value: |
-         when(type) {
-             "string" -> 200
-             else -> throw IllegalStateException(
-                 "The size of $type type field can not be defined."
-             )
-         }
+  - name: size
+    description: the maximum allowed size of the content of this property
+    type: number
+    optional: true
+    default_value: |
+      when(type) {
+          "string" -> 200
+          else -> throw IllegalStateException(
+              "The size of $type type field can not be defined."
+          )
+      }
 
-     - name: optional
-       type: boolean
-       optional: true
-       default_value: |
-         false
+  - name: optional
+    type: boolean
+    optional: true
+    default_value: |
+      false
 
-     - name: description
-       type: string
-       optional: true
-       default_value: |
-         if (type == "boolean") "Defines this ${entity.name} is $name or not." else "The $name of this ${entity.name}."
+  - name: description
+    type: string
+    optional: true
+    default_value: |
+      if (type == "boolean") "Defines this ${entity.name} is $name or not." else "The $name of this ${entity.name}."
 
-     - name: default_value
-       description: |
-         デフォルト値
-       type: string
-       optional: true
+  - name: default_value
+    description: |
+      The default value of this property, which is used when the actual value is null
+    type: string
+    optional: true
 
-     - name: example_value
-       type: string
-       optional: true
-       default_value: |
-         defaultValue ?: when(type) {
-           "string" -> "\"hogehoge\""
-           "number" -> "0"
-           "boolean" -> "false"
-           else -> "null"
-         }
+  - name: example_value
+    type: string
+    optional: true
+    default_value: |
+      defaultValue ?: when(type) {
+        "string" -> "\"hogehoge\""
+        "number" -> "0"
+        "boolean" -> "false"
+        else -> "null"
+      }
 
-     - name: table_column_name
-       type: string
-       optional: true
-       default_value: |
-         identifier.lowerUnderscorize()
+  - name: table_column_name
+    type: string
+    optional: true
+    default_value: |
+      identifier.lowerUnderscorize()
 
-     - name: snippet
-       type: string
-       optional: true
+  - name: snippet
+    type: string
+    optional: true
 
-     - name: multiple
-       type: boolean
-       optional: true
-       default_value: |
-         false
+  - name: multiple
+    type: boolean
+    optional: true
+    default_value: |
+      false
 
-     - name: property_name
-       type: string
-       snippet: >
-         identifier.lowerCamelize()
+  - name: property_name
+    type: string
+    snippet: >
+      identifier.lowerCamelize()
 
-     - name: class_name
-       type: string
-       snippet: |
-         (if (type == "number") "Int" else type.upperCamelize()).let {
-             if (multiple) "List<$it>" else it
-         }
+  - name: class_name
+    type: string
+    snippet: |
+      (if (type == "number") "Int" else type.upperCamelize()).let {
+          if (multiple) "List<$it>" else it
+      }
 
-     - name: nullable
-       description: |
-         Null値が許容されるかどうか
-       type: boolean
-       snippet: |
-         optional && (defaultValue == null)
+  - name: nullable
+    type: boolean
+    description: |
+      Whether this property permit a null value
+    snippet: |
+      optional && (defaultValue == null)
 
-    relationships:
-      - name: entity
-        reference_entity_name: entity
-        inherited: true
-        cardinality: '1'
+  - name: overwrites
+    type: boolean
+    description: |
+      Whether this preoperty overwrite a property which is defined in supertype.
+    snippet: |
+      entity.ancestors.any{ s -> s.properties.any{ p -> p.name == name }}
 
-      - name: domain
-        reference_entity_name: value_domain
-        cardinality: 0..1
-        aggregate: true
+  relationships:
+  - name: entity
+    reference_entity_name: entity
+    inherited: true
+    cardinality: '1'
 
-      - name: domain_type
-        reference_entity_name: value_domain_type
-        cardinality: 0..1
-        mappings:
-          - from: domain_type_name
-            to: name
+  - name: domain
+    reference_entity_name: value_domain
+    cardinality: 0..1
+    aggregate: true
+
+  - name: domain_type
+    reference_entity_name: value_domain_type
+    cardinality: 0..1
+    mappings:
+    - from: domain_type_name
+      to: name
 
