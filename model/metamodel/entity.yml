@@ -147,6 +147,20 @@ entities:
         - from: subtype_of
           to: name
 
+      - name: ancestors
+        description: |
+          The entities which are supertype of this entity (recursive).
+        reference_entity_name: entity
+        cardinality: '*'
+        snippet: |
+          mutableListOf<Entity>().also {
+              var ancestor = supertype
+              while (ancestor != null) {
+                  it.add(ancestor)
+                  ancestor = ancestor.supertype
+              }
+          }
+
       - name: subtypes
         description: The subtype entities of this entity
         reference_entity_name: entity
