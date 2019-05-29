@@ -70,6 +70,12 @@ data class EntityRecord (
         }
 
     /**
+     * クラス名
+     */
+    override val className: String
+        get() = identifier.upperCamelize()
+
+    /**
      * The name of the entity which this entity is subtype of
 
      */
@@ -83,6 +89,55 @@ which is used when implementing polymorphism. The name of entity is used by defa
     override val subtypeKeyValue: String
         get() = getOrThrow("subtypeKeyValue") {
             name
+        }
+
+    /**
+     * 他のエンティティの導出エンティティであるかどうか
+
+     */
+    override val inherited: Boolean
+        get() = supertype?.inherited ?: relationships.any{ it.inherited }
+
+    /**
+     * このエンティティがトップレベルエンティティかどうか
+
+     */
+    override val topLevel: Boolean
+        get() = !inherited && !valueObject
+
+    /**
+     * このエンティティがnamespaceをサポートしているかどうか
+
+     */
+    override val supportsNamespace: Boolean
+        get() = properties.any { p ->
+            p.name == "namespace" && p.type == "string"
+        }
+
+    /**
+     * 完全修飾名
+
+     */
+    override val fqn: String
+        get() = "$namespace.$className"
+
+    /**
+     * 一意識別子となるカラム項目名のリスト
+
+     */
+    override val primaryKeyNames: List<String>
+        get() = inheritedFrom.flatMap { inheritance ->
+            inheritance.referenceEntity.primaryKeys.map { pk ->
+                "${inheritance.identifier.lowerUnderscorize()}_${pk.propertyName.lowerUnderscorize()}"
+            }
+        } + primaryKeys.map { it.propertyName.lowerUnderscorize() }
+
+    /**
+     * Defines this entity is deprecated or not.
+     */
+    override val deprecated: Boolean
+        get() = getOrThrow("deprecated") {
+            false
         }
 
     /**

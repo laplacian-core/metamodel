@@ -94,6 +94,10 @@
           "snippet": {
             "description": "クエリスクリプト",
             "type": "string"
+          },
+          "deprecated": {
+            "description": "Defines this query is deprecated or not.",
+            "type": "boolean"
           }
         }
       },
@@ -140,6 +144,10 @@
             "description": "The value of subtype key that represents this type of entity,
 which is used when implementing polymorphism. The name of entity is used by default.",
             "type": "string"
+          },
+          "deprecated": {
+            "description": "Defines this entity is deprecated or not.",
+            "type": "boolean"
           },
           "properties": {
             "description": "The properties of this entity (excluding supertypes')",
@@ -236,6 +244,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "description": "Defines this property is multiple or not.",
             "type": "boolean"
           },
+          "deprecated": {
+            "description": "Defines this property is deprecated or not.",
+            "type": "boolean"
+          },
           "domain": {
             "description": "domain",
             "$ref": "#/definitions/entities/value_domain"
@@ -292,6 +304,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
           "snippet": {
             "description": "The snippet of this relationship.",
             "type": "string"
+          },
+          "deprecated": {
+            "description": "Defines this relationship is deprecated or not.",
+            "type": "boolean"
           },
           "mappings": {
             "description": "mappings",

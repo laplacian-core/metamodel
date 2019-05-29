@@ -76,6 +76,20 @@ data class QueryRecord (
         get() = getOrThrow("snippet")
 
     /**
+     * Defines this query is oneliner or not.
+     */
+    override val oneliner: Boolean
+        get() = !snippet.contains("""\breturn\b""".toRegex())
+
+    /**
+     * Defines this query is deprecated or not.
+     */
+    override val deprecated: Boolean
+        get() = getOrThrow("deprecated") {
+            false
+        }
+
+    /**
      * クエリ結果エンティティ
      */
     override val resultEntity: Entity?

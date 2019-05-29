@@ -117,6 +117,12 @@ entities:
     snippet: |
       entity.ancestors.any{ s -> s.properties.any{ p -> p.name == name }}
 
+  - name: deprecated
+    type: boolean
+    optional: true
+    default_value: |
+      false
+
   relationships:
   - name: entity
     reference_entity_name: entity

@@ -40,7 +40,10 @@ interface Query {
      * Defines this query is oneliner or not.
      */
     val oneliner: Boolean
-        get() = !snippet.contains("""\breturn\b""".toRegex())
+    /**
+     * Defines this query is deprecated or not.
+     */
+    val deprecated: Boolean
     /**
      * エンティティ
      */

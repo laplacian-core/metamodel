@@ -136,6 +136,42 @@ data class PropertyRecord (
         }
 
     /**
+     * The property_name of this property.
+     */
+    override val propertyName: String
+        get() = identifier.lowerCamelize()
+
+    /**
+     * The class_name of this property.
+     */
+    override val className: String
+        get() = (if (type == "number") "Int" else type.upperCamelize()).let {
+            if (multiple) "List<$it>" else it
+        }
+
+    /**
+     * Whether this property permit a null value
+
+     */
+    override val nullable: Boolean
+        get() = optional && (defaultValue == null)
+
+    /**
+     * Whether this preoperty overwrite a property which is defined in supertype.
+
+     */
+    override val overwrites: Boolean
+        get() = entity.ancestors.any{ s -> s.properties.any{ p -> p.name == name }}
+
+    /**
+     * Defines this property is deprecated or not.
+     */
+    override val deprecated: Boolean
+        get() = getOrThrow("deprecated") {
+            false
+        }
+
+    /**
      * domain
      */
     override val domain: ValueDomain?

@@ -1,282 +1,288 @@
 entities:
-  - name: entity
-    description: エンティティ
-    namespace: laplacian.metamodel
-    properties:
-      - name: name
-        description: 名称
-        primary_key: true
-        type: string
+- name: entity
+  description: エンティティ
+  namespace: laplacian.metamodel
+  properties:
+  - name: name
+    description: 名称
+    primary_key: true
+    type: string
 
-      - name: namespace
-        description: 名前空間
-        type: string
-        primary_key: true
-        domain_type_name: namespace
-        optional: true
-        default_value: |
-          if (inherited) {
-              inheritedFrom.first().referenceEntity.namespace
+  - name: namespace
+    description: 名前空間
+    type: string
+    primary_key: true
+    domain_type_name: namespace
+    optional: true
+    default_value: |
+      if (inherited) {
+          inheritedFrom.first().referenceEntity.namespace
+      }
+      else {
+          _context.get("project.namespace") ?: throw IllegalStateException(
+              "The ${name} entity does not have namespace." +
+              "You should give it or set the default(project) namespace instead."
+          )
+      } as String
+
+  - name: identifier
+    description: >
+      識別子
+      省略時は名称を使用
+    type: string
+    domain_type_name: identifier
+    optional: true
+    default_value: |
+      name.lowerUnderscorize()
+
+  - name: description
+    description: 詳細
+    optional: true
+    type: string
+    default_value: |
+      name
+
+  - name: value_object
+    description: 値オブジェクトかどうか
+    type: boolean
+    optional: true
+    default_value: |
+      false
+
+  - name: class_name
+    description: クラス名
+    type: string
+    snippet: >
+      identifier.upperCamelize()
+
+  - name: subtype_of
+    description: |
+      The name of the entity which this entity is subtype of
+    type: string
+    optional: true
+
+  - name: subtype_key_value
+    type: string
+    optional: true
+    description: |
+      The value of subtype key that represents this type of entity,
+      which is used when implementing polymorphism. The name of entity is used by default.
+    default_value: |
+      name
+
+  - name: inherited
+    description: >
+      他のエンティティの導出エンティティであるかどうか
+    type: boolean
+    snippet: |
+      supertype?.inherited ?: relationships.any{ it.inherited }
+
+  - name: top_level
+    description: >
+      このエンティティがトップレベルエンティティかどうか
+    type: boolean
+    snippet: >
+      !inherited && !valueObject
+
+  - name: supports_namespace
+    description: >
+      このエンティティがnamespaceをサポートしているかどうか
+    type: boolean
+    snippet: |
+      properties.any { p ->
+          p.name == "namespace" && p.type == "string"
+      }
+
+  - name: fqn
+    description: >
+      完全修飾名
+    type: string
+    snippet: |
+      "$namespace.$className"
+
+  - name: primary_key_names
+    description: |
+      一意識別子となるカラム項目名のリスト
+    type: string
+    multiple: true
+    snippet: |
+      inheritedFrom.flatMap { inheritance ->
+          inheritance.referenceEntity.primaryKeys.map { pk ->
+              "${inheritance.identifier.lowerUnderscorize()}_${pk.propertyName.lowerUnderscorize()}"
           }
-          else {
-              _context.get("project.namespace") ?: throw IllegalStateException(
-                  "The ${name} entity does not have namespace." +
-                  "You should give it or set the default(project) namespace instead."
-              )
-          } as String
+      } + primaryKeys.map { it.propertyName.lowerUnderscorize() }
 
-      - name: identifier
-        description: >
-          識別子
-          省略時は名称を使用
-        type: string
-        domain_type_name: identifier
-        optional: true
-        default_value: |
-          name.lowerUnderscorize()
+  - name: deprecated
+    type: boolean
+    optional: true
+    default_value: |
+      false
 
-      - name: description
-        description: 詳細
-        optional: true
-        type: string
-        default_value: |
-          name
+  relationships:
+  - name: properties
+    description: The properties of this entity (excluding supertypes')
+    reference_entity_name: property
+    aggregate: true
+    cardinality: "*"
 
-      - name: value_object
-        description: 値オブジェクトかどうか
-        type: boolean
-        optional: true
-        default_value: |
-          false
+  - name: all_properties
+    description: The properties of this entity
+    reference_entity_name: property
+    cardinality: "1..*"
+    snippet: |
+      (supertype?.allProperties ?: emptyList()) + properties
 
-      - name: class_name
-        description: クラス名
-        type: string
-        snippet: >
-          identifier.upperCamelize()
+  - name: relationships
+    description: The relationships with other entities (excluding supertypes')
+    reference_entity_name: relationship
+    aggregate: true
+    cardinality: '*'
 
-      - name: subtype_of
-        description: |
-          The name of the entity which this entity is subtype of
-        type: string
-        optional: true
+  - name: all_relationships
+    description: The relationships including supertype's ones.
+    reference_entity_name: relationship
+    cardinality: "*"
+    snippet: |
+      (supertype?.allRelationships ?: emptyList()) + relationships
 
-      - name: subtype_key_value
-        type: string
-        optional: true
-        description: |
-          The value of subtype key that represents this type of entity,
-          which is used when implementing polymorphism. The name of entity is used by default.
-        default_value: |
-          name
+  - name: supertype
+    description: The entity which this entity is subtype of
+    reference_entity_name: entity
+    cardinality: '0..1'
+    mappings:
+    - from: subtype_of
+      to: name
 
-      - name: inherited
-        description: >
-          他のエンティティの導出エンティティであるかどうか
-        type: boolean
-        snippet: |
-          supertype?.inherited ?: relationships.any{ it.inherited }
-
-      - name: top_level
-        description: >
-          このエンティティがトップレベルエンティティかどうか
-        type: boolean
-        snippet: >
-          !inherited && !valueObject
-
-      - name: supports_namespace
-        description: >
-          このエンティティがnamespaceをサポートしているかどうか
-        type: boolean
-        snippet: |
-          properties.any { p ->
-              p.name == "namespace" && p.type == "string"
+  - name: ancestors
+    description: |
+      The entities which are supertype of this entity (recursive).
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: |
+      mutableListOf<Entity>().also {
+          var ancestor = supertype
+          while (ancestor != null) {
+              it.add(ancestor)
+              ancestor = ancestor.supertype
           }
+      }
 
-      - name: fqn
-        description: >
-          完全修飾名
-        type: string
-        snippet: |
-          "$namespace.$className"
+  - name: subtypes
+    description: The subtype entities of this entity
+    reference_entity_name: entity
+    cardinality: '*'
+    mappings:
+    - from: name
+      to: subtype_of
 
-      - name: primary_key_names
-        description: |
-          一意識別子となるカラム項目名のリスト
-        type: string
-        multiple: true
-        snippet: |
-          inheritedFrom.flatMap { inheritance ->
-              inheritance.referenceEntity.primaryKeys.map { pk ->
-                  "${inheritance.identifier.lowerUnderscorize()}_${pk.propertyName.lowerUnderscorize()}"
-              }
-          } + primaryKeys.map { it.propertyName.lowerUnderscorize() }
+  - name: descendants
+    description: All the subtypes of this entity
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: |
+      subtypes.flatMap{ listOf(it) + it.subtypes }
 
-    relationships:
-      - name: properties
-        description: The properties of this entity (excluding supertypes')
-        reference_entity_name: property
-        aggregate: true
-        cardinality: "*"
+  - name: subtype_key
+    description: The property which is used to identify the type of a entity.
+    reference_entity_name: property
+    cardinality: '0..1'
+    snippet:
+      properties.find{ it.subtypeKey }
 
-      - name: all_properties
-        description: The properties of this entity
-        reference_entity_name: property
-        cardinality: "1..*"
-        snippet: |
-          (supertype?.allProperties ?: emptyList()) + properties
+  - name: queries
+    description: このエンティティに対するルートクエリ
+    reference_entity_name: query
+    aggregate: true
+    cardinality: '*'
 
-      - name: relationships
-        description: The relationships with other entities (excluding supertypes')
-        reference_entity_name: relationship
-        aggregate: true
-        cardinality: '*'
+  - name: primary_keys
+    description: 一意識別キーとなるプロパティのリスト
+    reference_entity_name: property
+    cardinality: '1..*'
+    snippet: |
+      (supertype?.primaryKeys ?: emptyList()) + properties.filter{ it.primaryKey }
 
-      - name: all_relationships
-        description: The relationships including supertype's ones.
-        reference_entity_name: relationship
-        cardinality: "*"
-        snippet: |
-          (supertype?.allRelationships ?: emptyList()) + relationships
+  - name: inherited_from
+    description: >
+      このエンティティの導出元エンティティ
+      このエンティティが導出エンティティでなければ空集合
+    reference_entity_name: relationship
+    cardinality: '*'
+    snippet: >
+      supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
 
-      - name: supertype
-        description: The entity which this entity is subtype of
-        reference_entity_name: entity
-        cardinality: '0..1'
-        mappings:
-        - from: subtype_of
-          to: name
+  - name: relating_entities
+    description: |
+      このエンティティが参照するエンティティの一覧(自身は除く)
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: |
+      relationships
+          .map{ it.referenceEntity }
+          .filter{ it.fqn != this.fqn }
+          .distinctBy{ it.fqn }
 
-      - name: ancestors
-        description: |
-          The entities which are supertype of this entity (recursive).
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: |
-          mutableListOf<Entity>().also {
-              var ancestor = supertype
-              while (ancestor != null) {
-                  it.add(ancestor)
-                  ancestor = ancestor.supertype
-              }
-          }
+  - name: relating_top_level_entities
+    description:
+      このエンティティが参照するトップレベルエンティティの一覧(自身は除く)
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: >
+      relatingEntities.filter{ !it.inherited }
 
-      - name: subtypes
-        description: The subtype entities of this entity
-        reference_entity_name: entity
-        cardinality: '*'
-        mappings:
-        - from: name
-          to: subtype_of
+  - name: relating_external_entities
+    description:
+      このエンティティが参照する外部パッケージのエンティティ
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: >
+      relatingEntities.filter{ it.namespace != namespace }
 
-      - name: descendants
-        description: All the subtypes of this entity
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: |
-          subtypes.flatMap{ listOf(it) + it.subtypes }
+  - name: aggregates
+    description: このエンティティが管理する集約
+    reference_entity_name: relationship
+    cardinality: '*'
+    snippet: >
+      relationships.filter{ it.aggregate }
 
-      - name: subtype_key
-        description: The property which is used to identify the type of a entity.
-        reference_entity_name: property
-        cardinality: '0..1'
-        snippet:
-          properties.find{ it.subtypeKey }
+  - name: aggregated_entities
+    description: |
+      このエンティティに集約されているエンティティの一覧 (再帰的に集約されているものを含む)
+    reference_entity_name: entity
+    cardinality: '*'
+    snippet: |
+      (listOf(this) + aggregates.flatMap {
+          it.referenceEntity.aggregatedEntities
+      }).distinctBy{ it.fqn }
 
-      - name: queries
-        description: このエンティティに対するルートクエリ
-        reference_entity_name: query
-        aggregate: true
-        cardinality: '*'
+  - name: stored_properties
+    description: このエンティティが直接値を保持するプロパティ
+    reference_entity_name: property
+    cardinality: '*'
+    snippet: >
+      properties.filter{ it.snippet == null }
 
-      - name: primary_keys
-        description: 一意識別キーとなるプロパティのリスト
-        reference_entity_name: property
-        cardinality: '1..*'
-        snippet: |
-          (supertype?.primaryKeys ?: emptyList()) + properties.filter{ it.primaryKey }
+  - name: stored_relationships
+    description: このエンティティが直接関連値を保持している関連
+    reference_entity_name: relationship
+    cardinality: '*'
+    snippet: >
+      relationships.filter{ it.aggregate || it.mappings.isNotEmpty() }
 
-      - name: inherited_from
-        description: >
-          このエンティティの導出元エンティティ
-          このエンティティが導出エンティティでなければ空集合
-        reference_entity_name: relationship
-        cardinality: '*'
-        snippet: >
-          supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
+  queries:
+  - name: top_level
+    result_entity_name: entity
+    cardinality: '*'
+    description: >
+      トップレベルエンティティの一覧
+    snippet: |
+      return filter{ it.topLevel }
 
-      - name: relating_entities
-        description: |
-          このエンティティが参照するエンティティの一覧(自身は除く)
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: |
-          relationships
-              .map{ it.referenceEntity }
-              .filter{ it.fqn != this.fqn }
-              .distinctBy{ it.fqn }
-
-      - name: relating_top_level_entities
-        description:
-          このエンティティが参照するトップレベルエンティティの一覧(自身は除く)
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: >
-          relatingEntities.filter{ !it.inherited }
-
-      - name: relating_external_entities
-        description:
-          このエンティティが参照する外部パッケージのエンティティ
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: >
-          relatingEntities.filter{ it.namespace != namespace }
-
-      - name: aggregates
-        description: このエンティティが管理する集約
-        reference_entity_name: relationship
-        cardinality: '*'
-        snippet: >
-          relationships.filter{ it.aggregate }
-
-      - name: aggregated_entities
-        description: |
-          このエンティティに集約されているエンティティの一覧 (再帰的に集約されているものを含む)
-        reference_entity_name: entity
-        cardinality: '*'
-        snippet: |
-          (listOf(this) + aggregates.flatMap {
-              it.referenceEntity.aggregatedEntities
-          }).distinctBy{ it.fqn }
-
-      - name: stored_properties
-        description: このエンティティが直接値を保持するプロパティ
-        reference_entity_name: property
-        cardinality: '*'
-        snippet: >
-          properties.filter{ it.snippet == null }
-
-      - name: stored_relationships
-        description: このエンティティが直接関連値を保持している関連
-        reference_entity_name: relationship
-        cardinality: '*'
-        snippet: >
-          relationships.filter{ it.aggregate || it.mappings.isNotEmpty() }
-
-    queries:
-      - name: top_level
-        result_entity_name: entity
-        cardinality: '*'
-        description: >
-          トップレベルエンティティの一覧
-        snippet: |
-          return filter{ it.topLevel }
-
-      - name: top_level_in_namespace
-        result_entity_name: entity
-        cardinality: '*'
-        description: |
-          The top level entities which are included in the same namespace.
-        snippet: |
-          return inNamespace.filter{ it.topLevel }
+  - name: top_level_in_namespace
+    result_entity_name: entity
+    cardinality: '*'
+    description: |
+      The top level entities which are included in the same namespace.
+    snippet: |
+      return inNamespace.filter{ it.topLevel }
 

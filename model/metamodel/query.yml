@@ -55,6 +55,12 @@ entities:
         snippet: |
           !snippet.contains("""\breturn\b""".toRegex())
 
+      - name: deprecated
+        type: boolean
+        optional: true
+        default_value: |
+          false
+
     relationships:
 
       - name: entity

@@ -43,39 +43,34 @@ interface Relationship {
      * The class_name of this relationship.
      */
     val className: String
-        get() = if (multiple) "List<${referenceEntity.className}>" else (referenceEntity.className + if (nullable) "?" else "")
     /**
      * Defines this relationship is multiple or not.
      */
     val multiple: Boolean
-        get() = cardinality.contains("""(\*|N|\.\.[2-9][0-9]+)""".toRegex())
     /**
      * Defines this relationship is allows_empty or not.
      */
     val allowsEmpty: Boolean
-        get() = cardinality == "N" || cardinality == "*" || cardinality.contains("""(0\.\.)""".toRegex())
     /**
      * Defines this relationship is nullable or not.
      */
     val nullable: Boolean
-        get() = !multiple && allowsEmpty
     /**
      * The property_name of this relationship.
      */
     val propertyName: String
-        get() = identifier.lowerCamelize()
     /**
      * Defines this relationship is bidirectional or not.
      */
     val bidirectional: Boolean
-        get() = aggregate && referenceEntity.relationships.any {
-            it.inherited && (it.referenceEntity.fqn == this.entity.fqn)
-        }
     /**
      * Defines this relationship is recursive or not.
      */
     val recursive: Boolean
-        get() = aggregate && (referenceEntity.fqn == entity.fqn)
+    /**
+     * Defines this relationship is deprecated or not.
+     */
+    val deprecated: Boolean
     /**
      * entity
      */

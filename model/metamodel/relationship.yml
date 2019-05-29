@@ -92,6 +92,12 @@ entities:
         snippet: |
           aggregate && (referenceEntity.fqn == entity.fqn)
 
+      - name: deprecated
+        type: boolean
+        optional: true
+        default_value: |
+          false
+
     relationships:
       - name: entity
         reference_entity_name: entity

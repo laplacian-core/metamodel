@@ -80,6 +80,58 @@ data class RelationshipRecord (
     override val snippet: String? by _record
 
     /**
+     * The class_name of this relationship.
+     */
+    override val className: String
+        get() = if (multiple) "List<${referenceEntity.className}>" else (referenceEntity.className + if (nullable) "?" else "")
+
+    /**
+     * Defines this relationship is multiple or not.
+     */
+    override val multiple: Boolean
+        get() = cardinality.contains("""(\*|N|\.\.[2-9][0-9]+)""".toRegex())
+
+    /**
+     * Defines this relationship is allows_empty or not.
+     */
+    override val allowsEmpty: Boolean
+        get() = cardinality == "N" || cardinality == "*" || cardinality.contains("""(0\.\.)""".toRegex())
+
+    /**
+     * Defines this relationship is nullable or not.
+     */
+    override val nullable: Boolean
+        get() = !multiple && allowsEmpty
+
+    /**
+     * The property_name of this relationship.
+     */
+    override val propertyName: String
+        get() = identifier.lowerCamelize()
+
+    /**
+     * Defines this relationship is bidirectional or not.
+     */
+    override val bidirectional: Boolean
+        get() = aggregate && referenceEntity.relationships.any {
+            it.inherited && (it.referenceEntity.fqn == this.entity.fqn)
+        }
+
+    /**
+     * Defines this relationship is recursive or not.
+     */
+    override val recursive: Boolean
+        get() = aggregate && (referenceEntity.fqn == entity.fqn)
+
+    /**
+     * Defines this relationship is deprecated or not.
+     */
+    override val deprecated: Boolean
+        get() = getOrThrow("deprecated") {
+            false
+        }
+
+    /**
      * mappings
      */
     override val mappings: List<PropertyMapping>

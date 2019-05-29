@@ -68,26 +68,24 @@ interface Property {
      * The property_name of this property.
      */
     val propertyName: String
-        get() = identifier.lowerCamelize()
     /**
      * The class_name of this property.
      */
     val className: String
-        get() = (if (type == "number") "Int" else type.upperCamelize()).let {
-            if (multiple) "List<$it>" else it
-        }
     /**
      * Whether this property permit a null value
 
      */
     val nullable: Boolean
-        get() = optional && (defaultValue == null)
     /**
      * Whether this preoperty overwrite a property which is defined in supertype.
 
      */
     val overwrites: Boolean
-        get() = entity.ancestors.any{ s -> s.properties.any{ p -> p.name == name }}
+    /**
+     * Defines this property is deprecated or not.
+     */
+    val deprecated: Boolean
     /**
      * entity
      */

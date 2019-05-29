@@ -37,6 +37,8 @@
   完全修飾名
 * **primary_key_names:** `List<String>`
   一意識別子となるカラム項目名のリスト
+* **deprecated:** `Boolean?`
+  Defines this entity is deprecated or not.
 
 #### Relationships
 * **properties:** `List<Property>`
@@ -122,6 +124,8 @@
   Whether this property permit a null value
 * **overwrites:** `Boolean`
   Whether this preoperty overwrite a property which is defined in supertype.
+* **deprecated:** `Boolean?`
+  Defines this property is deprecated or not.
 
 #### Relationships
 * **entity:** `Entity`
@@ -169,6 +173,8 @@
   Defines this relationship is bidirectional or not.
 * **recursive:** `Boolean`
   Defines this relationship is recursive or not.
+* **deprecated:** `Boolean?`
+  Defines this relationship is deprecated or not.
 
 #### Relationships
 * **entity:** `Entity`
@@ -202,6 +208,8 @@
   クエリスクリプト
 * **oneliner:** `Boolean`
   Defines this query is oneliner or not.
+* **deprecated:** `Boolean?`
+  Defines this query is deprecated or not.
 
 #### Relationships
 * **entity:** `Entity`
