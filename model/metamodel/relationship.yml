@@ -40,10 +40,15 @@ entities:
           false
 
       - name: inherited
+        deprecated: true
         type: boolean
         optional: true
         default_value: |
           false
+
+      - name: reverse_of
+        type: string
+        optional: true
 
       - name: description
         type: string
@@ -115,3 +120,9 @@ entities:
         mappings:
           - from: reference_entity_name
             to: name
+
+      - name: reverse
+        reference_entity_name: relationship
+        cardinality: '0..1'
+        snippet: |
+          referenceEntity.relationships.find{ it.name == reverseOf }

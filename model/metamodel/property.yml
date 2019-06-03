@@ -140,4 +140,3 @@ entities:
     mappings:
     - from: domain_type_name
       to: name
-

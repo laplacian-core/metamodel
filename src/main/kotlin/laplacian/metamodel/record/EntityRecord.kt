@@ -92,11 +92,11 @@ which is used when implementing polymorphism. The name of entity is used by defa
         }
 
     /**
-     * 他のエンティティの導出エンティティであるかどうか
+     * Deprecated: prefer to use the 'reverse_of' property
 
      */
     override val inherited: Boolean
-        get() = supertype?.inherited ?: relationships.any{ it.inherited }
+        get() = supertype?.inherited ?: relationships.any{ it.inherited || it.reverse != null }
 
     /**
      * このエンティティがトップレベルエンティティかどうか

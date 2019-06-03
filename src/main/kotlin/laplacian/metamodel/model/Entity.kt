@@ -44,7 +44,7 @@ which is used when implementing polymorphism. The name of entity is used by defa
      */
     val subtypeKeyValue: String
     /**
-     * 他のエンティティの導出エンティティであるかどうか
+     * Deprecated: prefer to use the 'reverse_of' property
 
      */
     val inherited: Boolean
@@ -135,6 +135,31 @@ which is used when implementing polymorphism. The name of entity is used by defa
      */
     val inheritedFrom: List<Relationship>
         get() = supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
+    /**
+     * The relationship expresses the ownership of this entity
+
+     */
+    val ownership: Relationship?
+        get() = supertype?.ownership ?:
+        relationships.find{ it.reverse?.aggregate ?: false }?.reverse
+    /**
+     * The entity this entity owns
+     */
+    val owner: Entity?
+        get() = ownership?.entity
+    /**
+     * The aggregation tree this entity is owned
+
+     */
+    val ownershipHierarchy: List<Relationship>
+        get() = supertype?.ownershipHierarchy ?:
+            if (ownership == null) emptyList()
+            else ownership!!.entity.ownershipHierarchy + ownership!!
+    /**
+     * root_owner
+     */
+    val rootOwner: Entity?
+        get() = supertype?.rootOwner ?: owner?.rootOwner ?: owner
     /**
      * このエンティティが参照するエンティティの一覧(自身は除く)
 

@@ -71,11 +71,12 @@ entities:
       name
 
   - name: inherited
-    description: >
-      他のエンティティの導出エンティティであるかどうか
+    deprecated: true
+    description: |
+      Deprecated: prefer to use the 'reverse_of' property
     type: boolean
     snippet: |
-      supertype?.inherited ?: relationships.any{ it.inherited }
+      supertype?.inherited ?: relationships.any{ it.inherited || it.reverse != null }
 
   - name: top_level
     description: >
@@ -203,13 +204,48 @@ entities:
       (supertype?.primaryKeys ?: emptyList()) + properties.filter{ it.primaryKey }
 
   - name: inherited_from
+    deprecated: true
     description: >
       このエンティティの導出元エンティティ
       このエンティティが導出エンティティでなければ空集合
     reference_entity_name: relationship
     cardinality: '*'
     snippet: >
-      supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
+      supertype?.inheritedFrom ?:
+      relationships.filter{ it.inherited }
+
+  - name: ownership
+    reference_entity_name: relationship
+    cardinality: '0..1'
+    description: |
+      The relationship expresses the ownership of this entity
+    snippet: |
+      supertype?.ownership ?:
+      relationships.find{ it.reverse?.aggregate ?: false }?.reverse
+
+  - name: owner
+    reference_entity_name: entity
+    cardinality: '0..1'
+    description:
+      The entity this entity owns
+    snippet: |
+      ownership?.entity
+
+  - name: ownership_hierarchy
+    reference_entity_name: relationship
+    cardinality: '*'
+    description: |
+      The aggregation tree this entity is owned
+    snippet: |
+      supertype?.ownershipHierarchy ?:
+          if (ownership == null) emptyList()
+          else ownership!!.entity.ownershipHierarchy + ownership!!
+
+  - name: root_owner
+    reference_entity_name: entity
+    cardinality: '0..1'
+    snippet: |
+      supertype?.rootOwner ?: owner?.rootOwner ?: owner
 
   - name: relating_entities
     description: |

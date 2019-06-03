@@ -297,6 +297,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "description": "Defines this relationship is inherited or not.",
             "type": "boolean"
           },
+          "reverse_of": {
+            "description": "The reverse_of of this relationship.",
+            "type": "string"
+          },
           "description": {
             "description": "The description of this relationship.",
             "type": "string"

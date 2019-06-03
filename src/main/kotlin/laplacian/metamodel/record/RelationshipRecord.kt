@@ -67,6 +67,11 @@ data class RelationshipRecord (
         }
 
     /**
+     * The reverse_of of this relationship.
+     */
+    override val reverseOf: String? by _record
+
+    /**
      * The description of this relationship.
      */
     override val description: String

@@ -28,7 +28,7 @@
   The value of subtype key that represents this type of entity,
   which is used when implementing polymorphism. The name of entity is used by default.
 * **inherited:** `Boolean`
-  他のエンティティの導出エンティティであるかどうか
+  Deprecated: prefer to use the 'reverse_of' property
 * **top_level:** `Boolean`
   このエンティティがトップレベルエンティティかどうか
 * **supports_namespace:** `Boolean`
@@ -65,6 +65,14 @@
   一意識別キーとなるプロパティのリスト
 * **inherited_from:** `List<Relationship>`
   このエンティティの導出元エンティティ このエンティティが導出エンティティでなければ空集合
+* **ownership:** `Relationship?`
+  The relationship expresses the ownership of this entity
+* **owner:** `Entity?`
+  The entity this entity owns
+* **ownership_hierarchy:** `List<Relationship>`
+  The aggregation tree this entity is owned
+* **root_owner:** `Entity?`
+  root_owner
 * **relating_entities:** `List<Entity>`
   このエンティティが参照するエンティティの一覧(自身は除く)
 * **relating_top_level_entities:** `List<Entity>`
@@ -155,6 +163,8 @@
   Defines this relationship is aggregate or not.
 * **inherited:** `Boolean?`
   Defines this relationship is inherited or not.
+* **reverse_of:** `String?`
+  The reverse_of of this relationship.
 * **description:** `String?`
   The description of this relationship.
 * **snippet:** `String?`
@@ -183,6 +193,8 @@
   mappings
 * **reference_entity:** `Entity`
   reference_entity
+* **reverse:** `Relationship?`
+  reverse
 
 
 

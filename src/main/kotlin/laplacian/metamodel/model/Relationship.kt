@@ -32,6 +32,10 @@ interface Relationship {
      */
     val inherited: Boolean
     /**
+     * The reverse_of of this relationship.
+     */
+    val reverseOf: String?
+    /**
      * The description of this relationship.
      */
     val description: String
@@ -83,4 +87,9 @@ interface Relationship {
      * reference_entity
      */
     val referenceEntity: Entity
+    /**
+     * reverse
+     */
+    val reverse: Relationship?
+        get() = referenceEntity.relationships.find{ it.name == reverseOf }
 }
