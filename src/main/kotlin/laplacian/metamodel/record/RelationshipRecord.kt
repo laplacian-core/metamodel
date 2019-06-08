@@ -137,6 +137,14 @@ data class RelationshipRecord (
         }
 
     /**
+     * The examples of this relationship.
+     */
+    override val examples: List<Any>
+        get() = getOrThrow("examples") {
+            emptyList<Any>()
+        }
+
+    /**
      * mappings
      */
     override val mappings: List<PropertyMapping>
@@ -160,9 +168,11 @@ data class RelationshipRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
-            RelationshipRecord(it, _context, entity = entity)
-        }
+        fun from(records: RecordList, _context: Context, entity: Entity) = records
+            .mergeWithKeys("name")
+            .map {
+                RelationshipRecord(it, _context, entity = entity)
+            }
     }
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

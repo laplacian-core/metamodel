@@ -45,8 +45,9 @@ data class PropertyMappingRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, _context: Context, relationship: Relationship) = records.map {
-            PropertyMappingRecord(it, _context, relationship = relationship)
-        }
+        fun from(records: RecordList, _context: Context, relationship: Relationship) = records
+            .map {
+                PropertyMappingRecord(it, _context, relationship = relationship)
+            }
     }
 }

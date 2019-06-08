@@ -101,8 +101,9 @@ data class QueryRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
-            QueryRecord(it, _context, entity = entity)
-        }
+        fun from(records: RecordList, _context: Context, entity: Entity) = records
+            .map {
+                QueryRecord(it, _context, entity = entity)
+            }
     }
 }

@@ -141,6 +141,14 @@ which is used when implementing polymorphism. The name of entity is used by defa
         }
 
     /**
+     * examples which explain actual usage of this entity
+     */
+    override val examples: List<Any>
+        get() = getOrThrow("examples") {
+            emptyList<Any>()
+        }
+
+    /**
      * The properties of this entity (excluding supertypes')
      */
     override val properties: List<Property>

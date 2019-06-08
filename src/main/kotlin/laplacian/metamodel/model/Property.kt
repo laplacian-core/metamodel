@@ -49,9 +49,9 @@ interface Property {
      */
     val defaultValue: String?
     /**
-     * The example_value of this property.
+     * The examples of this property.
      */
-    val exampleValue: String
+    val examples: List<Any>
     /**
      * The table_column_name of this property.
      */

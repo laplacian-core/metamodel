@@ -76,6 +76,10 @@ interface Relationship {
      */
     val deprecated: Boolean
     /**
+     * The examples of this relationship.
+     */
+    val examples: List<Any>
+    /**
      * entity
      */
     val entity: Entity

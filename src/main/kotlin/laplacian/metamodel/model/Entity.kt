@@ -73,6 +73,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
      */
     val deprecated: Boolean
     /**
+     * examples which explain actual usage of this entity
+     */
+    val examples: List<Any>
+    /**
      * The properties of this entity (excluding supertypes')
      */
     val properties: List<Property>

@@ -149,6 +149,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "description": "Defines this entity is deprecated or not.",
             "type": "boolean"
           },
+          "examples": {
+            "description": "examples which explain actual usage of this entity",
+            "type": "any"
+          },
           "properties": {
             "description": "The properties of this entity (excluding supertypes')",
             "type": "array",
@@ -228,9 +232,9 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "description": "The default value of this property, which is used when the actual value is null",
             "type": "string"
           },
-          "example_value": {
-            "description": "The example_value of this property.",
-            "type": "string"
+          "examples": {
+            "description": "The examples of this property.",
+            "type": "any"
           },
           "table_column_name": {
             "description": "The table_column_name of this property.",
@@ -312,6 +316,10 @@ which is used when implementing polymorphism. The name of entity is used by defa
           "deprecated": {
             "description": "Defines this relationship is deprecated or not.",
             "type": "boolean"
+          },
+          "examples": {
+            "description": "The examples of this relationship.",
+            "type": "any"
           },
           "mappings": {
             "description": "mappings",

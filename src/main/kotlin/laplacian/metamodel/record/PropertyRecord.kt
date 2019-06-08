@@ -102,16 +102,11 @@ data class PropertyRecord (
     override val defaultValue: String? by _record
 
     /**
-     * The example_value of this property.
+     * The examples of this property.
      */
-    override val exampleValue: String
-        get() = getOrThrow("exampleValue") {
-            defaultValue ?: when(type) {
-              "string" -> "\"hogehoge\""
-              "number" -> "0"
-              "boolean" -> "false"
-              else -> "null"
-            }
+    override val examples: List<Any>
+        get() = getOrThrow("examples") {
+            emptyList<Any>()
         }
 
     /**
@@ -189,9 +184,11 @@ data class PropertyRecord (
         /**
          * creates record list from list of map
          */
-        fun from(records: RecordList, _context: Context, entity: Entity) = records.map {
-            PropertyRecord(it, _context, entity = entity)
-        }
+        fun from(records: RecordList, _context: Context, entity: Entity) = records
+            .mergeWithKeys("name")
+            .map {
+                PropertyRecord(it, _context, entity = entity)
+            }
     }
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

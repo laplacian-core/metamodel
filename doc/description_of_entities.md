@@ -39,6 +39,8 @@
   一意識別子となるカラム項目名のリスト
 * **deprecated:** `Boolean?`
   Defines this entity is deprecated or not.
+* **examples:** `List<Any>?`
+  examples which explain actual usage of this entity
 
 #### Relationships
 * **properties:** `List<Property>`
@@ -116,8 +118,8 @@
   The description of this property.
 * **default_value:** `String?`
   The default value of this property, which is used when the actual value is null
-* **example_value:** `String?`
-  The example_value of this property.
+* **examples:** `List<Any>?`
+  The examples of this property.
 * **table_column_name:** `String?`
   The table_column_name of this property.
 * **snippet:** `String?`
@@ -185,6 +187,8 @@
   Defines this relationship is recursive or not.
 * **deprecated:** `Boolean?`
   Defines this relationship is deprecated or not.
+* **examples:** `List<Any>?`
+  The examples of this relationship.
 
 #### Relationships
 * **entity:** `Entity`

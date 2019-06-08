@@ -64,16 +64,12 @@ entities:
     type: string
     optional: true
 
-  - name: example_value
-    type: string
+  - name: examples
+    type: any
+    multiple: true
     optional: true
     default_value: |
-      defaultValue ?: when(type) {
-        "string" -> "\"hogehoge\""
-        "number" -> "0"
-        "boolean" -> "false"
-        else -> "null"
-      }
+      emptyList<Any>()
 
   - name: table_column_name
     type: string

@@ -119,6 +119,15 @@ entities:
     default_value: |
       false
 
+  - name: examples
+    description:
+      examples which explain actual usage of this entity
+    type: any
+    multiple: true
+    optional: true
+    default_value: |
+      emptyList<Any>()
+
   relationships:
   - name: properties
     description: The properties of this entity (excluding supertypes')
