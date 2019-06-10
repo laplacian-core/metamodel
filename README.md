@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/nabla-squared/laplacian.model.metamodel.svg?style=shield)](https://circleci.com/gh/nabla-squared/laplacian.model.metamodel)
+
 # laplacian:model:metamodel
 
 A model that expresses the structure of relational model with aggregation support.

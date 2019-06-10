@@ -232,8 +232,8 @@ which is used when implementing polymorphism. The name of entity is used by defa
             "description": "The default value of this property, which is used when the actual value is null",
             "type": "string"
           },
-          "examples": {
-            "description": "The examples of this property.",
+          "example_values": {
+            "description": "The example_values of this property.",
             "type": "any"
           },
           "table_column_name": {

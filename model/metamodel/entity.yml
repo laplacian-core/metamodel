@@ -2,11 +2,46 @@ entities:
 - name: entity
   description: エンティティ
   namespace: laplacian.metamodel
+  examples:
+  - name: party
+    namespace: example.party
+    properties:
+    - name: party_id
+      type: string
+      primary_key: true
+    - name: party_type
+      type: string
+      subtype_key: true
+
+  - name: person
+    namespace: example.party
+    subtype_of: party
+    properties:
+    - name: last_name
+      type: string
+    - name: first_name
+      type: string
+    - name: middle_name
+      type: string
+      optional: true
+
+  - name: organization
+    namespace: example.party
+    subtype_of: party
+    properties:
+    - name: name
+      type: string
+
+
   properties:
   - name: name
     description: 名称
     primary_key: true
     type: string
+    example_values:
+    - party
+    - person
+    - organization
 
   - name: namespace
     description: 名前空間
@@ -54,6 +89,8 @@ entities:
     type: string
     snippet: >
       identifier.upperCamelize()
+    example_values:
+    - Party
 
   - name: subtype_of
     description: |
@@ -69,6 +106,10 @@ entities:
       which is used when implementing polymorphism. The name of entity is used by default.
     default_value: |
       name
+    example_values:
+    - party
+    - person
+    - organization
 
   - name: inherited
     deprecated: true

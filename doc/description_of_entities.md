@@ -118,8 +118,8 @@
   The description of this property.
 * **default_value:** `String?`
   The default value of this property, which is used when the actual value is null
-* **examples:** `List<Any>?`
-  The examples of this property.
+* **example_values:** `List<Any>?`
+  The example_values of this property.
 * **table_column_name:** `String?`
   The table_column_name of this property.
 * **snippet:** `String?`

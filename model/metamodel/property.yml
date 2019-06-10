@@ -64,7 +64,7 @@ entities:
     type: string
     optional: true
 
-  - name: examples
+  - name: example_values
     type: any
     multiple: true
     optional: true

@@ -102,10 +102,10 @@ data class PropertyRecord (
     override val defaultValue: String? by _record
 
     /**
-     * The examples of this property.
+     * The example_values of this property.
      */
-    override val examples: List<Any>
-        get() = getOrThrow("examples") {
+    override val exampleValues: List<Any>
+        get() = getOrThrow("exampleValues") {
             emptyList<Any>()
         }
 
