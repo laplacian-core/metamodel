@@ -11,7 +11,7 @@ This model is used to define models from which templates generate resources.
 
 The following diagram summarizes the structure of the model:
 
-![](./doc/image/model-diagram.svg)
+![](./doc/image/model-diagram.svg)[]()
 
 
 As shown in above diagram, this model depends on the following external models.
