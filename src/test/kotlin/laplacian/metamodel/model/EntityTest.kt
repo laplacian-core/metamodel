@@ -33,7 +33,10 @@ class EntityTest {
         assertAll(
             { assertEquals("party", model.name) },
             { assertEquals("Party", model.className) },
-            { assertEquals("party", model.subtypeKeyValue) }
+            { assertEquals("party", model.subtypeKeyValue) },
+            { assertEquals(true, model.topLevel) },
+            { assertEquals("example.party.Party", model.fqn) },
+            { assertEquals(listOf("party_id"), model.primaryKeyNames) }
         )
     }
     @Test
@@ -62,7 +65,8 @@ class EntityTest {
 
         assertAll(
             { assertEquals("person", model.name) },
-            { assertEquals("person", model.subtypeKeyValue) }
+            { assertEquals("person", model.subtypeKeyValue) },
+            { assertEquals("example.party.Person", model.fqn) }
         )
     }
     @Test
