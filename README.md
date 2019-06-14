@@ -3,7 +3,10 @@
 # laplacian:model:metamodel
 
 A model that expresses the structure of relational model with aggregation support.
-This model is used to define models from which templates generate resources.
+This model is used to define models from which templates generate resources
+such as source code or document.
+
+
 
 
 
@@ -11,7 +14,7 @@ This model is used to define models from which templates generate resources.
 
 The following diagram summarizes the structure of the model:
 
-![](./doc/image/model-diagram.svg)[]()
+![](https://raw.githubusercontent.com/nabla-squared/laplacian.model.metamodel/master/doc/image/model-diagram.svg?sanitize=true)
 
 
 As shown in above diagram, this model depends on the following external models.
