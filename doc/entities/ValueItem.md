@@ -1,5 +1,8 @@
-# **value_item** (*laplacian.metamodel.model.ValueItem*)
-  value_item
+# **ValueItem**
+**namespace:** laplacian.metamodel
+
+value_item
+
 
 
 ---

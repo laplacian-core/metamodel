@@ -1,9 +1,12 @@
-# **entity** (*laplacian.metamodel.model.Entity*)
-  エンティティ
+# **Entity**
+**namespace:** laplacian.metamodel
 
-  example1:
-  ```yaml
-  name: party
+エンティティ
+
+
+example1:
+```yaml
+name: party
   namespace: example.party
   properties:
   - name: party_id
@@ -12,10 +15,11 @@
   - name: party_type
     type: string
     subtype_key: true
-  ```
-  example2:
-  ```yaml
-  name: person
+```
+
+example2:
+```yaml
+name: person
   namespace: example.party
   subtype_of: party
   properties:
@@ -26,16 +30,18 @@
   - name: middle_name
     type: string
     optional: true
-  ```
-  example3:
-  ```yaml
-  name: organization
+```
+
+example3:
+```yaml
+name: organization
   namespace: example.party
   subtype_of: party
   properties:
   - name: name
     type: string
-  ```
+```
+
 
 ---
 

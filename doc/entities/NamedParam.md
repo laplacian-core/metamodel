@@ -1,5 +1,8 @@
-# **named_param** (*laplacian.metamodel.model.NamedParam*)
-  named_param
+# **NamedParam**
+**namespace:** laplacian.metamodel
+
+named_param
+
 
 
 ---

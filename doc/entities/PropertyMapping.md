@@ -1,5 +1,8 @@
-# **property_mapping** (*laplacian.metamodel.model.PropertyMapping*)
-  property_mapping
+# **PropertyMapping**
+**namespace:** laplacian.metamodel
+
+property_mapping
+
 
 
 ---

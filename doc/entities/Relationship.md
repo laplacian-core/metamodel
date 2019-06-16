@@ -1,5 +1,8 @@
-# **relationship** (*laplacian.metamodel.model.Relationship*)
-  relationship
+# **Relationship**
+**namespace:** laplacian.metamodel
+
+relationship
+
 
 
 ---

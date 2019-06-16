@@ -1,5 +1,9 @@
-# **query** (*laplacian.metamodel.model.Query*)
-  The queries from which all navigation originates.
+# **Query**
+**namespace:** laplacian.metamodel
+
+The queries from which all navigation originates.
+
+
 
 
 ---

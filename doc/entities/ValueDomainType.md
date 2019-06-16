@@ -1,5 +1,8 @@
-# **value_domain_type** (*laplacian.metamodel.model.ValueDomainType*)
-  value_domain_type
+# **ValueDomainType**
+**namespace:** laplacian.metamodel
+
+value_domain_type
+
 
 
 ---

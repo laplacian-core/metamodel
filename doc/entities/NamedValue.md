@@ -1,5 +1,8 @@
-# **named_value** (*laplacian.metamodel.model.NamedValue*)
-  named_value
+# **NamedValue**
+**namespace:** laplacian.metamodel
+
+named_value
+
 
 
 ---

@@ -1,5 +1,8 @@
-# **property** (*laplacian.metamodel.model.Property*)
-  property
+# **Property**
+**namespace:** laplacian.metamodel
+
+property
+
 
 
 ---
