@@ -1,28 +1,26 @@
-## **value_item** (*laplacian.metamodel.model.ValueItem*)
+# **value_item** (*laplacian.metamodel.model.ValueItem*)
   value_item
 
 
 ---
 
-### Properties
-* **value:** `String`
-  The value of this value_item.
+## Properties
 
-* **label:** `String?`
-  The label of this value_item.
+### value: `String`
+The value of this value_item.
 
-  **Default:**
+### label: `String`
+The label of this value_item.
+- **Defaul value:**
   ```kotlin
   value
   ```
 
-* **description:** `String?`
-  The description of this value_item.
-
-  **Default:**
+### description: `String`
+The description of this value_item.
+- **Defaul value:**
   ```kotlin
   "label (=$value)"
   ```
-
 
 ## Relationships
