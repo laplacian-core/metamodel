@@ -32,7 +32,7 @@ name: person
     optional: true
   relationships:
   - name: physical_characteristics
-    reference_entity_name: physical_characteristic
+    reference_entity_name: person_physical_characteristic
     cardinality: '*'
     aggregate: true
 ```
@@ -322,6 +322,13 @@ The relationship expresses the ownership of this entity
 ### owner: `Entity?`
 The entity this entity owns
 - **Cardinality:** `0..1`
+- **Examples:**
+  ```kotlin
+  entities.find{ it.name == "person" }?.owner // -> null
+  ```
+  ```kotlin
+  entities.find{ it.name == "person_physical_characteristic" }?.owner?.name // -> "person"
+  ```
 - **Code:**
   ```kotlin
   ownership?.entity

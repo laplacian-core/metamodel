@@ -27,7 +27,7 @@ entities:
 
     relationships:
     - name: physical_characteristics
-      reference_entity_name: physical_characteristic
+      reference_entity_name: person_physical_characteristic
       cardinality: '*'
       aggregate: true
 
@@ -170,6 +170,9 @@ entities:
       !inherited && !valueObject
     example_values:
     - true
+    - true
+    - true
+    - false
 
   - name: supports_namespace
     description: >
@@ -344,6 +347,15 @@ entities:
       The entity this entity owns
     snippet: |
       ownership?.entity
+    examples:
+    - when_invoking: |
+        entities.find{ it.name == "person" }?.owner
+      then_returns: |
+        null
+    - when_invoking: |
+        entities.find{ it.name == "person_physical_characteristic" }?.owner?.name
+      then_returns: |
+        "person"
 
   - name: ownership_hierarchy
     reference_entity_name: relationship
@@ -427,6 +439,7 @@ entities:
       トップレベルエンティティの一覧
     snippet: |
       return filter{ it.topLevel }
+
 
   - name: top_level_in_namespace
     result_entity_name: entity

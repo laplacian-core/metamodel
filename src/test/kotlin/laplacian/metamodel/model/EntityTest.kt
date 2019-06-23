@@ -34,7 +34,7 @@ class EntityTest {
         |    optional: true
         |  relationships:
         |  - name: physical_characteristics
-        |    reference_entity_name: physical_characteristic
+        |    reference_entity_name: person_physical_characteristic
         |    cardinality: '*'
         |    aggregate: true
         |
@@ -96,8 +96,10 @@ class EntityTest {
             { assertEquals("Party", model.className) },
             { assertEquals("party", model.subtypeKeyValue) },
             { assertEquals(true, model.topLevel) },
+            { assertEquals(false, model.supportsNamespace) },
             { assertEquals("example.party.Party", model.fqn) },
-            { assertEquals(listOf("party_id"), model.primaryKeyNames) }
+            { assertEquals(listOf("party_id"), model.primaryKeyNames) },
+            { assertEquals(false, model.deprecated) }
         )
     }
     @Test
@@ -111,6 +113,7 @@ class EntityTest {
         assertAll(
             { assertEquals("person", model.name) },
             { assertEquals("person", model.subtypeKeyValue) },
+            { assertEquals(true, model.topLevel) },
             { assertEquals("example.party.Person", model.fqn) }
         )
     }
@@ -124,7 +127,8 @@ class EntityTest {
 
         assertAll(
             { assertEquals("organization", model.name) },
-            { assertEquals("organization", model.subtypeKeyValue) }
+            { assertEquals("organization", model.subtypeKeyValue) },
+            { assertEquals(true, model.topLevel) }
         )
     }
     @Test
@@ -136,6 +140,7 @@ class EntityTest {
             as Entity
 
         assertAll(
+            { assertEquals(false, model.topLevel) }
         )
     }
     @Test
@@ -161,6 +166,19 @@ class EntityTest {
         assertEquals(
             entities.find{ it.name == "person" }?.supertype?.name,
             "party"
+        )
+    }
+    @Test
+    fun `example of the relationship owner 1`() {
+        assertNull(
+            entities.find{ it.name == "person" }?.owner
+        )
+    }
+    @Test
+    fun `example of the relationship owner 2`() {
+        assertEquals(
+            entities.find{ it.name == "person_physical_characteristic" }?.owner?.name,
+            "person"
         )
     }
 }
