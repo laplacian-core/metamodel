@@ -258,12 +258,12 @@ entities:
     - from: subtype_of
       to: name
     examples:
-    - when: |
+    - when_invoking: |
         entities.find{ it.name == "party" }?.supertype
       then_returns: |
         null
 
-    - when: |
+    - when_invoking: |
         entities.find{ it.name == "person" }?.supertype?.name
       then_returns: |
         "party"
