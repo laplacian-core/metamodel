@@ -97,7 +97,7 @@ name: person_physical_characteristic_type
 ### namespace: `String`
 名前空間
 - **Attributes:** *PK*
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   if (inherited) {
       inheritedFrom.first().referenceEntity.namespace
@@ -113,21 +113,21 @@ name: person_physical_characteristic_type
 ### identifier: `String`
 識別子 省略時は名称を使用
 
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name.lowerUnderscorize()
   ```
 
 ### description: `String`
 詳細
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```
 
 ### value_object: `Boolean`
 値オブジェクトかどうか
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
@@ -147,7 +147,7 @@ The name of the entity which this entity is subtype of
 The value of subtype key that represents this type of entity,
 which is used when implementing polymorphism. The name of entity is used by default.
 
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```
@@ -202,14 +202,14 @@ Deprecated: prefer to use the 'reverse_of' property
 
 ### deprecated: `Boolean`
 Defines this entity is deprecated or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
 
 ### examples: `List<Any>`
 examples which explain actual usage of this entity
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   emptyList<Any>()
   ```
@@ -243,6 +243,13 @@ The relationships including supertype's ones.
 ### supertype: `Entity?`
 The entity which this entity is subtype of
 - **Cardinality:** `0..1`
+- **Examples:**
+  ```kotlin
+  entities.find{ it.name == "party" }?.supertype // -> null
+  ```
+  ```kotlin
+  entities.find{ it.name == "person" }?.supertype?.name // -> "party"
+  ```
 
 ### ancestors: `List<Entity>`
 The entities which are supertype of this entity (recursive).

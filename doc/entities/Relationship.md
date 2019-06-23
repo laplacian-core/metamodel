@@ -15,7 +15,7 @@ The name of this relationship.
 
 ### identifier: `String`
 The identifier of this relationship.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name.lowerUnderscorize()
   ```
@@ -28,7 +28,7 @@ The reference_entity_name of this relationship.
 
 ### aggregate: `Boolean`
 Defines this relationship is aggregate or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
@@ -37,7 +37,7 @@ Defines this relationship is aggregate or not.
 Defines this relationship is inherited or not.
   *Warning: This relationship is deprecated and may be deleted in the future release.*
 
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
@@ -47,7 +47,7 @@ The reverse_of of this relationship.
 
 ### description: `String`
 The description of this relationship.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```
@@ -108,14 +108,14 @@ Defines this relationship is recursive or not.
 
 ### deprecated: `Boolean`
 Defines this relationship is deprecated or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
 
 ### examples: `List<Any>`
 The examples of this relationship.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   emptyList<Any>()
   ```

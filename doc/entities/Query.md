@@ -15,14 +15,14 @@ The queries from which all navigation originates.
 
 ### identifier: `String`
 識別子
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name.lowerUnderscorize()
   ```
 
 ### type: `String`
 結果型
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   resultEntity?.className?.let { className ->
       if (cardinality.contains("*")) "List<$className>" else className
@@ -34,14 +34,14 @@ The queries from which all navigation originates.
 
 ### description: `String`
 詳細
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```
 
 ### cardinality: `String`
 多重度
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   "*"
   ```
@@ -58,7 +58,7 @@ Defines this query is oneliner or not.
 
 ### deprecated: `Boolean`
 Defines this query is deprecated or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```

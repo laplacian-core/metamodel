@@ -14,14 +14,14 @@ The value of this value_item.
 
 ### label: `String`
 The label of this value_item.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   value
   ```
 
 ### description: `String`
 The description of this value_item.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   "label (=$value)"
   ```

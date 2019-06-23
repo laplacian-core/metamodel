@@ -17,7 +17,7 @@ The type of this value_domain_type.
 
 ### description: `String`
 The description of this value_domain_type.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```

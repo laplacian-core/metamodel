@@ -17,7 +17,7 @@ The type of this named_param.
 
 ### description: `String`
 The description of this named_param.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name
   ```

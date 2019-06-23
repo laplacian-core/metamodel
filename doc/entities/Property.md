@@ -15,21 +15,21 @@ The name of this property.
 
 ### identifier: `String`
 The identifier of this property.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   name.lowerUnderscorize()
   ```
 
 ### primary_key: `Boolean`
 Defines this property is primary_key or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
 
 ### subtype_key: `Boolean`
 Defines this property is subtype_key or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
@@ -42,7 +42,7 @@ The type of this property.
 
 ### size: `Int`
 the maximum allowed size of the content of this property
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   when(type) {
       "string" -> 200
@@ -54,14 +54,14 @@ the maximum allowed size of the content of this property
 
 ### optional: `Boolean`
 Defines this property is optional or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
 
 ### description: `String`
 The description of this property.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   if (type == "boolean") "Defines this ${entity.name} is $name or not." else "The $name of this ${entity.name}."
   ```
@@ -72,14 +72,14 @@ The default value of this property, which is used when the actual value is null
 
 ### example_values: `List<Any>`
 The example_values of this property.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   emptyList<Any>()
   ```
 
 ### table_column_name: `String`
 The table_column_name of this property.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   identifier.lowerUnderscorize()
   ```
@@ -89,7 +89,7 @@ The snippet of this property.
 
 ### multiple: `Boolean`
 Defines this property is multiple or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
@@ -128,7 +128,7 @@ Whether this preoperty overwrite a property which is defined in supertype.
 
 ### deprecated: `Boolean`
 Defines this property is deprecated or not.
-- **Defaul value:**
+- **Default Value:**
   ```kotlin
   false
   ```
