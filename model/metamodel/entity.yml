@@ -25,6 +25,12 @@ entities:
       type: string
       optional: true
 
+    relationships:
+    - name: physical_characteristics
+      reference_entity_name: physical_characteristic
+      cardinality: '*'
+      aggregate: true
+
   - name: organization
     namespace: example.party
     subtype_of: party
@@ -32,6 +38,43 @@ entities:
     - name: name
       type: string
 
+  - name: person_physical_characteristic
+    namespace: example.party
+    properties:
+    - name: type
+      type: string
+
+    - name: from_date
+      type: string
+
+    - name: thru_date
+      type: string
+
+    - name: value
+      type: string
+
+    relationships:
+    - name: person
+      reference_entity_name: person
+      cardinality: '1'
+      reverse_of: physical_characteristics
+
+    - name: characteristic_type
+      reference_entity_name: person_physical_characteristic_type
+      cardinality: '1'
+      mappings:
+      - from: type
+        to: name
+
+  - name: person_physical_characteristic_type
+    namespace: example.party
+    properties:
+    - name: name
+      type: string
+      primary_key: true
+
+    - name: description
+      type: string
 
   properties:
   - name: name
@@ -214,6 +257,16 @@ entities:
     mappings:
     - from: subtype_of
       to: name
+    examples:
+    - when: |
+        entities.find{ it.name == "party" }?.supertype
+      then_returns: |
+        null
+
+    - when: |
+        entities.find{ it.name == "person" }?.supertype?.name
+      then_returns: |
+        "party"
 
   - name: ancestors
     description: |

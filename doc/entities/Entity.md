@@ -30,6 +30,11 @@ name: person
   - name: middle_name
     type: string
     optional: true
+  relationships:
+  - name: physical_characteristics
+    reference_entity_name: physical_characteristic
+    cardinality: '*'
+    aggregate: true
 ```
 
 example3:
@@ -39,6 +44,44 @@ name: organization
   subtype_of: party
   properties:
   - name: name
+    type: string
+```
+
+example4:
+```yaml
+name: person_physical_characteristic
+  namespace: example.party
+  properties:
+  - name: type
+    type: string
+  - name: from_date
+    type: string
+  - name: thru_date
+    type: string
+  - name: value
+    type: string
+  relationships:
+  - name: person
+    reference_entity_name: person
+    cardinality: '1'
+    reverse_of: physical_characteristics
+  - name: characteristic_type
+    reference_entity_name: person_physical_characteristic_type
+    cardinality: '1'
+    mappings:
+    - from: type
+      to: name
+```
+
+example5:
+```yaml
+name: person_physical_characteristic_type
+  namespace: example.party
+  properties:
+  - name: name
+    type: string
+    primary_key: true
+  - name: description
     type: string
 ```
 

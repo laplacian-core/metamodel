@@ -7,12 +7,10 @@ import org.junit.jupiter.api.assertAll
 
 class EntityTest {
 
-
-    @Test
-    fun `each properties of a entity model returns the appropriate value`() {
-        val context = MetamodelModelTestContext().models(
-        """
+    companion object {
+        val MODEL_YAML = """
         |entities:
+        |
         |- name: party
         |  namespace: example.party
         |  properties:
@@ -22,9 +20,72 @@ class EntityTest {
         |  - name: party_type
         |    type: string
         |    subtype_key: true
-        """.trimMargin())
-        val model = context
-            .entities.find {
+        |
+        |- name: person
+        |  namespace: example.party
+        |  subtype_of: party
+        |  properties:
+        |  - name: last_name
+        |    type: string
+        |  - name: first_name
+        |    type: string
+        |  - name: middle_name
+        |    type: string
+        |    optional: true
+        |  relationships:
+        |  - name: physical_characteristics
+        |    reference_entity_name: physical_characteristic
+        |    cardinality: '*'
+        |    aggregate: true
+        |
+        |- name: organization
+        |  namespace: example.party
+        |  subtype_of: party
+        |  properties:
+        |  - name: name
+        |    type: string
+        |
+        |- name: person_physical_characteristic
+        |  namespace: example.party
+        |  properties:
+        |  - name: type
+        |    type: string
+        |  - name: from_date
+        |    type: string
+        |  - name: thru_date
+        |    type: string
+        |  - name: value
+        |    type: string
+        |  relationships:
+        |  - name: person
+        |    reference_entity_name: person
+        |    cardinality: '1'
+        |    reverse_of: physical_characteristics
+        |  - name: characteristic_type
+        |    reference_entity_name: person_physical_characteristic_type
+        |    cardinality: '1'
+        |    mappings:
+        |    - from: type
+        |      to: name
+        |
+        |- name: person_physical_characteristic_type
+        |  namespace: example.party
+        |  properties:
+        |  - name: name
+        |    type: string
+        |    primary_key: true
+        |  - name: description
+        |    type: string
+        """.trimMargin()
+    }
+
+    val entities: EntityList
+        get() = MetamodelModelTestContext().models(MODEL_YAML).entities
+
+
+    @Test
+    fun `each properties of a entity model returns the appropriate value`() {
+        val model = entities.find {
                 it.name == "party" &&
                 it.namespace == "example.party"
             }!!
@@ -41,23 +102,7 @@ class EntityTest {
     }
     @Test
     fun `each properties of a entity model returns the appropriate value - alternative case 1`() {
-        val context = MetamodelModelTestContext().models(
-        """
-        |entities:
-        |- name: person
-        |  namespace: example.party
-        |  subtype_of: party
-        |  properties:
-        |  - name: last_name
-        |    type: string
-        |  - name: first_name
-        |    type: string
-        |  - name: middle_name
-        |    type: string
-        |    optional: true
-        """.trimMargin())
-        val model = context
-            .entities.find {
+        val model = entities.find {
                 it.name == "person" &&
                 it.namespace == "example.party"
             }!!
@@ -71,18 +116,7 @@ class EntityTest {
     }
     @Test
     fun `each properties of a entity model returns the appropriate value - alternative case 2`() {
-        val context = MetamodelModelTestContext().models(
-        """
-        |entities:
-        |- name: organization
-        |  namespace: example.party
-        |  subtype_of: party
-        |  properties:
-        |  - name: name
-        |    type: string
-        """.trimMargin())
-        val model = context
-            .entities.find {
+        val model = entities.find {
                 it.name == "organization" &&
                 it.namespace == "example.party"
             }!!
@@ -91,6 +125,42 @@ class EntityTest {
         assertAll(
             { assertEquals("organization", model.name) },
             { assertEquals("organization", model.subtypeKeyValue) }
+        )
+    }
+    @Test
+    fun `each properties of a entity model returns the appropriate value - alternative case 3`() {
+        val model = entities.find {
+                it.name == "person_physical_characteristic" &&
+                it.namespace == "example.party"
+            }!!
+            as Entity
+
+        assertAll(
+        )
+    }
+    @Test
+    fun `each properties of a entity model returns the appropriate value - alternative case 4`() {
+        val model = entities.find {
+                it.name == "person_physical_characteristic_type" &&
+                it.namespace == "example.party"
+            }!!
+            as Entity
+
+        assertAll(
+        )
+    }
+
+    @Test
+    fun `example of the relationship supertype 1`() {
+        assertNull(
+            entities.find{ it.name == "party" }?.supertype
+        )
+    }
+    @Test
+    fun `example of the relationship supertype 2`() {
+        assertEquals(
+            entities.find{ it.name == "person" }?.supertype?.name,
+            "party"
         )
     }
 }
