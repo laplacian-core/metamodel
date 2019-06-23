@@ -44,7 +44,7 @@ entities:
     type: boolean
     optional: true
     default_value: |
-      false
+      reverseOf != null
 
   - name: reverse_of
     type: string
@@ -114,7 +114,7 @@ entities:
   - name: entity
     reference_entity_name: entity
     cardinality: '1'
-    inherited: true
+    reverse_of: relationships
 
   - name: mappings
     reference_entity_name: property_mapping

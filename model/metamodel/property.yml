@@ -122,7 +122,7 @@ entities:
   relationships:
   - name: entity
     reference_entity_name: entity
-    inherited: true
+    reverse_of: properties
     cardinality: '1'
 
   - name: domain

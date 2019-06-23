@@ -167,7 +167,7 @@ Deprecated: prefer to use the 'reverse_of' property
 
 - **Code:**
   ```kotlin
-  !inherited && !valueObject
+  owner == null && !valueObject
   ```
 
 ### supports_namespace: `Boolean`
@@ -309,14 +309,21 @@ The property which is used to identify the type of a entity.
   supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
   ```
 
+### owned_by: `Relationship?`
+owned_by
+- **Cardinality:** `0..1`
+- **Code:**
+  ```kotlin
+  supertype?.ownedBy ?: relationships.find{ it.reverse?.aggregate ?: false }
+  ```
+
 ### ownership: `Relationship?`
 The relationship expresses the ownership of this entity
 
 - **Cardinality:** `0..1`
 - **Code:**
   ```kotlin
-  supertype?.ownership ?:
-  relationships.find{ it.reverse?.aggregate ?: false }?.reverse
+  ownedBy?.reverse
   ```
 
 ### owner: `Entity?`

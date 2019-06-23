@@ -39,7 +39,7 @@ Defines this relationship is inherited or not.
 
 - **Default Value:**
   ```kotlin
-  false
+  reverseOf != null
   ```
 
 ### reverse_of: `String`

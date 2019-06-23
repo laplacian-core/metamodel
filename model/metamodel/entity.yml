@@ -167,7 +167,7 @@ entities:
       このエンティティがトップレベルエンティティかどうか
     type: boolean
     snippet: >
-      !inherited && !valueObject
+      owner == null && !valueObject
     example_values:
     - true
     - true
@@ -331,14 +331,19 @@ entities:
       supertype?.inheritedFrom ?:
       relationships.filter{ it.inherited }
 
+  - name: owned_by
+    reference_entity_name: relationship
+    cardinality: '0..1'
+    snippet: |
+      supertype?.ownedBy ?: relationships.find{ it.reverse?.aggregate ?: false }
+
   - name: ownership
     reference_entity_name: relationship
     cardinality: '0..1'
     description: |
       The relationship expresses the ownership of this entity
     snippet: |
-      supertype?.ownership ?:
-      relationships.find{ it.reverse?.aggregate ?: false }?.reverse
+      ownedBy?.reverse
 
   - name: owner
     reference_entity_name: entity

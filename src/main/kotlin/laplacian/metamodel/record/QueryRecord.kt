@@ -11,9 +11,6 @@ import laplacian.util.*
 data class QueryRecord (
     private val __record: Record,
     private val _context: Context,
-    /**
-     * the entity which aggregates this query
-     */
     override val entity: Entity,
     private val _record: Record = __record.normalizeCamelcase()
 ): Query, Record by _record {

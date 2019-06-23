@@ -16,7 +16,7 @@ entities:
       - name: relationship
         reference_entity_name: relationship
         cardinality: '1'
-        inherited: true
+        reverse_of: mappings
 
       - name: property
         reference_entity_name: property

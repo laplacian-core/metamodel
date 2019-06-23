@@ -103,7 +103,7 @@ which is used when implementing polymorphism. The name of entity is used by defa
 
      */
     override val topLevel: Boolean
-        get() = !inherited && !valueObject
+        get() = owner == null && !valueObject
 
     /**
      * このエンティティがnamespaceをサポートしているかどうか

@@ -67,7 +67,7 @@ entities:
         description: エンティティ
         reference_entity_name: entity
         cardinality: '1'
-        inherited: true
+        reverse_of: queries
 
       - name: result_entity
         description: クエリ結果エンティティ

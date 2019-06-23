@@ -11,9 +11,6 @@ import laplacian.util.*
 data class PropertyMappingRecord (
     private val __record: Record,
     private val _context: Context,
-    /**
-     * the relationship which aggregates this property_mapping
-     */
     override val relationship: Relationship,
     private val _record: Record = __record.normalizeCamelcase()
 ): PropertyMapping, Record by _record {

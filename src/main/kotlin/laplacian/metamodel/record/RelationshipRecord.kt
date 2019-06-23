@@ -11,9 +11,6 @@ import laplacian.util.*
 data class RelationshipRecord (
     private val __record: Record,
     private val _context: Context,
-    /**
-     * the entity which aggregates this relationship
-     */
     override val entity: Entity,
     private val _record: Record = __record.normalizeCamelcase()
 ): Relationship, Record by _record {
@@ -63,7 +60,7 @@ data class RelationshipRecord (
      */
     override val inherited: Boolean
         get() = getOrThrow("inherited") {
-            false
+            reverseOf != null
         }
 
     /**

@@ -12,9 +12,6 @@ import laplacian.util.*
 data class PropertyRecord (
     private val __record: Record,
     private val _context: Context,
-    /**
-     * the entity which aggregates this property
-     */
     override val entity: Entity,
     private val _record: Record = __record.normalizeCamelcase()
 ): Property, Record by _record {

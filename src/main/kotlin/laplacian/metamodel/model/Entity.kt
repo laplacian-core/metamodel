@@ -140,12 +140,16 @@ which is used when implementing polymorphism. The name of entity is used by defa
     val inheritedFrom: List<Relationship>
         get() = supertype?.inheritedFrom ?: relationships.filter{ it.inherited }
     /**
+     * owned_by
+     */
+    val ownedBy: Relationship?
+        get() = supertype?.ownedBy ?: relationships.find{ it.reverse?.aggregate ?: false }
+    /**
      * The relationship expresses the ownership of this entity
 
      */
     val ownership: Relationship?
-        get() = supertype?.ownership ?:
-        relationships.find{ it.reverse?.aggregate ?: false }?.reverse
+        get() = ownedBy?.reverse
     /**
      * The entity this entity owns
      */
