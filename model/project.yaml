@@ -1,0 +1,13 @@
+project:
+  group: laplacian
+  name: model.metamodel
+  namespace: laplacian
+  version: '1.0.0'
+  source_repository:
+    url: https://github.com/nabla-squared/laplacian.model.metamodel.git
+    branch: master
+  subprojects: []
+  schemas: []
+  templates: []
+  model_files: []
+  template_files: []
