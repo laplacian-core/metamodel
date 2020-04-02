@@ -1,6 +1,7 @@
 project:
   group: laplacian
   name: model.metamodel
+  type: model
   namespace: laplacian
   version: '1.0.0'
   source_repository:
@@ -9,5 +10,6 @@ project:
   subprojects: []
   schemas: []
   templates: []
+  models: []
   model_files: []
   template_files: []
