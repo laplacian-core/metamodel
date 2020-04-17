@@ -1,27 +1,37 @@
 project:
   group: laplacian
-  name: model.metamodel
+  name: metamodel
   type: model
-  namespace: laplacian
+  namespace: laplacian.metamodel
   version: '1.0.0'
   description: |
     A model that expresses the structure of relational model with aggregation support.
     This model is used to define models from which templates generate resources such as source code or document.
   source_repository:
-    url: https://github.com/nabla-squared/laplacian.model.metamodel.git
+    url: https://github.com/nabla-squared/laplacian.metamodel.git
     branch: master
   subprojects: []
-  schemas:
+  schemas: []
+  plugins:
   - group: laplacian
     name: schema.metamodel
     version: '1.0.0'
+  - group: laplacian
+    name: project.schema-plugin
+    version: '1.0.0'
   templates:
   - group: laplacian
-    name: template.metamodel.document
+    name: project.base-template
+    version: '1.0.0'
+  - group: laplacian
+    name: schema.document-template
     version: '1.0.0'
   models:
   - group: laplacian
-    name: model.metamodel
+    name: metamodel
+    version: '1.0.0'
+  - group: laplacian
+    name: project.document-content
     version: '1.0.0'
   model_files: []
   template_files: []
