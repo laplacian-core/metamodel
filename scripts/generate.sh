@@ -4,6 +4,10 @@ SCRIPT_BASE_DIR=$(cd $"${BASH_SOURCE%/*}" && pwd)
 PROJECT_BASE_DIR=$(cd $SCRIPT_BASE_DIR && cd .. && pwd)
 
 LOCAL_REPO_PATH="$PROJECT_BASE_DIR/../mvn-repo"
+if [[ -d "$PROJECT_BASE_DIR/subprojects/mvn-repo" ]]
+then
+  LOCAL_REPO_PATH="$PROJECT_BASE_DIR/subprojects/mvn-repo"
+fi
 PROJECT_MODEL_DIR="$PROJECT_BASE_DIR/model/project"
 PROJECT_SOURCE_INDEX="$PROJECT_MODEL_DIR/sources.yaml"
 
@@ -49,7 +53,7 @@ file_list() {
   local separator="\n  - "
   (cd $PROJECT_BASE_DIR
     find . -type d \( \
-      -path './scripts' -o -path './.git' -o -path './dest' \
+      -path './scripts' -o -path './.git' -o -path './dest' -o -path './subprojects' \
     \) -prune -o -type f -print
   ) | while read -r file
   do
@@ -67,10 +71,10 @@ generate() {
     --plugin 'laplacian:laplacian.project.schema-plugin:1.0.0' \
     --template 'laplacian:laplacian.project.base-template:1.0.0' \
     --template 'laplacian:laplacian.schema.document-template:1.0.0' \
-    --model 'laplacian:laplacian.metamodel:1.0.0' \
     --model 'laplacian:laplacian.project.document-content:1.0.0' \
     --model-files $(normalize_path './model/project.yaml') \
     --model-files $(normalize_path './model/project/') \
+    --model-files $(normalize_path 'src/') \
     --target-dir ./ \
     --local-repo "$LOCAL_REPO_PATH"
 }

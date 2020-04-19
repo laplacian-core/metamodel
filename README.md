@@ -6,7 +6,7 @@ This model is used to define models from which templates generate resources such
 
 <!-- @head-content@ -->
 
-<!-- @toc -->
+<!-- @toc@ -->
 ## Table of contents
 1. [Usage](#usage)
 
@@ -16,9 +16,9 @@ This model is used to define models from which templates generate resources such
 
 
 
-<!-- @toc -->
+<!-- @toc@ -->
 
-<!-- @main-content -->
+<!-- @main-content@ -->
 ## Usage
 
 Add the following entry to your project definition.
@@ -128,4 +128,4 @@ The following diagram summarizes the structure of the model:
 
 
 
-<!-- @main-content -->
+<!-- @main-content@ -->
