@@ -102,9 +102,9 @@ entities:
   - name: nullable
     type: boolean
     description: |
-      Whether this property permit a null value
+      Whether this property permits a null value
     snippet: |
-      optional && (defaultValue == null)
+      optional && !multiple && (defaultValue == null)
 
   - name: overwrites
     type: boolean

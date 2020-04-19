@@ -111,11 +111,11 @@ The class_name of this property.
   ```
 
 ### nullable: `Boolean`
-Whether this property permit a null value
+Whether this property permits a null value
 
 - **Code:**
   ```kotlin
-  optional && (defaultValue == null)
+  optional && !multiple && (defaultValue == null)
   ```
 
 ### overwrites: `Boolean`
