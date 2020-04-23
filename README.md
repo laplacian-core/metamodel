@@ -8,6 +8,7 @@ This model is used to define models from which templates generate resources such
 
 <!-- @toc@ -->
 ## Table of contents
+1. [Usage](#usage)
 
 1. [Schema model](#schema-model)
 
@@ -18,6 +19,18 @@ This model is used to define models from which templates generate resources such
 <!-- @toc@ -->
 
 <!-- @main-content@ -->
+## Usage
+
+Add the following entry to your project definition.
+```yaml
+project:
+  models:
+  - group: laplacian
+    name: metamodel
+    version: 1.0.0
+```
+
+
 
 ## Schema model
 

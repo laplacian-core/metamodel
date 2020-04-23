@@ -70,11 +70,27 @@ The description of this property.
 The default value of this property, which is used when the actual value is null
 
 
-### example_values: `List<Any>`
-The example_values of this property.
+### example_values: `List<String>`
+Kotlin expressions which represent some typical values of this property.
+
 - **Default Value:**
   ```kotlin
-  emptyList<Any>()
+  emptyList<String>()
+  ```
+
+### example_value: `String`
+A kotlin expression which represents a typical value of this property.
+
+- **Code:**
+  ```kotlin
+  when {
+    !exampleValues.isEmpty() -> exampleValues.first()
+    (defaultValue != null) -> defaultValue.toString()
+    multiple -> "emptyList<${className}>()"
+    (type == "string") -> "\"hogehoge\""
+    (type == "number") -> "42"
+    else -> "null"
+  }
   ```
 
 ### table_column_name: `String`

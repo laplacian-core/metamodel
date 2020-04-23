@@ -65,11 +65,27 @@ entities:
     optional: true
 
   - name: example_values
-    type: any
+    description: |
+      Kotlin expressions which represent some typical values of this property.
+    type: string
     multiple: true
     optional: true
     default_value: |
-      emptyList<Any>()
+      emptyList<String>()
+
+  - name: example_value
+    description: |
+      A kotlin expression which represents a typical value of this property.
+    type: string
+    snippet: |
+      when {
+        !exampleValues.isEmpty() -> exampleValues.first()
+        (defaultValue != null) -> defaultValue.toString()
+        multiple -> "emptyList<${className}>()"
+        (type == "string") -> "\"hogehoge\""
+        (type == "number") -> "42"
+        else -> "null"
+      }
 
   - name: table_column_name
     type: string
