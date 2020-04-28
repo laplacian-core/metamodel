@@ -45,10 +45,6 @@ The following diagram summarizes the structure of the model:
 
 - [**Entity**](<./doc/entities/Entity.md>)
   エンティティ
-- [**NamedParam**](<./doc/entities/NamedParam.md>)
-  named_param
-- [**NamedValue**](<./doc/entities/NamedValue.md>)
-  named_value
 - [**Property**](<./doc/entities/Property.md>)
   property
 - [**PropertyMapping**](<./doc/entities/PropertyMapping.md>)
@@ -70,36 +66,6 @@ The following diagram summarizes the structure of the model:
 ## Source list
 
 
-[README.md](<./README.md>)
-
-[doc/entities/Entity.md](<./doc/entities/Entity.md>)
-
-[doc/entities/NamedParam.md](<./doc/entities/NamedParam.md>)
-
-[doc/entities/NamedValue.md](<./doc/entities/NamedValue.md>)
-
-[doc/entities/PropertyMapping.md](<./doc/entities/PropertyMapping.md>)
-
-[doc/entities/Property.md](<./doc/entities/Property.md>)
-
-[doc/entities/Query.md](<./doc/entities/Query.md>)
-
-[doc/entities/Relationship.md](<./doc/entities/Relationship.md>)
-
-[doc/entities/ValueDomainType.md](<./doc/entities/ValueDomainType.md>)
-
-[doc/entities/ValueDomain.md](<./doc/entities/ValueDomain.md>)
-
-[doc/entities/ValueItem.md](<./doc/entities/ValueItem.md>)
-
-[doc/image/model-diagram.svg](<./doc/image/model-diagram.svg>)
-
-[.editorconfig](<./.editorconfig>)
-
-[.gitattributes](<./.gitattributes>)
-
-[.gitignore](<./.gitignore>)
-
 [model/project/sources.yaml](<./model/project/sources.yaml>)
 
 [model/project.yaml](<./model/project.yaml>)
@@ -107,10 +73,6 @@ The following diagram summarizes the structure of the model:
 [src/entities/entity/example.yaml](<./src/entities/entity/example.yaml>)
 
 [src/entities/entity.yml](<./src/entities/entity.yml>)
-
-[src/entities/named_param.yml](<./src/entities/named_param.yml>)
-
-[src/entities/named_value.yml](<./src/entities/named_value.yml>)
 
 [src/entities/property_mapping.yml](<./src/entities/property_mapping.yml>)
 
@@ -120,9 +82,13 @@ The following diagram summarizes the structure of the model:
 
 [src/entities/relationship.yml](<./src/entities/relationship.yml>)
 
-[src/entities/value_domain_type.yml](<./src/entities/value_domain_type.yml>)
-
 [src/entities/value_domain.yml](<./src/entities/value_domain.yml>)
+
+[src/value_domain_types/basic_type.yml](<./src/value_domain_types/basic_type.yml>)
+
+[src/value_domain_types/identifier.yml](<./src/value_domain_types/identifier.yml>)
+
+[src/value_domain_types/namespace.yml](<./src/value_domain_types/namespace.yml>)
 
 
 

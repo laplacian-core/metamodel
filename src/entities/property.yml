@@ -27,7 +27,7 @@ entities:
 
   - name: type
     type: string
-    domain_type_name: base_type
+    domain_type_name: basic_type
 
   - name: domain_type_name
     description: 制約型名

@@ -29,4 +29,6 @@ build/
 out/
 
 # Laplacian projects
+.NEXT/
+.PREV/
 /dest/
