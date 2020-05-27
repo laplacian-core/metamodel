@@ -104,11 +104,11 @@ entities:
       false
 
   - name: examples
-    type: any
+    type: string
     multiple: true
     optional: true
     default_value: |
-        emptyList<Any>()
+        emptyList<String>()
 
   relationships:
   - name: entity

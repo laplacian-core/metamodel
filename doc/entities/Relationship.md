@@ -113,11 +113,11 @@ Defines this relationship is deprecated or not.
   false
   ```
 
-### examples: `List<Any>`
+### examples: `List<String>`
 The examples of this relationship.
 - **Default Value:**
   ```kotlin
-  emptyList<Any>()
+  emptyList<String>()
   ```
 
 ## Relationships

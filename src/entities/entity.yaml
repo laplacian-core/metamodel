@@ -43,10 +43,10 @@ entities:
   - name: singly_rooted
     description: |
       If this property is true, there is the "root" instance, which is accessible globally.
-    type: boolean 
+    type: boolean
     optional: true
     default_value: |
-      false 
+      false
 
   - name: description
     description: 詳細
@@ -104,10 +104,10 @@ entities:
     snippet: >
       (owner == null || owner == this) && !valueObject
     example_values:
-    - true
-    - true
-    - true
-    - false
+    - 'true'
+    - 'true'
+    - 'true'
+    - 'false'
 
   - name: supports_namespace
     description: >
@@ -118,7 +118,7 @@ entities:
           p.name == "namespace" && p.type == "string"
       }
     example_values:
-    - false
+    - 'false'
 
   - name: fqn
     description: >
@@ -142,7 +142,7 @@ entities:
           }
       } + primaryKeys.map { it.propertyName.lowerUnderscorize() }
     example_values:
-    - ["party_id"]
+    - listOf("party_id")
 
   - name: deprecated
     type: boolean
@@ -150,16 +150,16 @@ entities:
     default_value: |
       false
     example_values:
-    - false
+    - 'false'
 
   - name: examples
     description:
       examples which explain actual usage of this entity
-    type: any
+    type: string
     multiple: true
     optional: true
     default_value: |
-      emptyList<Any>()
+      emptyList<String>()
 
   relationships:
   - name: properties
@@ -195,16 +195,6 @@ entities:
     mappings:
     - from: subtype_of
       to: name
-    examples:
-    - when_invoking: |
-        entities.find{ it.name == "party" }?.supertype
-      then_returns: |
-        null
-
-    - when_invoking: |
-        entities.find{ it.name == "person" }?.supertype?.name
-      then_returns: |
-        "party"
 
   - name: ancestors
     description: |
@@ -287,15 +277,6 @@ entities:
       The entity this entity owns
     snippet: |
       ownership?.entity
-    examples:
-    - when_invoking: |
-        entities.find{ it.name == "person" }?.owner
-      then_returns: |
-        null
-    - when_invoking: |
-        entities.find{ it.name == "person_physical_characteristic" }?.owner?.name
-      then_returns: |
-        "person"
 
   - name: ownership_hierarchy
     reference_entity_name: relationship
@@ -379,7 +360,6 @@ entities:
       トップレベルエンティティの一覧
     snippet: |
       return filter{ it.topLevel }
-
 
   - name: top_level_in_namespace
     result_entity_name: entity

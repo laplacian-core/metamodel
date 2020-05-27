@@ -6,16 +6,14 @@ SCRIPT_BASE_DIR="$PROJECT_BASE_DIR/scripts"
 
 LOCAL_REPO_PATH="$PROJECT_BASE_DIR/../../../mvn-repo"
 
-OPT_NAMES='hvr:-:'
+OPT_NAMES='hv-:'
 
 ARGS=
 HELP=
 VERBOSE=
-MAX_RECURSION=10
-SKIP_GENERATION=
 
 
-run_publish_local() {
+run_publish_local_metamodel_plugin() {
   parse_args "$@"
   ! [ -z $VERBOSE ] && set -x
   ! [ -z $HELP ] && show_usage && exit 0
@@ -32,10 +30,6 @@ parse_args() {
         HELP='yes';;
       verbose)
         VERBOSE='yes';;
-      max-recursion)
-        MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
-      skip-generation)
-        SKIP_GENERATION='yes';;
       *)
         echo "ERROR: Unknown OPTION --$OPTARG" >&2
         exit 1
@@ -43,7 +37,6 @@ parse_args() {
       ;;
     h) HELP='yes';;
     v) VERBOSE='yes';;
-    r) MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
     esac
   done
   ARGS=$@
@@ -56,12 +49,8 @@ Usage: $(basename "$0") [OPTION]...
     Displays how to use this command.
   -v, --verbose
     Displays more detailed command execution information.
-  -r, --max-recursion [VALUE]
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>). (Default: 10)
-  --skip-generation
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>).
 END
 }
 
-source $SCRIPT_BASE_DIR/.publish-local/main.sh
-run_publish_local "$@"
+source $SCRIPT_BASE_DIR/.publish-local-metamodel-plugin/main.sh
+run_publish_local_metamodel_plugin "$@"

@@ -2,7 +2,8 @@ entities:
 - name: entity
   namespace: laplacian.metamodel
   examples:
-  - name: party
+  - |
+    name: party
     namespace: example.party
     properties:
     - name: party_id
@@ -12,7 +13,8 @@ entities:
       type: string
       subtype_key: true
 
-  - name: person
+  - |
+    name: person
     namespace: example.party
     subtype_of: party
     properties:
@@ -30,14 +32,16 @@ entities:
       cardinality: '*'
       aggregate: true
 
-  - name: organization
+  - |
+    name: organization
     namespace: example.party
     subtype_of: party
     properties:
     - name: name
       type: string
 
-  - name: person_physical_characteristic
+  - |
+    name: person_physical_characteristic
     namespace: example.party
     properties:
     - name: type
@@ -65,7 +69,8 @@ entities:
       - from: type
         to: name
 
-  - name: person_physical_characteristic_type
+  - |
+    name: person_physical_characteristic_type
     namespace: example.party
     properties:
     - name: name

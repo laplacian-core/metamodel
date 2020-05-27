@@ -6,16 +6,15 @@ SCRIPT_BASE_DIR="$PROJECT_BASE_DIR/scripts"
 
 LOCAL_REPO_PATH="$PROJECT_BASE_DIR/../../../mvn-repo"
 
-OPT_NAMES='hvr:-:'
+OPT_NAMES='hvc-:'
 
 ARGS=
 HELP=
 VERBOSE=
-MAX_RECURSION=10
-SKIP_GENERATION=
+CONTINUE_ON_ERROR=
 
 
-run_publish_local() {
+run_do_each_subproject() {
   parse_args "$@"
   ! [ -z $VERBOSE ] && set -x
   ! [ -z $HELP ] && show_usage && exit 0
@@ -32,10 +31,8 @@ parse_args() {
         HELP='yes';;
       verbose)
         VERBOSE='yes';;
-      max-recursion)
-        MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
-      skip-generation)
-        SKIP_GENERATION='yes';;
+      continue-on-error)
+        CONTINUE_ON_ERROR='yes';;
       *)
         echo "ERROR: Unknown OPTION --$OPTARG" >&2
         exit 1
@@ -43,7 +40,7 @@ parse_args() {
       ;;
     h) HELP='yes';;
     v) VERBOSE='yes';;
-    r) MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
+    c) CONTINUE_ON_ERROR='yes';;
     esac
   done
   ARGS=$@
@@ -56,12 +53,10 @@ Usage: $(basename "$0") [OPTION]...
     Displays how to use this command.
   -v, --verbose
     Displays more detailed command execution information.
-  -r, --max-recursion [VALUE]
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>). (Default: 10)
-  --skip-generation
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>).
+  -c, --continue-on-error
+    Even if the given command fails in a subproject in the middle, executes it for the remaining subprojects.
 END
 }
 
-source $SCRIPT_BASE_DIR/.publish-local/main.sh
-run_publish_local "$@"
+source $SCRIPT_BASE_DIR/.do-each-subproject/main.sh
+run_do_each_subproject "$@"

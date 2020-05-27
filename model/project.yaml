@@ -1,14 +1,44 @@
 project:
   group: laplacian
   name: metamodel
-  type: schema-model
+  type: domain-model
   namespace: laplacian.metamodel
   version: '1.0.0'
-  description: |
-    A model that expresses the structure of relational model with aggregation support.
-    This model is used to define models from which templates generate resources such as source code or document.
+  description:
+    en: |
+      This model is a model for defining a model, i.e. a metamodel.
+      In this model, you can define a model with the following structure
+
+      - attribute
+      - relationship
+      - aggregation
+      - inheritance
+      - mixin
+    ja: |
+      このモデルはモデルを定義するためのモデル(=メタモデル)です。
+      このモデルでは、以下の構造を持つモデルを定義することができます。
+
+      - 属性
+      - 関連
+      - 集約
+      - 継承
+      - Mixin
+    zh: |
+      This model is a model for defining a model, i.e. a metamodel.
+      In this model, you can define a model with the following structure
+
+      - attribute
+      - relationship
+      - aggregation
+      - inheritance
+      - mixin
   source_repository:
     url: https://github.com/nabla-squared/laplacian.metamodel.git
     branch: master
+  module_repositories:
+    local:
+      path: ../../../mvn-repo
+    remote:
+    - https://github.com/nabla-squared/mvn-repo
   model_files:
-  - src/
+  - 'dest/'

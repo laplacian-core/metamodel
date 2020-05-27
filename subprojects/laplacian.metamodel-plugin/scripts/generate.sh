@@ -4,18 +4,18 @@ PROJECT_BASE_DIR=$(cd $"${BASH_SOURCE%/*}/../" && pwd)
 
 SCRIPT_BASE_DIR="$PROJECT_BASE_DIR/scripts"
 
-LOCAL_REPO_PATH="$PROJECT_BASE_DIR/../../../mvn-repo"
+LOCAL_REPO_PATH="$PROJECT_BASE_DIR/../../../../../mvn-repo"
 
-OPT_NAMES='hvr:-:'
+OPT_NAMES='hvdr:-:'
 
 ARGS=
 HELP=
 VERBOSE=
+DRY_RUN=
 MAX_RECURSION=10
-SKIP_GENERATION=
 
 
-run_publish_local() {
+run_generate() {
   parse_args "$@"
   ! [ -z $VERBOSE ] && set -x
   ! [ -z $HELP ] && show_usage && exit 0
@@ -32,10 +32,10 @@ parse_args() {
         HELP='yes';;
       verbose)
         VERBOSE='yes';;
+      dry-run)
+        DRY_RUN='yes';;
       max-recursion)
         MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
-      skip-generation)
-        SKIP_GENERATION='yes';;
       *)
         echo "ERROR: Unknown OPTION --$OPTARG" >&2
         exit 1
@@ -43,6 +43,7 @@ parse_args() {
       ;;
     h) HELP='yes';;
     v) VERBOSE='yes';;
+    d) DRY_RUN='yes';;
     r) MAX_RECURSION=("${!OPTIND}"); OPTIND=$(($OPTIND+1));;
     esac
   done
@@ -56,12 +57,17 @@ Usage: $(basename "$0") [OPTION]...
     Displays how to use this command.
   -v, --verbose
     Displays more detailed command execution information.
+  -d, --dry-run
+    After this command is processed, the generated files are output to the `.NEXT` directory
+    without reflecting to the folders of `dest/` `doc/` `scripts/`.
+    In addition, the difference between the contents of the `.NEXT` directory and the current files.
+    This directory also contains any intermediate files created during the generation.
   -r, --max-recursion [VALUE]
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>). (Default: 10)
-  --skip-generation
-    This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>).
+    The upper limit of the number of times to execute recursively
+    when the contents of the `model/` `template/` directory are updated
+    during the generation process. (Default: 10)
 END
 }
 
-source $SCRIPT_BASE_DIR/.publish-local/main.sh
-run_publish_local "$@"
+source $SCRIPT_BASE_DIR/.generate/main.sh
+run_generate "$@"
