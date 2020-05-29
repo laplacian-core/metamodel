@@ -11,6 +11,11 @@ value_domain_type
 
 ### name: `String`
 The name of this value_domain_type.
+- **Attributes:** *PK*
+
+### namespace: `String`
+The namespace of this value_domain_type.
+- **Attributes:** *PK*
 
 ### type: `String`
 The type of this value_domain_type.

@@ -39,7 +39,7 @@ project:
       metamodel 域模型插件模块
   module_repositories:
     local:
-      path: ../../../../../mvn-repo
+      ../../../../../mvn-repo
     remote:
     - https://github.com/nabla-squared/mvn-repo
   models:

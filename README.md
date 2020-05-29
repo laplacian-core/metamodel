@@ -90,10 +90,10 @@ property_mapping
 The queries from which all navigation originates.
 - [**Relationship**](<./doc/entities/Relationship.md>)
 relationship
-- [**ValueDomainType**](<./doc/entities/ValueDomainType.md>)
-value_domain_type
 - [**ValueDomain**](<./doc/entities/ValueDomain.md>)
 value_domain
+- [**ValueDomainType**](<./doc/entities/ValueDomainType.md>)
+value_domain_type
 - [**ValueItem**](<./doc/entities/ValueItem.md>)
 value_item
 ### Script List
@@ -298,10 +298,12 @@ value_item
 - [src/entities/property.yaml](<./src/entities/property.yaml>)
 - [src/entities/query.yaml](<./src/entities/query.yaml>)
 - [src/entities/relationship.yaml](<./src/entities/relationship.yaml>)
+- [src/entities/value_domain_type.yaml](<./src/entities/value_domain_type.yaml>)
 - [src/entities/value_domain.yaml](<./src/entities/value_domain.yaml>)
-- [src/value_domain_types/basic_type.yml](<./src/value_domain_types/basic_type.yml>)
-- [src/value_domain_types/identifier.yml](<./src/value_domain_types/identifier.yml>)
-- [src/value_domain_types/namespace.yml](<./src/value_domain_types/namespace.yml>)
+- [src/entities/value_item.yaml](<./src/entities/value_item.yaml>)
+- [src/value_domain_types/basic_type.yaml](<./src/value_domain_types/basic_type.yaml>)
+- [src/value_domain_types/identifier.yaml](<./src/value_domain_types/identifier.yaml>)
+- [src/value_domain_types/namespace.yaml](<./src/value_domain_types/namespace.yaml>)
 
 
 <!-- @main-content@ -->
