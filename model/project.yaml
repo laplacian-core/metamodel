@@ -1,7 +1,7 @@
 project:
   group: laplacian
   name: metamodel
-  type: domain-model
+  type: model
   namespace: laplacian.metamodel
   version: '1.0.0'
   description:
@@ -13,7 +13,6 @@ project:
       - relationship
       - aggregation
       - inheritance
-      - mixin
     ja: |
       このモデルはモデルを定義するためのモデル(=メタモデル)です。
       このモデルでは、以下の構造を持つモデルを定義することができます。
@@ -22,23 +21,25 @@ project:
       - 関連
       - 集約
       - 継承
-      - Mixin
     zh: |
-      This model is a model for defining a model, i.e. a metamodel.
-      In this model, you can define a model with the following structure
+      这个模型是一个定义模型的模型。(= metamodel)
+      在这个模型中，你可以定义一个模型，其结构如下
 
       - attribute
       - relationship
       - aggregation
       - inheritance
-      - mixin
   source_repository:
-    url: https://github.com/nabla-squared/laplacian.metamodel.git
+    url: https://github.com/laplacian-core/metamodel.git
     branch: master
   module_repositories:
     local:
       ../../../mvn-repo
     remote:
     - https://github.com/nabla-squared/mvn-repo
+  templates:
+  - group: laplacian
+    name: domain-model.project-template
+    version: '1.0.0'
   model_files:
-  - 'dest/'
+  - 'dest/model'

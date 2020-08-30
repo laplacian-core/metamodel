@@ -2,6 +2,8 @@
 *.tmp
 *.log
 *.swp
+*.backup
+*.zip
 
 # General - Windows
 Thumbs.db
@@ -14,7 +16,7 @@ Thumbs.db
 
 # VSCode
 /vscode/
-/.vscode/
+# /.vscode/
 *.code-workspace
 
 # Java development
@@ -32,5 +34,11 @@ out/
 .NEXT/
 .PREV/
 /dest/
-subprojects/mvn-repo/
-subprojects/mvn-repo
+
+
+# GCP
+.gcloud/
+
+# Terraform
+.terraform/
+*.tfstate

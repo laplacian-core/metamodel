@@ -8,7 +8,6 @@
 - 関連
 - 集約
 - 継承
-- Mixin
 
 
 *Read this in other languages*: [[English](README.md)] [[简体中文](README_zh.md)]
@@ -100,69 +99,6 @@ value_item
 ### スクリプト一覧
 
 
-- [./script/do-each-subproject.sh](<./scripts/do-each-subproject.sh>)
-
-  各サブプロジェクトに対して、引数で指定されたコマンドを一括で実行します。
-
-  使用例:
-  ```console
-  $ ./scripts/null -c git status
-  ```
-
-  > Usage: do-each-subproject.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   このコマンドの使用方法を表示します。
-  >   
-  > -v, --verbose
-  >
-  >   より詳細なコマンドの実行情報を表示します。
-  >   
-  > -c, --continue-on-error
-  >
-  >   途中のサブプロジェクトで与えられたコマンドが失敗しても、残りのサブプロジェクトに対してコマンドを実行します。
-  >   
-- [./script/generate-all.sh](<./scripts/generate-all.sh>)
-
-  サブプロジェクトを含むプロジェクト内の資源を自動生成します。
-
-  > Usage: generate-all.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   このコマンドの使用方法を表示します。
-  >   
-  > -v, --verbose
-  >
-  >   より詳細なコマンドの実行情報を表示します。
-  >   
-  > -c, --continue-on-error
-  >
-  >   途中のサブプロジェクトで与えられたコマンドが失敗しても、残りのサブプロジェクトに対してコマンドを実行します。
-  >   
-- [./script/generate-metamodel-plugin.sh](<./scripts/generate-metamodel-plugin.sh>)
-
-  [laplacian/metamodel-plugin](<null>)プロジェクトをサブプロジェクトとして下記のディレクトリに生成します。
-  ```
-  subprojects/laplacian.metamodel-plugin
-  ```
-  すでにそのサブプロジェクトが存在する場合はその内容を更新します。
-
-  > Usage: generate-metamodel-plugin.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   このコマンドの使用方法を表示します。
-  >   
-  > -v, --verbose
-  >
-  >   より詳細なコマンドの実行情報を表示します。
-  >   
-  > -c, --clean
-  >
-  >   サブプロジェクトのローカルにある資源を全て削除してから再生成します。
-  >   
 - [./script/generate.sh](<./scripts/generate.sh>)
 
   このプロジェクト内の資源を自動生成します。
@@ -222,28 +158,15 @@ value_item
   >   自動生成処理中に`model/` `template/`ディレクトリの内容が更新された場合に、
   >   再帰的に自動生成処理を実行する回数の上限。
   >    (Default: 10)
-- [./script/git-each-subproject.sh](<./scripts/git-each-subproject.sh>)
-
-  各サブプロジェクトに対して、引数で指定されたGitサブコマンドを一括実行します。
-
-  使用例:
-  ```console
-  $ ./scripts/null -c status
-  ```
-
-  > Usage: git-each-subproject.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   このコマンドの使用方法を表示します。
+  >   ローカルでビルドされたモジュールを格納するリポジトリのパス。
+  >   ここに存在するモジュールが最優先で参照されます。
   >   
-  > -v, --verbose
+  > , --updates-scripts-only
   >
-  >   より詳細なコマンドの実行情報を表示します。
-  >   
-  > -c, --continue-on-error
-  >
-  >   途中のサブプロジェクトで与えられたコマンドが失敗しても、残りのサブプロジェクトに対してコマンドを実行します。
+  >   スクリプトファイルのみを更新の対象とします。
+  >   プロジェクトを初期生成する際、自動生成スクリプト自体を初回作成する場合などに指定します。
   >   
 - [./script/publish-local.sh](<./scripts/publish-local.sh>)
 
@@ -268,36 +191,27 @@ value_item
   >
   >   自動生成処理を行わずに、ビルドおよびローカルリポジトリへの登録を行います。
   >   
-- [./script/publish-local-metamodel-plugin.sh](<./scripts/publish-local-metamodel-plugin.sh>)
-
-  [laplacian/metamodel-plugin](<null>)サブプロジェクトの資源を自動生成します。
-
-  > Usage: publish-local-metamodel-plugin.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   このコマンドの使用方法を表示します。
-  >   
-  > -v, --verbose
-  >
-  >   より詳細なコマンドの実行情報を表示します。
+  >   ビルドしたモジュールを格納するローカルリポジトリのパス。
+  >   指定したパスにリポジトリが存在しない場合は、自動的に作成されます。
   >   
 ### ソースコード一覧
 
 
 - [model/project.yaml](<./model/project.yaml>)
-- [src/entities/entity/example.yaml](<./src/entities/entity/example.yaml>)
-- [src/entities/entity.yaml](<./src/entities/entity.yaml>)
-- [src/entities/property_mapping.yaml](<./src/entities/property_mapping.yaml>)
-- [src/entities/property.yaml](<./src/entities/property.yaml>)
-- [src/entities/query.yaml](<./src/entities/query.yaml>)
-- [src/entities/relationship.yaml](<./src/entities/relationship.yaml>)
-- [src/entities/value_domain_type.yaml](<./src/entities/value_domain_type.yaml>)
-- [src/entities/value_domain.yaml](<./src/entities/value_domain.yaml>)
-- [src/entities/value_item.yaml](<./src/entities/value_item.yaml>)
-- [src/value_domain_types/basic_type.yaml](<./src/value_domain_types/basic_type.yaml>)
-- [src/value_domain_types/identifier.yaml](<./src/value_domain_types/identifier.yaml>)
-- [src/value_domain_types/namespace.yaml](<./src/value_domain_types/namespace.yaml>)
+- [src/model/entities/entity/example.yaml](<./src/model/entities/entity/example.yaml>)
+- [src/model/entities/entity.yaml](<./src/model/entities/entity.yaml>)
+- [src/model/entities/property_mapping.yaml](<./src/model/entities/property_mapping.yaml>)
+- [src/model/entities/property.yaml](<./src/model/entities/property.yaml>)
+- [src/model/entities/query.yaml](<./src/model/entities/query.yaml>)
+- [src/model/entities/relationship.yaml](<./src/model/entities/relationship.yaml>)
+- [src/model/entities/value_domain_type.yaml](<./src/model/entities/value_domain_type.yaml>)
+- [src/model/entities/value_domain.yaml](<./src/model/entities/value_domain.yaml>)
+- [src/model/entities/value_item.yaml](<./src/model/entities/value_item.yaml>)
+- [src/model/value_domain_types/basic_type.yaml](<./src/model/value_domain_types/basic_type.yaml>)
+- [src/model/value_domain_types/identifier.yaml](<./src/model/value_domain_types/identifier.yaml>)
+- [src/model/value_domain_types/namespace.yaml](<./src/model/value_domain_types/namespace.yaml>)
 
 
 <!-- @main-content@ -->

@@ -8,7 +8,6 @@ In this model, you can define a model with the following structure
 - relationship
 - aggregation
 - inheritance
-- mixin
 
 
 *Read this in other languages*: [[日本語](README_ja.md)] [[简体中文](README_zh.md)]
@@ -99,69 +98,6 @@ value_item
 ### Script List
 
 
-- [./script/do-each-subproject.sh](<./scripts/do-each-subproject.sh>)
-
-  Executes the command specified by the argument for each subproject.
-
-  Example:
-  ```console
-  $ ./scripts/null -c git status
-  ```
-
-  > Usage: do-each-subproject.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   Displays how to use this command.
-  >   
-  > -v, --verbose
-  >
-  >   Displays more detailed command execution information.
-  >   
-  > -c, --continue-on-error
-  >
-  >   Even if the given command fails in a subproject in the middle, executes it for the remaining subprojects.
-  >   
-- [./script/generate-all.sh](<./scripts/generate-all.sh>)
-
-  Generates resources in the project, including subprojects.
-
-  > Usage: generate-all.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   Displays how to use this command.
-  >   
-  > -v, --verbose
-  >
-  >   Displays more detailed command execution information.
-  >   
-  > -c, --continue-on-error
-  >
-  >   Even if the given command fails in a subproject in the middle, executes it for the remaining subprojects.
-  >   
-- [./script/generate-metamodel-plugin.sh](<./scripts/generate-metamodel-plugin.sh>)
-
-  Generates the [laplacian/metamodel-plugin](<null>) project as a subproject in the following directory.
-  ```
-  subprojects/laplacian.metamodel-plugin
-  ```
-  If the subproject already exists, the content of the subproject is updated.
-
-  > Usage: generate-metamodel-plugin.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   Displays how to use this command.
-  >   
-  > -v, --verbose
-  >
-  >   Displays more detailed command execution information.
-  >   
-  > -c, --clean
-  >
-  >   Delete all local resources of the subproject and regenerate them.
-  >   
 - [./script/generate.sh](<./scripts/generate.sh>)
 
   Generates the resources in each directory of `src/` `model/` `template/` in this project.
@@ -227,28 +163,16 @@ value_item
   >   when the contents of the `model/` `template/` directory are updated
   >   during the generation process.
   >    (Default: 10)
-- [./script/git-each-subproject.sh](<./scripts/git-each-subproject.sh>)
-
-  Executes the git sub-command specified by the argument for each subproject.
-
-  Example:
-  ```console
-  $ ./scripts/null -c status
-  ```
-
-  > Usage: git-each-subproject.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   Displays how to use this command.
+  >   The repository path to store locally built modules.
+  >   The modules in this repository have the highest priority.
   >   
-  > -v, --verbose
+  > , --updates-scripts-only
   >
-  >   Displays more detailed command execution information.
-  >   
-  > -c, --continue-on-error
-  >
-  >   Even if the given command fails in a subproject in the middle, executes it for the remaining subprojects.
+  >   Updates script files only.
+  >   This option is used to generate the generator script itself
+  >   when the project is initially generated.
   >   
 - [./script/publish-local.sh](<./scripts/publish-local.sh>)
 
@@ -274,36 +198,27 @@ value_item
   >
   >   This option is the same as the option of the same name in [generate.sh](<./scripts/generate.sh>).
   >   
-- [./script/publish-local-metamodel-plugin.sh](<./scripts/publish-local-metamodel-plugin.sh>)
-
-  Generates resources for the [laplacian/metamodel-plugin](<null>) subproject.
-
-  > Usage: publish-local-metamodel-plugin.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   Displays how to use this command.
-  >   
-  > -v, --verbose
-  >
-  >   Displays more detailed command execution information.
+  >   The path to the local repository where the built module will be stored.
+  >   If the repository does not exist in the specified path, it will be created automatically.
   >   
 ### Source code list
 
 
 - [model/project.yaml](<./model/project.yaml>)
-- [src/entities/entity/example.yaml](<./src/entities/entity/example.yaml>)
-- [src/entities/entity.yaml](<./src/entities/entity.yaml>)
-- [src/entities/property_mapping.yaml](<./src/entities/property_mapping.yaml>)
-- [src/entities/property.yaml](<./src/entities/property.yaml>)
-- [src/entities/query.yaml](<./src/entities/query.yaml>)
-- [src/entities/relationship.yaml](<./src/entities/relationship.yaml>)
-- [src/entities/value_domain_type.yaml](<./src/entities/value_domain_type.yaml>)
-- [src/entities/value_domain.yaml](<./src/entities/value_domain.yaml>)
-- [src/entities/value_item.yaml](<./src/entities/value_item.yaml>)
-- [src/value_domain_types/basic_type.yaml](<./src/value_domain_types/basic_type.yaml>)
-- [src/value_domain_types/identifier.yaml](<./src/value_domain_types/identifier.yaml>)
-- [src/value_domain_types/namespace.yaml](<./src/value_domain_types/namespace.yaml>)
+- [src/model/entities/entity/example.yaml](<./src/model/entities/entity/example.yaml>)
+- [src/model/entities/entity.yaml](<./src/model/entities/entity.yaml>)
+- [src/model/entities/property_mapping.yaml](<./src/model/entities/property_mapping.yaml>)
+- [src/model/entities/property.yaml](<./src/model/entities/property.yaml>)
+- [src/model/entities/query.yaml](<./src/model/entities/query.yaml>)
+- [src/model/entities/relationship.yaml](<./src/model/entities/relationship.yaml>)
+- [src/model/entities/value_domain_type.yaml](<./src/model/entities/value_domain_type.yaml>)
+- [src/model/entities/value_domain.yaml](<./src/model/entities/value_domain.yaml>)
+- [src/model/entities/value_item.yaml](<./src/model/entities/value_item.yaml>)
+- [src/model/value_domain_types/basic_type.yaml](<./src/model/value_domain_types/basic_type.yaml>)
+- [src/model/value_domain_types/identifier.yaml](<./src/model/value_domain_types/identifier.yaml>)
+- [src/model/value_domain_types/namespace.yaml](<./src/model/value_domain_types/namespace.yaml>)
 
 
 <!-- @main-content@ -->

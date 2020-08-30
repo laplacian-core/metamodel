@@ -1,14 +1,13 @@
 <!-- @head-content@ -->
 # laplacian/metamodel
 
-This model is a model for defining a model, i.e. a metamodel.
-In this model, you can define a model with the following structure
+这个模型是一个定义模型的模型。(= metamodel)
+在这个模型中，你可以定义一个模型，其结构如下
 
 - attribute
 - relationship
 - aggregation
 - inheritance
-- mixin
 
 
 *Read this in other languages*: [[English](README.md)] [[日本語](README_ja.md)]
@@ -101,69 +100,6 @@ value_item
 ### 命令列表
 
 
-- [./script/do-each-subproject.sh](<./scripts/do-each-subproject.sh>)
-
-  为每个子项目执行参数指定的命令。
-
-  例子:
-  ```console
-  $ ./scripts/null -c git status
-  ```
-
-  > Usage: do-each-subproject.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   显示如何使用此命令。
-  >   
-  > -v, --verbose
-  >
-  >   显示更详细的命令执行信息。
-  >   
-  > -c, --continue-on-error
-  >
-  >   即使给定的命令在中间的一个子项目中失败，对其余的子项目执行该命令。
-  >   
-- [./script/generate-all.sh](<./scripts/generate-all.sh>)
-
-  生成项目中的资源，包括子项目。
-
-  > Usage: generate-all.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   显示如何使用此命令。
-  >   
-  > -v, --verbose
-  >
-  >   显示更详细的命令执行信息。
-  >   
-  > -c, --continue-on-error
-  >
-  >   即使给定的命令在中间的一个子项目中失败，对其余的子项目执行该命令。
-  >   
-- [./script/generate-metamodel-plugin.sh](<./scripts/generate-metamodel-plugin.sh>)
-
-  在下面的目录中生成[laplacian/metamodel-plugin](<null>)项目，作为子项目。
-  ```
-  subprojects/laplacian.metamodel-plugin
-  ```
-  如果子项目已经存在，则更新子项目的内容。
-
-  > Usage: generate-metamodel-plugin.sh [OPTION]...
-  >
-  > -h, --help
-  >
-  >   显示如何使用此命令。
-  >   
-  > -v, --verbose
-  >
-  >   显示更详细的命令执行信息。
-  >   
-  > -c, --clean
-  >
-  >   删除子项目的所有本地资源，并对其进行再生。
-  >   
 - [./script/generate.sh](<./scripts/generate.sh>)
 
   生成本项目中每个`src/` `model/` `template/`目录下的资源。
@@ -223,28 +159,15 @@ value_item
   >
   >   当`model/` `template/`目录的内容在生成过程中被更新时，递归执行的次数上限。
   >    (Default: 10)
-- [./script/git-each-subproject.sh](<./scripts/git-each-subproject.sh>)
-
-  执行参数为每个子项目指定的git子命令。
-
-  例子:
-  ```console
-  $ ./scripts/null -c status
-  ```
-
-  > Usage: git-each-subproject.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   显示如何使用此命令。
+  >   存储本地构建的模块的存储库路径。
+  >   这个存储库中的模块具有最高优先级。
   >   
-  > -v, --verbose
+  > , --updates-scripts-only
   >
-  >   显示更详细的命令执行信息。
-  >   
-  > -c, --continue-on-error
-  >
-  >   即使给定的命令在中间的一个子项目中失败，对其余的子项目执行该命令。
+  >   仅更新脚本文件。
+  >   这个选项在项目初始生成时用于生成生成器脚本本身。
   >   
 - [./script/publish-local.sh](<./scripts/publish-local.sh>)
 
@@ -268,36 +191,27 @@ value_item
   >
   >   这个选项与[generate.sh](<./scripts/generate.sh>)中的同名选项相同。
   >   
-- [./script/publish-local-metamodel-plugin.sh](<./scripts/publish-local-metamodel-plugin.sh>)
-
-  为[laplacian/metamodel-plugin](<null>)子项目生成资源。
-
-  > Usage: publish-local-metamodel-plugin.sh [OPTION]...
+  > , --local-module-repository [VALUE]
   >
-  > -h, --help
-  >
-  >   显示如何使用此命令。
-  >   
-  > -v, --verbose
-  >
-  >   显示更详细的命令执行信息。
+  >   到本地存储库的路径。
+  >   如果在指定的路径中不存在存储库，将自动创建。
   >   
 ### 源码列表
 
 
 - [model/project.yaml](<./model/project.yaml>)
-- [src/entities/entity/example.yaml](<./src/entities/entity/example.yaml>)
-- [src/entities/entity.yaml](<./src/entities/entity.yaml>)
-- [src/entities/property_mapping.yaml](<./src/entities/property_mapping.yaml>)
-- [src/entities/property.yaml](<./src/entities/property.yaml>)
-- [src/entities/query.yaml](<./src/entities/query.yaml>)
-- [src/entities/relationship.yaml](<./src/entities/relationship.yaml>)
-- [src/entities/value_domain_type.yaml](<./src/entities/value_domain_type.yaml>)
-- [src/entities/value_domain.yaml](<./src/entities/value_domain.yaml>)
-- [src/entities/value_item.yaml](<./src/entities/value_item.yaml>)
-- [src/value_domain_types/basic_type.yaml](<./src/value_domain_types/basic_type.yaml>)
-- [src/value_domain_types/identifier.yaml](<./src/value_domain_types/identifier.yaml>)
-- [src/value_domain_types/namespace.yaml](<./src/value_domain_types/namespace.yaml>)
+- [src/model/entities/entity/example.yaml](<./src/model/entities/entity/example.yaml>)
+- [src/model/entities/entity.yaml](<./src/model/entities/entity.yaml>)
+- [src/model/entities/property_mapping.yaml](<./src/model/entities/property_mapping.yaml>)
+- [src/model/entities/property.yaml](<./src/model/entities/property.yaml>)
+- [src/model/entities/query.yaml](<./src/model/entities/query.yaml>)
+- [src/model/entities/relationship.yaml](<./src/model/entities/relationship.yaml>)
+- [src/model/entities/value_domain_type.yaml](<./src/model/entities/value_domain_type.yaml>)
+- [src/model/entities/value_domain.yaml](<./src/model/entities/value_domain.yaml>)
+- [src/model/entities/value_item.yaml](<./src/model/entities/value_item.yaml>)
+- [src/model/value_domain_types/basic_type.yaml](<./src/model/value_domain_types/basic_type.yaml>)
+- [src/model/value_domain_types/identifier.yaml](<./src/model/value_domain_types/identifier.yaml>)
+- [src/model/value_domain_types/namespace.yaml](<./src/model/value_domain_types/namespace.yaml>)
 
 
 <!-- @main-content@ -->

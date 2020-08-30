@@ -102,7 +102,7 @@ entities:
       このエンティティがトップレベルエンティティかどうか
     type: boolean
     snippet: >
-      (owner == null || owner == this) && !valueObject
+      (owner == null || owner == this) && (supertype == null) && !valueObject
     example_values:
     - 'true'
     - 'true'
