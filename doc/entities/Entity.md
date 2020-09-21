@@ -402,6 +402,14 @@ root_owner
   relationships.filter{ it.aggregate }
   ```
 
+### all_aggregates: `List<Relationship>`
+aggregates owned by this entity or its ancestors
+- **Cardinality:** `*`
+- **Code:**
+  ```kotlin
+  allRelationships.filter{ it.aggregate }
+  ```
+
 ### aggregated_entities: `List<Entity>`
 このエンティティに集約されているエンティティの一覧 (再帰的に集約されているものを含む)
 

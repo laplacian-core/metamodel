@@ -328,6 +328,13 @@ entities:
     snippet: >
       relationships.filter{ it.aggregate }
 
+  - name: all_aggregates
+    description: aggregates owned by this entity or its ancestors
+    reference_entity_name: relationship
+    cardinality: '*'
+    snippet: >
+      allRelationships.filter{ it.aggregate }
+
   - name: aggregated_entities
     description: |
       このエンティティに集約されているエンティティの一覧 (再帰的に集約されているものを含む)
