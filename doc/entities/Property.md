@@ -121,7 +121,12 @@ The property_name of this property.
 The class_name of this property.
 - **Code:**
   ```kotlin
-  (if (type == "number") "Int" else type.upperCamelize()).let {
+  when(type) {
+      "number" -> "Int"
+      "date", "datetime", "time" -> "String"
+      else -> type.upperCamelize()
+  }
+  .let {
       if (multiple) "List<$it>" else it
   }
   ```

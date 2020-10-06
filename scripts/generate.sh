@@ -127,9 +127,9 @@ generate() {
     --model 'laplacian:laplacian.project.project-types:1.0.0' \
     --model 'laplacian:laplacian.project.domain-model:1.0.0' \
     --model 'laplacian:laplacian.common-model:1.0.0' \
+    --model 'laplacian:laplacian.metamodel:1.0.0' \
     $schema_option \
     --model-files $(normalize_path 'model/') \
-    --model-files $(normalize_path 'dest/model') \
     --template-files $(normalize_path 'template/') \
     --target-dir "$NEXT_CONTENT_DIR_NAME" \
     --local-repo "$LOCAL_MODULE_REPOSITORY"

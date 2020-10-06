@@ -384,11 +384,14 @@
         "type": "string"
       },
       "basic_type": {
-        "description": "基本型",
+        "description": "basic scalar type",
         "enum":[
            "string",
            "boolean",
-           "number"
+           "number",
+           "date",
+           "time",
+           "datetime"
         ],
         "type": "string"
       },

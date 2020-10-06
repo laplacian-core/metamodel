@@ -111,7 +111,12 @@ entities:
   - name: class_name
     type: string
     snippet: |
-      (if (type == "number") "Int" else type.upperCamelize()).let {
+      when(type) {
+          "number" -> "Int"
+          "date", "datetime", "time" -> "String"
+          else -> type.upperCamelize()
+      }
+      .let {
           if (multiple) "List<$it>" else it
       }
 

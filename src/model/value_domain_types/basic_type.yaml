@@ -1,13 +1,13 @@
 value_domain_types:
 - name: basic_type
   namespace: laplacian.metamodel
-  description: 基本型
+  description: basic scalar type
   type: string
   domain:
     choices:
-    - label: 文字列
-      value: string
-    - label: 真偽値
-      value: boolean
-    - label: 数値
-      value: number
+    - value: string
+    - value: boolean
+    - value: number
+    - value: date
+    - value: time
+    - value: datetime
