@@ -389,6 +389,9 @@
            "string",
            "boolean",
            "number",
+           "int",
+           "float",
+           "double",
            "date",
            "time",
            "datetime"

@@ -8,6 +8,9 @@ value_domain_types:
     - value: string
     - value: boolean
     - value: number
+    - value: int
+    - value: float
+    - value: double
     - value: date
     - value: time
     - value: datetime
