@@ -1,7 +1,7 @@
 project:
   group: laplacian
   name: metamodel
-  type: domain-model
+  type: model
   namespace: laplacian.metamodel
   version: '1.0.0'
   description:
@@ -41,3 +41,5 @@ project:
   - group: laplacian
     name: domain-model.project-template
     version: '1.0.0'
+  model_files:
+  - 'dest/model'

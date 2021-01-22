@@ -1,7 +1,7 @@
 # **Entity**
 **namespace:** laplacian.metamodel
 
-エンティティ
+An entity describing a entity.
 
 
 example1:
@@ -103,28 +103,15 @@ properties:
 ## Properties
 
 ### name: `String`
-名称
+The name of this entity.
 - **Attributes:** *PK*
 
 ### namespace: `String`
-名前空間
+The namespace of this entity.
 - **Attributes:** *PK*
-- **Default Value:**
-  ```kotlin
-  if (inherited) {
-      inheritedFrom.first().referenceEntity.namespace
-  }
-  else {
-      _context.get("project.namespace") ?: throw IllegalStateException(
-          "The ${name} entity does not have namespace." +
-          "You should give it or set the default(project) namespace instead."
-      )
-  } as String
-  ```
 
 ### identifier: `String`
-識別子 省略時は名称を使用
-
+The identifier of this entity.
 - **Default Value:**
   ```kotlin
   name.lowerUnderscorize()
@@ -139,29 +126,35 @@ If this property is true, there is the "root" instance, which is accessible glob
   ```
 
 ### description: `String`
-詳細
+The description of this entity.
 - **Default Value:**
   ```kotlin
-  name
+  "An entity describing a ${name}."
   ```
 
 ### value_object: `Boolean`
-値オブジェクトかどうか
+Defines this entity is value_object or not.
 - **Default Value:**
   ```kotlin
   false
   ```
 
 ### class_name: `String`
-クラス名
+The class_name of this entity.
 - **Code:**
   ```kotlin
   identifier.upperCamelize()
   ```
 
-### subtype_of: `String`
-The name of the entity which this entity is subtype of
+### supertype_name: `String`
+The supertype_name of this entity.
 
+### supertype_namespace: `String`
+The supertype_namespace of this entity.
+- **Default Value:**
+  ```kotlin
+  namespace
+  ```
 
 ### subtype_key_value: `String`
 The value of subtype key that represents this type of entity,
@@ -183,16 +176,14 @@ Deprecated: prefer to use the 'reverse_of' property
   ```
 
 ### top_level: `Boolean`
-このエンティティがトップレベルエンティティかどうか
-
+Defines this entity is top_level or not.
 - **Code:**
   ```kotlin
   (owner == null || owner == this) && (supertype == null) && !valueObject
   ```
 
 ### supports_namespace: `Boolean`
-このエンティティがnamespaceをサポートしているかどうか
-
+Defines this entity is supports_namespace or not.
 - **Code:**
   ```kotlin
   properties.any { p ->
@@ -201,15 +192,15 @@ Deprecated: prefer to use the 'reverse_of' property
   ```
 
 ### fqn: `String`
-完全修飾名
-
+The fqn of this entity.
 - **Code:**
   ```kotlin
   "$namespace.$className"
   ```
 
 ### primary_key_names: `List<String>`
-一意識別子となるカラム項目名のリスト
+The primary_key_names of this entity.
+  *Warning: This relationship is deprecated and may be deleted in the future release.*
 
 - **Code:**
   ```kotlin
@@ -263,6 +254,15 @@ The relationships including supertype's ones.
 ### supertype: `Entity?`
 The entity which this entity is subtype of
 - **Cardinality:** `0..1`
+
+### root: `Entity`
+The root entity of the inheritance tree including this entity.
+
+- **Cardinality:** `1`
+- **Code:**
+  ```kotlin
+  if (supertype != null) ancestors.last() else this
+  ```
 
 ### ancestors: `List<Entity>`
 The entities which are supertype of this entity (recursive).
@@ -323,7 +323,7 @@ The property which is used to identify the type of a entity.
   ```
 
 ### owned_by: `Relationship?`
-owned_by
+The owned_by of this entity.
 - **Cardinality:** `0..1`
 - **Code:**
   ```kotlin
@@ -359,7 +359,7 @@ The aggregation tree this entity is owned
   ```
 
 ### root_owner: `Entity?`
-root_owner
+The root_owner of this entity.
 - **Cardinality:** `0..1`
 - **Code:**
   ```kotlin

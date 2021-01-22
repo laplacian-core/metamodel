@@ -1,11 +1,9 @@
 entities:
 - name: entity
-  description: エンティティ
   namespace: laplacian.metamodel
 
   properties:
   - name: name
-    description: 名称
     primary_key: true
     type: string
     example_values:
@@ -14,26 +12,11 @@ entities:
     - organization
 
   - name: namespace
-    description: 名前空間
     type: string
     primary_key: true
     domain_type_name: namespace
-    optional: true
-    default_value: |
-      if (inherited) {
-          inheritedFrom.first().referenceEntity.namespace
-      }
-      else {
-          _context.get("project.namespace") ?: throw IllegalStateException(
-              "The ${name} entity does not have namespace." +
-              "You should give it or set the default(project) namespace instead."
-          )
-      } as String
 
   - name: identifier
-    description: >
-      識別子
-      省略時は名称を使用
     type: string
     domain_type_name: identifier
     optional: true
@@ -49,32 +32,33 @@ entities:
       false
 
   - name: description
-    description: 詳細
     optional: true
     type: string
     default_value: |
-      name
+      "An entity describing a ${name}."
 
   - name: value_object
-    description: 値オブジェクトかどうか
     type: boolean
     optional: true
     default_value: |
       false
 
   - name: class_name
-    description: クラス名
     type: string
     snippet: >
       identifier.upperCamelize()
     example_values:
     - Party
 
-  - name: subtype_of
-    description: |
-      The name of the entity which this entity is subtype of
+  - name: supertype_name
     type: string
     optional: true
+
+  - name: supertype_namespace
+    type: string
+    optional: true
+    default_value: |
+      namespace
 
   - name: subtype_key_value
     type: string
@@ -98,8 +82,6 @@ entities:
       supertype?.inherited ?: relationships.any{ it.inherited || it.reverse != null }
 
   - name: top_level
-    description: >
-      このエンティティがトップレベルエンティティかどうか
     type: boolean
     snippet: >
       (owner == null || owner == this) && (supertype == null) && !valueObject
@@ -110,8 +92,6 @@ entities:
     - 'false'
 
   - name: supports_namespace
-    description: >
-      このエンティティがnamespaceをサポートしているかどうか
     type: boolean
     snippet: |
       properties.any { p ->
@@ -121,8 +101,6 @@ entities:
     - 'false'
 
   - name: fqn
-    description: >
-      完全修飾名
     type: string
     snippet: |
       "$namespace.$className"
@@ -131,9 +109,8 @@ entities:
     - example.party.Person
 
   - name: primary_key_names
-    description: |
-      一意識別子となるカラム項目名のリスト
     type: string
+    deprecated: true
     multiple: true
     snippet: |
       inheritedFrom.flatMap { inheritance ->
@@ -193,8 +170,18 @@ entities:
     reference_entity_name: entity
     cardinality: '0..1'
     mappings:
-    - from: subtype_of
+    - from: supertype_name
       to: name
+    - from: supertype_namespace
+      to: namespace
+
+  - name: root
+    description: |
+      The root entity of the inheritance tree including this entity.
+    reference_entity_name: entity
+    cardinality: '1'
+    snippet: |
+      if (supertype != null) ancestors.last() else this
 
   - name: ancestors
     description: |
@@ -216,7 +203,9 @@ entities:
     cardinality: '*'
     mappings:
     - from: name
-      to: subtype_of
+      to: supertype_name
+    - from: namespace
+      to: supertype_namespace
 
   - name: descendants
     description: All the subtypes of this entity

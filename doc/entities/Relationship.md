@@ -1,7 +1,7 @@
 # **Relationship**
 **namespace:** laplacian.metamodel
 
-relationship
+An entity describing a relationship.
 
 
 
@@ -26,6 +26,13 @@ The cardinality of this relationship.
 ### reference_entity_name: `String`
 The reference_entity_name of this relationship.
 
+### reference_entity_namespace: `String`
+The reference_entity_namespace of this relationship.
+- **Default Value:**
+  ```kotlin
+  entity.namespace
+  ```
+
 ### aggregate: `Boolean`
 Defines this relationship is aggregate or not.
 - **Default Value:**
@@ -49,7 +56,7 @@ The reverse_of of this relationship.
 The description of this relationship.
 - **Default Value:**
   ```kotlin
-  name
+  "The $name of this ${entity.name}."
   ```
 
 ### snippet: `String`
@@ -123,19 +130,19 @@ The examples of this relationship.
 ## Relationships
 
 ### entity: `Entity`
-entity
+The entity of this relationship.
 - **Cardinality:** `1`
 
 ### mappings: `List<PropertyMapping>`
-mappings
+The mappings of this relationship.
 - **Cardinality:** `*`
 
 ### reference_entity: `Entity`
-reference_entity
+The reference_entity of this relationship.
 - **Cardinality:** `1`
 
 ### reverse: `Relationship?`
-reverse
+The reverse of this relationship.
 - **Cardinality:** `0..1`
 - **Code:**
   ```kotlin

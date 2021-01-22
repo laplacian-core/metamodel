@@ -1,7 +1,7 @@
 # **ValueDomainType**
 **namespace:** laplacian.metamodel
 
-value_domain_type
+An entity describing a value_domain_type.
 
 
 
@@ -30,5 +30,5 @@ The description of this value_domain_type.
 ## Relationships
 
 ### domain: `ValueDomain`
-domain
+The domain of this value_domain_type.
 - **Cardinality:** `1`

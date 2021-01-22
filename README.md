@@ -80,21 +80,21 @@ $ ./script/generate
 
 
 - [**Entity**](<./doc/entities/Entity.md>)
-エンティティ
+An entity describing a entity.
 - [**Property**](<./doc/entities/Property.md>)
-property
+An entity describing a property.
 - [**PropertyMapping**](<./doc/entities/PropertyMapping.md>)
-property_mapping
+An entity describing a property_mapping.
 - [**Query**](<./doc/entities/Query.md>)
 The queries from which all navigation originates.
 - [**Relationship**](<./doc/entities/Relationship.md>)
-relationship
+An entity describing a relationship.
 - [**ValueDomain**](<./doc/entities/ValueDomain.md>)
-value_domain
+An entity describing a value_domain.
 - [**ValueDomainType**](<./doc/entities/ValueDomainType.md>)
-value_domain_type
+An entity describing a value_domain_type.
 - [**ValueItem**](<./doc/entities/ValueItem.md>)
-value_item
+An entity describing a value_item.
 ### Script List
 
 

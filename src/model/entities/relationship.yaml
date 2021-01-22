@@ -33,6 +33,12 @@ entities:
   - name: reference_entity_name
     type: string
 
+  - name: reference_entity_namespace
+    type: string
+    optional: true
+    default_value: |
+      entity.namespace
+
   - name: aggregate
     type: boolean
     optional: true
@@ -54,7 +60,7 @@ entities:
     type: string
     optional: true
     default_value: |
-      name
+      "The $name of this ${entity.name}."
 
   - name: snippet
     type: string
@@ -127,6 +133,8 @@ entities:
     mappings:
     - from: reference_entity_name
       to: name
+    - from: reference_entity_namespace
+      to: namespace
 
   - name: reverse
     reference_entity_name: relationship

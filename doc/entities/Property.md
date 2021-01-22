@@ -1,7 +1,7 @@
 # **Property**
 **namespace:** laplacian.metamodel
 
-property
+An entity describing a property.
 
 
 
@@ -38,10 +38,10 @@ Defines this property is subtype_key or not.
 The type of this property.
 
 ### domain_type_name: `String`
-制約型名
+The name of predefined value domain type for this property.
 
 ### size: `Int`
-the maximum allowed size of the content of this property
+The maximum allowed size of the content of this property.
 - **Default Value:**
   ```kotlin
   when(type) {
@@ -124,6 +124,7 @@ The class_name of this property.
   when(type) {
       "number" -> "Int"
       "date", "datetime", "time" -> "String"
+      "object", "any_entity" -> "Any"
       else -> type.upperCamelize()
   }
   .let {
@@ -157,13 +158,13 @@ Defines this property is deprecated or not.
 ## Relationships
 
 ### entity: `Entity`
-entity
+The entity of this property.
 - **Cardinality:** `1`
 
 ### domain: `ValueDomain?`
-domain
+The domain of this property.
 - **Cardinality:** `0..1`
 
 ### domain_type: `ValueDomainType?`
-domain_type
+The domain_type of this property.
 - **Cardinality:** `0..1`

@@ -1,7 +1,7 @@
 # **ValueDomain**
 **namespace:** laplacian.metamodel
 
-value_domain
+An entity describing a value_domain.
 
 
 
@@ -10,10 +10,10 @@ value_domain
 ## Properties
 
 ### pattern: `String`
-許容される値のパターン(正規表現)
+Allowed pattern in Regular expression.
 
 ## Relationships
 
 ### choices: `List<ValueItem>`
-許容される値のリスト
+The list of allowed values.
 - **Cardinality:** `*`

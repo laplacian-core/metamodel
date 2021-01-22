@@ -14,3 +14,4 @@ value_domain_types:
     - value: date
     - value: time
     - value: datetime
+    - value: any_entity

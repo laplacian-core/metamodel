@@ -30,12 +30,12 @@ entities:
     domain_type_name: basic_type
 
   - name: domain_type_name
-    description: 制約型名
+    description: The name of predefined value domain type for this property.
     type: string
     optional: true
 
   - name: size
-    description: the maximum allowed size of the content of this property
+    description: The maximum allowed size of the content of this property.
     type: number
     optional: true
     default_value: |
@@ -114,6 +114,7 @@ entities:
       when(type) {
           "number" -> "Int"
           "date", "datetime", "time" -> "String"
+          "object", "any_entity" -> "Any"
           else -> type.upperCamelize()
       }
       .let {

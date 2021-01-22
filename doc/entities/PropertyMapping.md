@@ -1,7 +1,7 @@
 # **PropertyMapping**
 **namespace:** laplacian.metamodel
 
-property_mapping
+An entity describing a property_mapping.
 
 
 
@@ -21,11 +21,11 @@ The null_value of this property_mapping.
 ## Relationships
 
 ### relationship: `Relationship`
-relationship
+The relationship of this property_mapping.
 - **Cardinality:** `1`
 
 ### property: `Property`
-property
+The property of this property_mapping.
 - **Cardinality:** `1`
 - **Code:**
   ```kotlin
@@ -33,7 +33,7 @@ property
   ```
 
 ### reference_property: `Property`
-reference_property
+The reference_property of this property_mapping.
 - **Cardinality:** `1`
 - **Code:**
   ```kotlin

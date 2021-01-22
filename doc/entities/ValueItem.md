@@ -1,7 +1,7 @@
 # **ValueItem**
 **namespace:** laplacian.metamodel
 
-value_item
+An entity describing a value_item.
 
 
 
