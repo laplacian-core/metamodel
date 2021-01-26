@@ -212,7 +212,7 @@ entities:
     reference_entity_name: entity
     cardinality: '*'
     snippet: |
-      subtypes.flatMap{ listOf(it) + it.subtypes }
+      subtypes + subtypes.flatMap{ it.descendants }
 
   - name: subtype_key
     description: The property which is used to identify the type of a entity.

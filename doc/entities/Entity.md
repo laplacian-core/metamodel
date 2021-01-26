@@ -288,7 +288,7 @@ All the subtypes of this entity
 - **Cardinality:** `*`
 - **Code:**
   ```kotlin
-  subtypes.flatMap{ listOf(it) + it.subtypes }
+  subtypes + subtypes.flatMap{ it.descendants }
   ```
 
 ### subtype_key: `Property?`
