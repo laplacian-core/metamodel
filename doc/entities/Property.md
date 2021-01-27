@@ -46,9 +46,7 @@ The maximum allowed size of the content of this property.
   ```kotlin
   when(type) {
       "string" -> 200
-      else -> throw IllegalStateException(
-          "The size of $type type field can not be defined."
-      )
+      else -> 0
   }
   ```
 
