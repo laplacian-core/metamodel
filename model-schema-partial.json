@@ -416,6 +416,7 @@
         "description": "An entity describing a document.",
         "type": "object",
         "required": [
+          "languages"
         ],
         "additionalProperties": false,
         "properties": {
@@ -456,6 +457,8 @@
         "description": "An entity describing a document_language.",
         "type": "object",
         "required": [
+          "name",
+          "code"
         ],
         "additionalProperties": false,
         "properties": {
@@ -478,7 +481,8 @@
         "description": "An entity describing a section.",
         "type": "object",
         "required": [
-          "name"
+          "name",
+          "title"
         ],
         "additionalProperties": false,
         "properties": {
@@ -512,6 +516,9 @@
         "description": "An entity describing a module.",
         "type": "object",
         "required": [
+          "name",
+          "group",
+          "version"
         ],
         "additionalProperties": false,
         "properties": {
@@ -556,7 +563,9 @@
         "type": "object",
         "required": [
           "group",
-          "name"
+          "name",
+          "version",
+          "sources"
         ],
         "additionalProperties": false,
         "properties": {
@@ -808,6 +817,7 @@
         "description": "An entity describing a source_repository.",
         "type": "object",
         "required": [
+          "url"
         ],
         "additionalProperties": false,
         "properties": {
@@ -826,6 +836,8 @@
         "description": "An entity describing a localized_text.",
         "type": "object",
         "required": [
+          "language",
+          "content"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1602,6 +1614,8 @@
         "description": "An entity describing a named_param.",
         "type": "object",
         "required": [
+          "name",
+          "type"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1624,6 +1638,8 @@
         "description": "An entity describing a named_value.",
         "type": "object",
         "required": [
+          "name",
+          "expression"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1730,7 +1746,8 @@
         "description": "An entity describing a property.",
         "type": "object",
         "required": [
-          "name"
+          "name",
+          "type"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1816,6 +1833,8 @@
         "description": "An entity describing a property_mapping.",
         "type": "object",
         "required": [
+          "from",
+          "to"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1838,6 +1857,8 @@
         "description": "The queries from which all navigation originates.",
         "type": "object",
         "required": [
+          "name",
+          "snippet"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1884,7 +1905,9 @@
         "description": "An entity describing a relationship.",
         "type": "object",
         "required": [
-          "name"
+          "name",
+          "cardinality",
+          "reference_entity_name"
         ],
         "additionalProperties": false,
         "properties": {
@@ -1985,7 +2008,9 @@
         "type": "object",
         "required": [
           "name",
-          "namespace"
+          "namespace",
+          "type",
+          "domain"
         ],
         "additionalProperties": false,
         "properties": {
@@ -2024,6 +2049,7 @@
         "description": "An entity describing a value_item.",
         "type": "object",
         "required": [
+          "value"
         ],
         "additionalProperties": false,
         "properties": {
