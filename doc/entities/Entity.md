@@ -1,3 +1,5 @@
+
+
 # **Entity**
 **namespace:** laplacian.metamodel
 
@@ -141,9 +143,16 @@ Defines this entity is value_object or not.
 
 ### class_name: `String`
 The class_name of this entity.
-- **Code:**
+- **Default Value:**
   ```kotlin
-  identifier.upperCamelize()
+  name.upperCamelize()
+  ```
+
+### table_name: `String`
+The table_name of this entity.
+- **Default Value:**
+  ```kotlin
+  "t_${name.lowerUnderscorize()}"
   ```
 
 ### supertype_name: `String`

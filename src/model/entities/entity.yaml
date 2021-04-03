@@ -45,10 +45,17 @@ entities:
 
   - name: class_name
     type: string
-    snippet: >
-      identifier.upperCamelize()
+    optional: true
+    default_value: >
+      name.upperCamelize()
     example_values:
     - Party
+
+  - name: table_name
+    type: string
+    optional: true
+    default_value: |
+      "t_${name.lowerUnderscorize()}"
 
   - name: supertype_name
     type: string

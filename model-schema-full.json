@@ -1,3 +1,6 @@
+
+
+
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Domain model definition for the metamodel project.",
@@ -1695,6 +1698,14 @@
           "value_object": {
             "description": "Defines this entity is value_object or not.",
             "type": "boolean"
+          },
+          "class_name": {
+            "description": "The class_name of this entity.",
+            "type": "string"
+          },
+          "table_name": {
+            "description": "The table_name of this entity.",
+            "type": "string"
           },
           "supertype_name": {
             "description": "The supertype_name of this entity.",
